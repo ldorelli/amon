@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "amon-graph", "graph\amon-graph.vcxproj", "{8F913C4B-7B49-7E98-E450-57F4D0271989}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "amon-utils", "util\amon-utils.vcxproj", "{EE223B4C-DADA-7C99-43E2-55F52FB9178A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "amon", "Amon\amon.vcxproj", "{B01E947C-9C55-950D-4542-7B103158110F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EE223B4C-DADA-7C99-43E2-55F52FB9178A} = {EE223B4C-DADA-7C99-43E2-55F52FB9178A}
+		{8F913C4B-7B49-7E98-E450-57F4D0271989} = {8F913C4B-7B49-7E98-E450-57F4D0271989}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F913C4B-7B49-7E98-E450-57F4D0271989}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8F913C4B-7B49-7E98-E450-57F4D0271989}.Debug|Win32.Build.0 = Debug|Win32
+		{8F913C4B-7B49-7E98-E450-57F4D0271989}.Release|Win32.ActiveCfg = Release|Win32
+		{8F913C4B-7B49-7E98-E450-57F4D0271989}.Release|Win32.Build.0 = Release|Win32
+		{EE223B4C-DADA-7C99-43E2-55F52FB9178A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE223B4C-DADA-7C99-43E2-55F52FB9178A}.Debug|Win32.Build.0 = Debug|Win32
+		{EE223B4C-DADA-7C99-43E2-55F52FB9178A}.Release|Win32.ActiveCfg = Release|Win32
+		{EE223B4C-DADA-7C99-43E2-55F52FB9178A}.Release|Win32.Build.0 = Release|Win32
+		{B01E947C-9C55-950D-4542-7B103158110F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B01E947C-9C55-950D-4542-7B103158110F}.Debug|Win32.Build.0 = Debug|Win32
+		{B01E947C-9C55-950D-4542-7B103158110F}.Release|Win32.ActiveCfg = Release|Win32
+		{B01E947C-9C55-950D-4542-7B103158110F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
