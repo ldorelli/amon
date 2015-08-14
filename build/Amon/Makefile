@@ -16,7 +16,7 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/amon
   OBJDIR = obj/Debug
   DEFINES +=
-  INCLUDES += -I../../includes/social -I../../includes/amon -I../../includes/csys -I../../includes/graph -I../../includes/util -I../../includes/ai -I../../includes/util/json
+  INCLUDES += -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -std=c++11 -fPIC -Wall
@@ -43,7 +43,7 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/amon
   OBJDIR = obj/Release
   DEFINES +=
-  INCLUDES += -I../../includes/social -I../../includes/amon -I../../includes/csys -I../../includes/graph -I../../includes/util -I../../includes/ai -I../../includes/util/json
+  INCLUDES += -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -std=c++11 -fPIC -Wall
