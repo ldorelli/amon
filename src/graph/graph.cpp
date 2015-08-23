@@ -1,12 +1,22 @@
 #include <graph.hpp>
+#include <iostream>
+#include <set>
+#include <algorithm>
+#include <queue>
 
 amon::Graph::Graph() {
+	edgesCount = 0;
+	nodesCount = 0;
 }
 
 amon::Graph::~Graph() {
 	adj.clear();
 	validNodes.clear();
 	while (availableIndexes.size()) availableIndexes.pop();
+}
+
+amon::Graph::Graph(int n) {
+	for (int i = 0; i < n; ++i) addNode();
 }
 
 
@@ -28,6 +38,7 @@ int amon::Graph::addNode () {
 	} else {
 		idx = adj.size();
 		adj.push_back(std::list<std::pair<int, double> >());
+		validNodes.push_back(true);
 	}
 	nodesCount++;
 	return idx;
@@ -94,3 +105,78 @@ void amon::Graph::nextNeighboor (
 double amon::Graph::meanDegree () {
 	return (double) edgesCount/nodesCount;
 }
+
+double amon::Graph::globalClusteringCoefficient() {
+	std::vector < std::set<int> > L;
+	std::vector < std::pair<int, int> > nodes;
+
+	for (int i = 0; i < (int)adj.size(); ++i) {
+		if (!validNodes[i]) continue;
+		nodes.push_back( std::make_pair(i, L.size()) );
+		L.push_back(std::set<int>());
+		for (auto e : adj[i]) {
+			L[i].insert(e.first);
+		}
+	}
+
+	double triangles = 0.0, triplets = 0.0;
+	for (int i = 0; i < (int)nodes.size(); ++i) {
+		for (int j = i+1; j < (int)nodes.size(); ++j) {
+			int ii = nodes[i].second;
+			int jj = nodes[j].second;
+			// They do not connect to each other
+			if (!L[ii].count(jj) or !L[jj].count(ii)) continue;
+			// Size of union -> triplets
+			int sz = L[ii].size() + L[jj].size();
+			std::vector <int> I(sz), U(sz);
+			int usz = std::set_union(L[ii].begin(), L[ii].end(),
+				L[jj].begin(), L[jj].end(), U.begin()) - U.begin();
+			int isz = std::set_intersection(L[ii].begin(), L[ii].end(),
+				L[jj].begin(), L[jj].end(), I.begin()) - I.begin();
+			triangles += isz;
+			triplets += usz - 2;
+		}
+	}
+	triangles /= 3.0;
+	triplets -= triangles*3.0;
+	triplets /= 2.0;
+	triplets += triangles;
+	return triangles/triplets;
+}
+
+
+void amon::Graph::bridges(int p, int l, int& num, 
+	std::vector<int>& dfsnum, std::vector<int>& dfslow, int& ans) {
+
+	dfsnum[p] = dfslow[p] = num++;
+	
+	for (auto& e : adj[p]) {
+		int v = e.first;
+		if (v == l) continue;
+	
+		if (dfsnum[v] == 0) {
+	
+			bridges(v, p, num, dfsnum, dfslow, ans);	
+			if (dfslow[v] > dfsnum[p]) {
+				++ans;
+			}
+			dfslow[p] = std::min(dfslow[p], dfslow[v]);
+		} else {
+			dfslow[p] = std::min(dfslow[p], dfsnum[v]);
+		}
+	}
+}
+
+
+int amon::Graph::bridges () {
+	int num = 1, ans = 0;
+	std::vector<int> dfsnum(adj.size(), 0);
+	std::vector<int> dfslow(adj.size(), 0);
+	for (int i = 0; i < (int)adj.size(); ++i) {
+		if (validNodes[i] and dfsnum[i] == 0) {
+			bridges(i, -1, num, dfsnum, dfslow, ans);
+		}
+	}
+	return ans;
+}
+

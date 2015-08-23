@@ -9,6 +9,7 @@ class Graph {
 
 public:
 	
+	const double EPS = 1e-7;
 	/**
 	 * Empty Constructor
 	 */
@@ -71,6 +72,13 @@ public:
 	 */
 	double meanDegree ();
 
+	/**
+	 *
+	 * The clustering coefficient of the graph
+	 * @return The clustering coefficient of the graph
+	 */
+	 double globalClusteringCoefficient();
+
 
 	/**
 	 * Returns an iterator to the begining of the adjacency list of 
@@ -88,6 +96,19 @@ public:
 	std::list<std::pair<int, double> >::iterator 
 		neighboorsEnd(int node);
 
+	/**
+	 * Count the number of bridges on the graph.
+	 * @return Number of bridges 
+	 */
+	int bridges ();
+
+	/**
+	 * Return the mean degree of the P percent nodes 
+	 * with highest degrees.
+	 * @param P The desired percentage
+	 * @return The mean degree. 
+	 */
+	double meanDegree(double P);
 
 	/**
 	 * Advances the adjacency list iterator to the next neighboor. 
@@ -104,5 +125,8 @@ private:
 	// validNotes[i] is true if node i is active
 	std::vector <bool> validNodes;
 	std::queue <int> availableIndexes;
+
+	void bridges(int p, int i, int&, 
+		std::vector<int>&, std::vector<int>&, int&);
 };
 }

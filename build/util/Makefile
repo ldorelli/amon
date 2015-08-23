@@ -12,11 +12,11 @@ endif
 
 ifeq ($(config),debug)
   RESCOMP = windres
-  TARGETDIR = ../../lib
+  TARGETDIR = /usr/local/lib
   TARGET = $(TARGETDIR)/libamon-utils.a
   OBJDIR = obj/Debug
   DEFINES +=
-  INCLUDES += -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -std=c++11 -fPIC -Wall
@@ -39,11 +39,11 @@ endif
 
 ifeq ($(config),release)
   RESCOMP = windres
-  TARGETDIR = ../../lib
+  TARGETDIR = /usr/local/lib
   TARGET = $(TARGETDIR)/libamon-utils.a
   OBJDIR = obj/Release
   DEFINES +=
-  INCLUDES += -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -std=c++11 -fPIC -Wall

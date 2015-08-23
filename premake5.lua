@@ -41,7 +41,7 @@ solution "AmonRa"
 		kind "SharedLib"
 		language  "C++"
 		location  "build/graph"
-		targetdir "lib"
+		targetdir "/usr/local/lib"
 		files  {
 			"src/graph/**.cpp",
 		}
@@ -69,7 +69,7 @@ solution "AmonRa"
 		kind "StaticLib"
 		language  "C++"
 		location  "build/util"
-		targetdir "lib"
+		targetdir "/usr/local/lib"
 		files  {
 			"src/util/**.cpp",
 		}
@@ -77,7 +77,7 @@ solution "AmonRa"
 	project "amon"
 		kind "ConsoleApp"
 		location  "build/Amon"
-		targetdir "bin"
+		targetdir "/usr/local/bin"
 		language  "C++"
 		files  {
 			"src/amon/**.cpp",
