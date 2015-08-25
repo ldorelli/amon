@@ -1,3 +1,6 @@
+#ifndef __GRAPH_H__
+#define __GRAPH_H__
+
 #include <vector>
 #include <set>
 #include <queue>
@@ -9,7 +12,7 @@ class Graph {
 
 public:
 	
-	const double EPS = 1e-7;
+	static const double EPS;
 	/**
 	 * Empty Constructor
 	 */
@@ -111,12 +114,28 @@ public:
 	double meanDegree(double P);
 
 	/**
+	 * Calculates the average distance on the graph.
+	 * Not using weights.
+	 * @return The average distance excluding non-connected pairs.
+	 */
+	double averageDistance ();
+
+	/**
+	 *	Breadth-First search to find minimum paths.
+	 * 	@param src The source node.
+	 *  @return A vector containing the distances from nodes to the source.
+	 */
+	std::vector<int> bfs (int src);
+
+	/**
 	 * Advances the adjacency list iterator to the next neighboor. 
 	 * @param iterator The iterator to advance
 	 * @param node The node related to the iterator 
 	 */
 	void nextNeighboor (std::list<std::pair<int, double> >::iterator 
 		& iterator, int node);
+
+
 
 private:
 	int nodesCount, edgesCount;
@@ -130,3 +149,5 @@ private:
 		std::vector<int>&, std::vector<int>&, int&);
 };
 }
+
+#endif

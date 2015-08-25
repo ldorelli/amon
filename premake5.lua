@@ -46,14 +46,15 @@ solution "AmonRa"
 			"src/graph/**.cpp",
 		}
 
-	-- -- complex systems lib 
-	-- project "amon-csys"
-	-- 	kind "SharedLib"
-	-- 	language  "C++"
-	-- 	location  "build/csys"
-	-- 	files  {
-	-- 		"src/csys/src/**.cpp",
-	-- 	}
+	-- complex systems lib 
+	project "amon-csys"
+		kind "SharedLib"
+		language  "C++"
+		location  "build/csys"
+		targetdir "/usr/local/lib"
+		files  {
+			"src/csys/**.cpp",
+		}
 
 	-- -- social network stuff
 	-- project "amon-social"
@@ -66,7 +67,7 @@ solution "AmonRa"
 
 	-- utilities
 	project "amon-utils"
-		kind "StaticLib"
+		kind "SharedLib"
 		language  "C++"
 		location  "build/util"
 		targetdir "/usr/local/lib"
@@ -82,5 +83,5 @@ solution "AmonRa"
 		files  {
 			"src/amon/**.cpp",
 		}
-		links { "amon-utils", "amon-graph" } 
+		links { "amon-utils", "amon-graph", "amon-csys" } 
 

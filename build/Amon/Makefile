@@ -16,14 +16,14 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/amon
   OBJDIR = obj/Debug
   DEFINES +=
-  INCLUDES += -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -std=c++11 -fPIC -Wall
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += /usr/local/lib/libamon-utils.a /usr/local/lib/libamon-graph.so
-  LDDEPS += /usr/local/lib/libamon-utils.a /usr/local/lib/libamon-graph.so
+  LIBS += /usr/local/lib/libamon-utils.so /usr/local/lib/libamon-graph.so /usr/local/lib/libamon-csys.so
+  LDDEPS += /usr/local/lib/libamon-utils.so /usr/local/lib/libamon-graph.so /usr/local/lib/libamon-csys.so
   ALL_LDFLAGS += $(LDFLAGS) -s
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -43,14 +43,14 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/amon
   OBJDIR = obj/Release
   DEFINES +=
-  INCLUDES += -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -std=c++11 -fPIC -Wall
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += /usr/local/lib/libamon-utils.a /usr/local/lib/libamon-graph.so
-  LDDEPS += /usr/local/lib/libamon-utils.a /usr/local/lib/libamon-graph.so
+  LIBS += /usr/local/lib/libamon-utils.so /usr/local/lib/libamon-graph.so /usr/local/lib/libamon-csys.so
+  LDDEPS += /usr/local/lib/libamon-utils.so /usr/local/lib/libamon-graph.so /usr/local/lib/libamon-csys.so
   ALL_LDFLAGS += $(LDFLAGS) -s
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS

@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <queue>
 
+
+const double amon::Graph::EPS = 1e-7;
+
 amon::Graph::Graph() {
 	edgesCount = 0;
 	nodesCount = 0;
@@ -180,3 +183,35 @@ int amon::Graph::bridges () {
 	return ans;
 }
 
+double  amon::Graph::meanDegree (double percent) {
+	std::vector <double> degs;
+	for (int i = 0; i < (int)adj.size(); ++i) {
+		if (validNodes[i]) {
+			degs.push_back(adj[i].size());
+		}
+	}
+	sort(degs.begin(), degs.end(), std::greater<double>());
+	int qt = percent * nodesCount;
+	double res = 0.0;
+	for (int i = 0; i < qt; ++i) {
+		res += degs[i];
+	}
+	return res/qt;
+}
+
+std::vector<int> amon::Graph::bfs (int src) {
+	std::queue<int> q;
+	std::vector <int> ans(adj.size(), -1);
+	ans[0] = 0;
+	q.push(src);
+	while (!q.empty()) {
+		int n = q.front(); q.pop();
+		for (auto& e : adj[n]) {
+			int v = e.first;
+			if (ans[v] != -1) continue;
+			ans[v] = ans[n] + 1;
+			q.push(v);
+		}
+	}
+	return ans;
+}

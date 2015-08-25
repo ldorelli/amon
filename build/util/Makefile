@@ -13,19 +13,19 @@ endif
 ifeq ($(config),debug)
   RESCOMP = windres
   TARGETDIR = /usr/local/lib
-  TARGET = $(TARGETDIR)/libamon-utils.a
+  TARGET = $(TARGETDIR)/libamon-utils.so
   OBJDIR = obj/Debug
   DEFINES +=
-  INCLUDES += -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -std=c++11 -fPIC -Wall
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -std=c++11 -fPIC -Wall
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s
-  LINKCMD = $(AR) -rcs $(TARGET) $(OBJECTS)
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared
+  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -40,19 +40,19 @@ endif
 ifeq ($(config),release)
   RESCOMP = windres
   TARGETDIR = /usr/local/lib
-  TARGET = $(TARGETDIR)/libamon-utils.a
+  TARGET = $(TARGETDIR)/libamon-utils.so
   OBJDIR = obj/Release
   DEFINES +=
-  INCLUDES += -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -std=c++11 -fPIC -Wall
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -std=c++11 -fPIC -Wall
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s
-  LINKCMD = $(AR) -rcs $(TARGET) $(OBJECTS)
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared
+  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -65,6 +65,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/fenwick.o \
 	$(OBJDIR)/json.o \
 
 RESOURCES := \
@@ -123,6 +124,9 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
+$(OBJDIR)/fenwick.o: ../../src/util/fenwick.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/json.o: ../../src/util/json/json.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

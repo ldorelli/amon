@@ -13,7 +13,7 @@ endif
 ifeq ($(config),debug)
   RESCOMP = windres
   TARGETDIR = /usr/local/lib
-  TARGET = $(TARGETDIR)/libamon-graph.so
+  TARGET = $(TARGETDIR)/libamon-csys.so
   OBJDIR = obj/Debug
   DEFINES +=
   INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
@@ -40,7 +40,7 @@ endif
 ifeq ($(config),release)
   RESCOMP = windres
   TARGETDIR = /usr/local/lib
-  TARGET = $(TARGETDIR)/libamon-graph.so
+  TARGET = $(TARGETDIR)/libamon-csys.so
   OBJDIR = obj/Release
   DEFINES +=
   INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
@@ -65,7 +65,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/graph.o \
+	$(OBJDIR)/network_models.o \
 
 RESOURCES := \
 
@@ -80,7 +80,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
-	@echo Linking amon-graph
+	@echo Linking amon-csys
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -101,7 +101,7 @@ else
 endif
 
 clean:
-	@echo Cleaning amon-graph
+	@echo Cleaning amon-csys
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -123,7 +123,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/graph.o: ../../src/graph/graph.cpp
+$(OBJDIR)/network_models.o: ../../src/csys/network_models.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

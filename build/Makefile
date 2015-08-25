@@ -12,16 +12,18 @@ endif
 
 ifeq ($(config),debug)
   amon_graph_config = debug
+  amon_csys_config = debug
   amon_utils_config = debug
   amon_config = debug
 endif
 ifeq ($(config),release)
   amon_graph_config = release
+  amon_csys_config = release
   amon_utils_config = release
   amon_config = release
 endif
 
-PROJECTS := amon-graph amon-utils amon
+PROJECTS := amon-graph amon-csys amon-utils amon
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -33,13 +35,19 @@ ifneq (,$(amon_graph_config))
 	@${MAKE} --no-print-directory -C graph -f Makefile config=$(amon_graph_config)
 endif
 
+amon-csys:
+ifneq (,$(amon_csys_config))
+	@echo "==== Building amon-csys ($(amon_csys_config)) ===="
+	@${MAKE} --no-print-directory -C csys -f Makefile config=$(amon_csys_config)
+endif
+
 amon-utils:
 ifneq (,$(amon_utils_config))
 	@echo "==== Building amon-utils ($(amon_utils_config)) ===="
 	@${MAKE} --no-print-directory -C util -f Makefile config=$(amon_utils_config)
 endif
 
-amon: amon-utils amon-graph
+amon: amon-utils amon-graph amon-csys
 ifneq (,$(amon_config))
 	@echo "==== Building amon ($(amon_config)) ===="
 	@${MAKE} --no-print-directory -C Amon -f Makefile config=$(amon_config)
@@ -47,6 +55,7 @@ endif
 
 clean:
 	@${MAKE} --no-print-directory -C graph -f Makefile clean
+	@${MAKE} --no-print-directory -C csys -f Makefile clean
 	@${MAKE} --no-print-directory -C util -f Makefile clean
 	@${MAKE} --no-print-directory -C Amon -f Makefile clean
 
@@ -61,6 +70,7 @@ help:
 	@echo "   all (default)"
 	@echo "   clean"
 	@echo "   amon-graph"
+	@echo "   amon-csys"
 	@echo "   amon-utils"
 	@echo "   amon"
 	@echo ""
