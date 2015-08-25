@@ -10,7 +10,6 @@ using namespace amon;
 
 int main (void) {
 
-	amon::Graph g;
 	Json::Value root;
 	// for (int i = 0; i < 10; ++i)
 	// 	g.addNode();
@@ -23,12 +22,15 @@ int main (void) {
 	// g.addUndirectedEdge(3, 8, 1);
 	// g.addUndirectedEdge(8, 9, 1);
 
-	for (int i = 0; i < 100; ++i) {
+	int sz = 0;
+	for (int i = 0; i < 30; ++i) {
 		NetworkGenerator generator;
-		amon::Graph g = generator.simpleErdos(1000, 0.02);
+		amon::Graph g = generator.undirectedErdosRenyi(5000, 0.002);
+		sz += g.edgesQty();
 		printf("Edges: %d\n", g.edgesQty());
 		// printf("Clustering: %.15lf\n", g.globalClusteringCoefficient());
 	}
+	printf("%d\n", sz/30);
 
 	// g = generator.simpleErdos(5000, 0.3);
 	// printf("Edges: %d\n", g.edgesQty());

@@ -12,14 +12,12 @@ amon::Graph::Graph() {
 	nodesCount = 0;
 }
 
-amon::Graph::~Graph() {
-	adj.clear();
-	validNodes.clear();
-	while (availableIndexes.size()) availableIndexes.pop();
-}
 
 amon::Graph::Graph(int n) {
-	for (int i = 0; i < n; ++i) addNode();
+	edgesCount = nodesCount = 0;
+	for (int i = 0; i < n; ++i) {
+		addNode();
+	}
 }
 
 

@@ -24,8 +24,6 @@ public:
 	 */
 	Graph(int n);
 
-	~Graph();
-
 	/**
 	 * Returns the number of nodes in the graph.
 	 * @return The number of nodes in the graph.
