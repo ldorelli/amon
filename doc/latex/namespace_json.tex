@@ -1,0 +1,378 @@
+\hypertarget{namespace_json}{\section{Json Namespace Reference}
+\label{namespace_json}\index{Json@{Json}}
+}
+
+
+J\-S\-O\-N (Java\-Script Object Notation).  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_json_1_1_features}{Features}
+\begin{DoxyCompactList}\small\item\em Configuration passed to reader and writer. This configuration object can be used to force the \hyperlink{class_json_1_1_reader}{Reader} or \hyperlink{class_json_1_1_writer}{Writer} to behave in a standard conforming way. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_static_string}{Static\-String}
+\begin{DoxyCompactList}\small\item\em Lightweight wrapper to tag static string. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_value}{Value}
+\begin{DoxyCompactList}\small\item\em Represents a \href{http://www.json.org}{\tt J\-S\-O\-N} value. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_path_argument}{Path\-Argument}
+\begin{DoxyCompactList}\small\item\em Experimental and untested\-: represents an element of the \char`\"{}path\char`\"{} to access a node. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_path}{Path}
+\begin{DoxyCompactList}\small\item\em Experimental and untested\-: represents a \char`\"{}path\char`\"{} to access a node. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_value_iterator_base}{Value\-Iterator\-Base}
+\begin{DoxyCompactList}\small\item\em base class for \hyperlink{class_json_1_1_value}{Value} iterators. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_value_const_iterator}{Value\-Const\-Iterator}
+\begin{DoxyCompactList}\small\item\em const iterator for object and array value. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_value_iterator}{Value\-Iterator}
+\begin{DoxyCompactList}\small\item\em Iterator for object and array value. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_reader}{Reader}
+\begin{DoxyCompactList}\small\item\em Unserialize a \href{http://www.json.org}{\tt J\-S\-O\-N} document into a \hyperlink{class_json_1_1_value}{Value}. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_writer}{Writer}
+\begin{DoxyCompactList}\small\item\em Abstract class for writers. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_fast_writer}{Fast\-Writer}
+\begin{DoxyCompactList}\small\item\em Outputs a \hyperlink{class_json_1_1_value}{Value} in \href{http://www.json.org}{\tt J\-S\-O\-N} format without formatting (not human friendly). \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_styled_writer}{Styled\-Writer}
+\begin{DoxyCompactList}\small\item\em Writes a \hyperlink{class_json_1_1_value}{Value} in \href{http://www.json.org}{\tt J\-S\-O\-N} format in a human friendly way. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_styled_stream_writer}{Styled\-Stream\-Writer}
+\begin{DoxyCompactList}\small\item\em Writes a \hyperlink{class_json_1_1_value}{Value} in \href{http://www.json.org}{\tt J\-S\-O\-N} format in a human friendly way, to a stream rather than to a string. \end{DoxyCompactList}\item 
+class \hyperlink{class_json_1_1_batch_allocator}{Batch\-Allocator}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int \hyperlink{namespace_json_a08122e8005b706d982e48cca1e2119c7}{Int}
+\item 
+typedef unsigned int \hyperlink{namespace_json_a800fb90eb6ee8d5d62b600c06f87f7d4}{U\-Int}
+\item 
+typedef long long int \hyperlink{namespace_json_ab7b47d2905da3b4ae60e4e800ec9ae5f}{Int64}
+\item 
+typedef unsigned long long int \hyperlink{namespace_json_a01f20bce8f8229f38ff890168c0e6452}{U\-Int64}
+\item 
+typedef \hyperlink{namespace_json_ab7b47d2905da3b4ae60e4e800ec9ae5f}{Int64} \hyperlink{namespace_json_a218d880af853ce786cd985e82571d297}{Largest\-Int}
+\item 
+typedef \hyperlink{namespace_json_a01f20bce8f8229f38ff890168c0e6452}{U\-Int64} \hyperlink{namespace_json_ae202ecad69725e23443f465e257456d0}{Largest\-U\-Int}
+\item 
+typedef unsigned int \hyperlink{namespace_json_a8048e741f2177c3b5d9ede4a5b8c53c2}{Array\-Index}
+\item 
+typedef char \hyperlink{namespace_json_a602bcf69c2042fb61c3b243cb16f04ca}{U\-Int\-To\-String\-Buffer} \mbox{[}\hyperlink{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}{uint\-To\-String\-Buffer\-Size}\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4e}{Value\-Type} \{ \\*
+\hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4ea7d9899633b4409bd3fc107e6737f8391}{null\-Value} = 0, 
+\hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4eae5a9d708d5c9e23ae9bf98898522512d}{int\-Value}, 
+\hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4eaea788d9a3bb00adc6d68d97d43e1ccd3}{uint\-Value}, 
+\hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4eab837c7b869c14d8be712deb45c9e490e}{real\-Value}, 
+\\*
+\hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4ea804ef857affea2d415843c73f261c258}{string\-Value}, 
+\hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4ea14c30dbf4da86f7b809be299f671f7fd}{boolean\-Value}, 
+\hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4eadc8f264f36b55b063c78126b335415f4}{array\-Value}, 
+\hyperlink{namespace_json_a7d654b75c16a57007925868e38212b4eae8386dcfc36d1ae897745f7b4f77a1f6}{object\-Value}
+ \}
+\begin{DoxyCompactList}\small\item\em Type of the value held by a Value object. \end{DoxyCompactList}\item 
+enum \hyperlink{namespace_json_a4fc417c23905b2ae9e2c47d197a45351}{Comment\-Placement} \{ \hyperlink{namespace_json_a4fc417c23905b2ae9e2c47d197a45351a52f1733775460517b2ea6bedf4906d52}{comment\-Before} = 0, 
+\hyperlink{namespace_json_a4fc417c23905b2ae9e2c47d197a45351a008a230a0586de54f30b76afe70fdcfa}{comment\-After\-On\-Same\-Line}, 
+\hyperlink{namespace_json_a4fc417c23905b2ae9e2c47d197a45351ac5784ca53b12250888ddb642b06aebef}{comment\-After}, 
+\hyperlink{namespace_json_a4fc417c23905b2ae9e2c47d197a45351abcbd3eb00417335e094e4a03379659b5}{number\-Of\-Comment\-Placement}
+ \}
+\item 
+enum \{ \hyperlink{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}{uint\-To\-String\-Buffer\-Size} = 3 $\ast$ sizeof(Largest\-U\-Int) + 1
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} std\-::istream \& \hyperlink{namespace_json_a4d245ef719cc0853e8e78eb5f99c16e5}{operator$>$$>$} (std\-::istream \&, \hyperlink{class_json_1_1_value}{Value} \&)
+\begin{DoxyCompactList}\small\item\em Read from 'sin' into 'root'. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} \hyperlink{namespace_json_a05cd078d8e086a4bcc08d40948f711e7}{value\-To\-String} (\hyperlink{namespace_json_a08122e8005b706d982e48cca1e2119c7}{Int} value)
+\item 
+std\-::string \hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} \hyperlink{namespace_json_abcb58ea0f384c30608729a94d539e2ce}{value\-To\-String} (\hyperlink{namespace_json_a800fb90eb6ee8d5d62b600c06f87f7d4}{U\-Int} value)
+\item 
+std\-::string \hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} \hyperlink{namespace_json_abd9c650f70d9434f98f9025e2e2faf2d}{value\-To\-String} (\hyperlink{namespace_json_a218d880af853ce786cd985e82571d297}{Largest\-Int} value)
+\item 
+std\-::string \hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} \hyperlink{namespace_json_a3f46b0bc62b95a9426a2da0117bdf9f0}{value\-To\-String} (\hyperlink{namespace_json_ae202ecad69725e23443f465e257456d0}{Largest\-U\-Int} value)
+\item 
+std\-::string \hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} \hyperlink{namespace_json_a99995d7dafa4f4970b349d7d3c8d1d99}{value\-To\-String} (double value)
+\item 
+std\-::string \hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} \hyperlink{namespace_json_a979ed531f091985e22f0051cd2a8e341}{value\-To\-String} (bool value)
+\item 
+std\-::string \hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} \hyperlink{namespace_json_aa0c8235a4a5c6599da5d3332743db8ac}{value\-To\-Quoted\-String} (const char $\ast$value)
+\item 
+\hyperlink{json_8hpp_a1d61ffde86ce1a18fd83194ff0d9a206}{J\-S\-O\-N\-\_\-\-A\-P\-I} std\-::ostream \& \hyperlink{namespace_json_a87bc83d7e90fc666d28aa16727deda2f}{operator$<$$<$} (std\-::ostream \&, const \hyperlink{class_json_1_1_value}{Value} \&root)
+\begin{DoxyCompactList}\small\item\em Output using the \hyperlink{class_json_1_1_styled_stream_writer}{Styled\-Stream\-Writer}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned char \& \hyperlink{namespace_json_ab30055b4bbd82aecaca57ccecd63bbe6}{k\-Null\-Ref} = k\-Null\mbox{[}0\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+J\-S\-O\-N (Java\-Script Object Notation). 
+
+\subsection{Typedef Documentation}
+\hypertarget{namespace_json_a8048e741f2177c3b5d9ede4a5b8c53c2}{\index{Json@{Json}!Array\-Index@{Array\-Index}}
+\index{Array\-Index@{Array\-Index}!Json@{Json}}
+\subsubsection[{Array\-Index}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int {\bf Json\-::\-Array\-Index}}}\label{namespace_json_a8048e741f2177c3b5d9ede4a5b8c53c2}
+
+
+Definition at line 261 of file json.\-hpp.
+
+\hypertarget{namespace_json_a08122e8005b706d982e48cca1e2119c7}{\index{Json@{Json}!Int@{Int}}
+\index{Int@{Int}!Json@{Json}}
+\subsubsection[{Int}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf Json\-::\-Int}}}\label{namespace_json_a08122e8005b706d982e48cca1e2119c7}
+
+
+Definition at line 203 of file json.\-hpp.
+
+\hypertarget{namespace_json_ab7b47d2905da3b4ae60e4e800ec9ae5f}{\index{Json@{Json}!Int64@{Int64}}
+\index{Int64@{Int64}!Json@{Json}}
+\subsubsection[{Int64}]{\setlength{\rightskip}{0pt plus 5cm}typedef long long int {\bf Json\-::\-Int64}}}\label{namespace_json_ab7b47d2905da3b4ae60e4e800ec9ae5f}
+
+
+Definition at line 215 of file json.\-hpp.
+
+\hypertarget{namespace_json_a218d880af853ce786cd985e82571d297}{\index{Json@{Json}!Largest\-Int@{Largest\-Int}}
+\index{Largest\-Int@{Largest\-Int}!Json@{Json}}
+\subsubsection[{Largest\-Int}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Int64} {\bf Json\-::\-Largest\-Int}}}\label{namespace_json_a218d880af853ce786cd985e82571d297}
+
+
+Definition at line 218 of file json.\-hpp.
+
+\hypertarget{namespace_json_ae202ecad69725e23443f465e257456d0}{\index{Json@{Json}!Largest\-U\-Int@{Largest\-U\-Int}}
+\index{Largest\-U\-Int@{Largest\-U\-Int}!Json@{Json}}
+\subsubsection[{Largest\-U\-Int}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf U\-Int64} {\bf Json\-::\-Largest\-U\-Int}}}\label{namespace_json_ae202ecad69725e23443f465e257456d0}
+
+
+Definition at line 219 of file json.\-hpp.
+
+\hypertarget{namespace_json_a800fb90eb6ee8d5d62b600c06f87f7d4}{\index{Json@{Json}!U\-Int@{U\-Int}}
+\index{U\-Int@{U\-Int}!Json@{Json}}
+\subsubsection[{U\-Int}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int {\bf Json\-::\-U\-Int}}}\label{namespace_json_a800fb90eb6ee8d5d62b600c06f87f7d4}
+
+
+Definition at line 204 of file json.\-hpp.
+
+\hypertarget{namespace_json_a01f20bce8f8229f38ff890168c0e6452}{\index{Json@{Json}!U\-Int64@{U\-Int64}}
+\index{U\-Int64@{U\-Int64}!Json@{Json}}
+\subsubsection[{U\-Int64}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned long long int {\bf Json\-::\-U\-Int64}}}\label{namespace_json_a01f20bce8f8229f38ff890168c0e6452}
+
+
+Definition at line 216 of file json.\-hpp.
+
+\hypertarget{namespace_json_a602bcf69c2042fb61c3b243cb16f04ca}{\index{Json@{Json}!U\-Int\-To\-String\-Buffer@{U\-Int\-To\-String\-Buffer}}
+\index{U\-Int\-To\-String\-Buffer@{U\-Int\-To\-String\-Buffer}!Json@{Json}}
+\subsubsection[{U\-Int\-To\-String\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}typedef char Json\-::\-U\-Int\-To\-String\-Buffer\mbox{[}{\bf uint\-To\-String\-Buffer\-Size}\mbox{]}}}\label{namespace_json_a602bcf69c2042fb61c3b243cb16f04ca}
+
+
+Definition at line 138 of file json.\-cpp.
+
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespace_json_a0c5f614b019f20b4598dcaec09d9e820}{\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}}\label{namespace_json_a0c5f614b019f20b4598dcaec09d9e820}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{uint\-To\-String\-Buffer\-Size@{uint\-To\-String\-Buffer\-Size}!Json@{Json}}\index{Json@{Json}!uint\-To\-String\-Buffer\-Size@{uint\-To\-String\-Buffer\-Size}}\item[{\em 
+\hypertarget{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}{uint\-To\-String\-Buffer\-Size}\label{namespace_json_a0c5f614b019f20b4598dcaec09d9e820ae4f2008c7919f20d81286121d1374424}
+}]Constant that specify the size of the buffer that must be passed to uint\-To\-String. \end{description}
+\end{Desc}
+
+
+Definition at line 131 of file json.\-cpp.
+
+\hypertarget{namespace_json_a4fc417c23905b2ae9e2c47d197a45351}{\index{Json@{Json}!Comment\-Placement@{Comment\-Placement}}
+\index{Comment\-Placement@{Comment\-Placement}!Json@{Json}}
+\subsubsection[{Comment\-Placement}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Json\-::\-Comment\-Placement}}}\label{namespace_json_a4fc417c23905b2ae9e2c47d197a45351}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{comment\-Before@{comment\-Before}!Json@{Json}}\index{Json@{Json}!comment\-Before@{comment\-Before}}\item[{\em 
+\hypertarget{namespace_json_a4fc417c23905b2ae9e2c47d197a45351a52f1733775460517b2ea6bedf4906d52}{comment\-Before}\label{namespace_json_a4fc417c23905b2ae9e2c47d197a45351a52f1733775460517b2ea6bedf4906d52}
+}]a comment placed on the line before a value \index{comment\-After\-On\-Same\-Line@{comment\-After\-On\-Same\-Line}!Json@{Json}}\index{Json@{Json}!comment\-After\-On\-Same\-Line@{comment\-After\-On\-Same\-Line}}\item[{\em 
+\hypertarget{namespace_json_a4fc417c23905b2ae9e2c47d197a45351a008a230a0586de54f30b76afe70fdcfa}{comment\-After\-On\-Same\-Line}\label{namespace_json_a4fc417c23905b2ae9e2c47d197a45351a008a230a0586de54f30b76afe70fdcfa}
+}]a comment just after a value on the same line \index{comment\-After@{comment\-After}!Json@{Json}}\index{Json@{Json}!comment\-After@{comment\-After}}\item[{\em 
+\hypertarget{namespace_json_a4fc417c23905b2ae9e2c47d197a45351ac5784ca53b12250888ddb642b06aebef}{comment\-After}\label{namespace_json_a4fc417c23905b2ae9e2c47d197a45351ac5784ca53b12250888ddb642b06aebef}
+}]a comment on the line after a value (only make sense for \index{number\-Of\-Comment\-Placement@{number\-Of\-Comment\-Placement}!Json@{Json}}\index{Json@{Json}!number\-Of\-Comment\-Placement@{number\-Of\-Comment\-Placement}}\item[{\em 
+\hypertarget{namespace_json_a4fc417c23905b2ae9e2c47d197a45351abcbd3eb00417335e094e4a03379659b5}{number\-Of\-Comment\-Placement}\label{namespace_json_a4fc417c23905b2ae9e2c47d197a45351abcbd3eb00417335e094e4a03379659b5}
+}]root value) \end{description}
+\end{Desc}
+
+
+Definition at line 414 of file json.\-hpp.
+
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4e}{\index{Json@{Json}!Value\-Type@{Value\-Type}}
+\index{Value\-Type@{Value\-Type}!Json@{Json}}
+\subsubsection[{Value\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Json\-::\-Value\-Type}}}\label{namespace_json_a7d654b75c16a57007925868e38212b4e}
+
+
+Type of the value held by a \hyperlink{class_json_1_1_value}{Value} object. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{null\-Value@{null\-Value}!Json@{Json}}\index{Json@{Json}!null\-Value@{null\-Value}}\item[{\em 
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4ea7d9899633b4409bd3fc107e6737f8391}{null\-Value}\label{namespace_json_a7d654b75c16a57007925868e38212b4ea7d9899633b4409bd3fc107e6737f8391}
+}]'null' value \index{int\-Value@{int\-Value}!Json@{Json}}\index{Json@{Json}!int\-Value@{int\-Value}}\item[{\em 
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4eae5a9d708d5c9e23ae9bf98898522512d}{int\-Value}\label{namespace_json_a7d654b75c16a57007925868e38212b4eae5a9d708d5c9e23ae9bf98898522512d}
+}]signed integer value \index{uint\-Value@{uint\-Value}!Json@{Json}}\index{Json@{Json}!uint\-Value@{uint\-Value}}\item[{\em 
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4eaea788d9a3bb00adc6d68d97d43e1ccd3}{uint\-Value}\label{namespace_json_a7d654b75c16a57007925868e38212b4eaea788d9a3bb00adc6d68d97d43e1ccd3}
+}]unsigned integer value \index{real\-Value@{real\-Value}!Json@{Json}}\index{Json@{Json}!real\-Value@{real\-Value}}\item[{\em 
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4eab837c7b869c14d8be712deb45c9e490e}{real\-Value}\label{namespace_json_a7d654b75c16a57007925868e38212b4eab837c7b869c14d8be712deb45c9e490e}
+}]double value \index{string\-Value@{string\-Value}!Json@{Json}}\index{Json@{Json}!string\-Value@{string\-Value}}\item[{\em 
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4ea804ef857affea2d415843c73f261c258}{string\-Value}\label{namespace_json_a7d654b75c16a57007925868e38212b4ea804ef857affea2d415843c73f261c258}
+}]U\-T\-F-\/8 string value. \index{boolean\-Value@{boolean\-Value}!Json@{Json}}\index{Json@{Json}!boolean\-Value@{boolean\-Value}}\item[{\em 
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4ea14c30dbf4da86f7b809be299f671f7fd}{boolean\-Value}\label{namespace_json_a7d654b75c16a57007925868e38212b4ea14c30dbf4da86f7b809be299f671f7fd}
+}]bool value \index{array\-Value@{array\-Value}!Json@{Json}}\index{Json@{Json}!array\-Value@{array\-Value}}\item[{\em 
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4eadc8f264f36b55b063c78126b335415f4}{array\-Value}\label{namespace_json_a7d654b75c16a57007925868e38212b4eadc8f264f36b55b063c78126b335415f4}
+}]array value (ordered list) \index{object\-Value@{object\-Value}!Json@{Json}}\index{Json@{Json}!object\-Value@{object\-Value}}\item[{\em 
+\hypertarget{namespace_json_a7d654b75c16a57007925868e38212b4eae8386dcfc36d1ae897745f7b4f77a1f6}{object\-Value}\label{namespace_json_a7d654b75c16a57007925868e38212b4eae8386dcfc36d1ae897745f7b4f77a1f6}
+}]object value (collection of name/value pairs). \end{description}
+\end{Desc}
+
+
+Definition at line 403 of file json.\-hpp.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace_json_a87bc83d7e90fc666d28aa16727deda2f}{\index{Json@{Json}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Json@{Json}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream \& Json\-::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{sout, }
+\item[{const Value \&}]{root}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_a87bc83d7e90fc666d28aa16727deda2f}
+
+
+Output using the \hyperlink{class_json_1_1_styled_stream_writer}{Styled\-Stream\-Writer}. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_json_a4d245ef719cc0853e8e78eb5f99c16e5}{Json\-::operator$>$$>$()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 3648 of file json.\-cpp.
+
+\hypertarget{namespace_json_a4d245ef719cc0853e8e78eb5f99c16e5}{\index{Json@{Json}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!Json@{Json}}
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::istream \& Json\-::operator$>$$>$ (
+\begin{DoxyParamCaption}
+\item[{std\-::istream \&}]{sin, }
+\item[{Value \&}]{root}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_a4d245ef719cc0853e8e78eb5f99c16e5}
+
+
+Read from 'sin' into 'root'. 
+
+Always keep comments from the input J\-S\-O\-N.
+
+This can be used to read a file into a particular sub-\/object. For example\-: 
+\begin{DoxyCode}
+\hyperlink{class_json_1_1_value}{Json::Value} root;
+cin >> root[\textcolor{stringliteral}{"dir"}][\textcolor{stringliteral}{"file"}];
+cout << root;
+\end{DoxyCode}
+ Result\-: \begin{DoxyVerb}{
+"dir": {
+    "file": {
+    // The input stream JSON would be nested here.
+    }
+}
+}
+\end{DoxyVerb}
+ 
+\begin{DoxyExceptions}{Exceptions}
+{\em std\-::exception} & on parse error. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_json_a87bc83d7e90fc666d28aa16727deda2f}{Json\-::operator$<$$<$()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 1055 of file json.\-cpp.
+
+\hypertarget{namespace_json_aa0c8235a4a5c6599da5d3332743db8ac}{\index{Json@{Json}!value\-To\-Quoted\-String@{value\-To\-Quoted\-String}}
+\index{value\-To\-Quoted\-String@{value\-To\-Quoted\-String}!Json@{Json}}
+\subsubsection[{value\-To\-Quoted\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Json\-::value\-To\-Quoted\-String (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_aa0c8235a4a5c6599da5d3332743db8ac}
+
+
+Definition at line 3075 of file json.\-cpp.
+
+\hypertarget{namespace_json_a05cd078d8e086a4bcc08d40948f711e7}{\index{Json@{Json}!value\-To\-String@{value\-To\-String}}
+\index{value\-To\-String@{value\-To\-String}!Json@{Json}}
+\subsubsection[{value\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf J\-S\-O\-N\-\_\-\-A\-P\-I} Json\-::value\-To\-String (
+\begin{DoxyParamCaption}
+\item[{Int}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_a05cd078d8e086a4bcc08d40948f711e7}
+\hypertarget{namespace_json_abcb58ea0f384c30608729a94d539e2ce}{\index{Json@{Json}!value\-To\-String@{value\-To\-String}}
+\index{value\-To\-String@{value\-To\-String}!Json@{Json}}
+\subsubsection[{value\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf J\-S\-O\-N\-\_\-\-A\-P\-I} Json\-::value\-To\-String (
+\begin{DoxyParamCaption}
+\item[{U\-Int}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_abcb58ea0f384c30608729a94d539e2ce}
+\hypertarget{namespace_json_abd9c650f70d9434f98f9025e2e2faf2d}{\index{Json@{Json}!value\-To\-String@{value\-To\-String}}
+\index{value\-To\-String@{value\-To\-String}!Json@{Json}}
+\subsubsection[{value\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Json\-::value\-To\-String (
+\begin{DoxyParamCaption}
+\item[{Largest\-Int}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_abd9c650f70d9434f98f9025e2e2faf2d}
+
+
+Definition at line 3003 of file json.\-cpp.
+
+\hypertarget{namespace_json_a3f46b0bc62b95a9426a2da0117bdf9f0}{\index{Json@{Json}!value\-To\-String@{value\-To\-String}}
+\index{value\-To\-String@{value\-To\-String}!Json@{Json}}
+\subsubsection[{value\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Json\-::value\-To\-String (
+\begin{DoxyParamCaption}
+\item[{Largest\-U\-Int}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_a3f46b0bc62b95a9426a2da0117bdf9f0}
+
+
+Definition at line 3016 of file json.\-cpp.
+
+\hypertarget{namespace_json_a99995d7dafa4f4970b349d7d3c8d1d99}{\index{Json@{Json}!value\-To\-String@{value\-To\-String}}
+\index{value\-To\-String@{value\-To\-String}!Json@{Json}}
+\subsubsection[{value\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Json\-::value\-To\-String (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_a99995d7dafa4f4970b349d7d3c8d1d99}
+
+
+Definition at line 3036 of file json.\-cpp.
+
+\hypertarget{namespace_json_a979ed531f091985e22f0051cd2a8e341}{\index{Json@{Json}!value\-To\-String@{value\-To\-String}}
+\index{value\-To\-String@{value\-To\-String}!Json@{Json}}
+\subsubsection[{value\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Json\-::value\-To\-String (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_json_a979ed531f091985e22f0051cd2a8e341}
+
+
+Definition at line 3073 of file json.\-cpp.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespace_json_ab30055b4bbd82aecaca57ccecd63bbe6}{\index{Json@{Json}!k\-Null\-Ref@{k\-Null\-Ref}}
+\index{k\-Null\-Ref@{k\-Null\-Ref}!Json@{Json}}
+\subsubsection[{k\-Null\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned char\& Json\-::k\-Null\-Ref = k\-Null\mbox{[}0\mbox{]}}}\label{namespace_json_ab30055b4bbd82aecaca57ccecd63bbe6}
+
+
+Definition at line 1509 of file json.\-cpp.
+

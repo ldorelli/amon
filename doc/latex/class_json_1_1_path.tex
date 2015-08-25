@@ -1,0 +1,103 @@
+\hypertarget{class_json_1_1_path}{\section{Json\-:\-:Path Class Reference}
+\label{class_json_1_1_path}\index{Json\-::\-Path@{Json\-::\-Path}}
+}
+
+
+Experimental and untested\-: represents a \char`\"{}path\char`\"{} to access a node.  
+
+
+
+
+{\ttfamily \#include $<$json.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_json_1_1_path_aaa37a99650e770d0cd680bf53585ec99}{Path} (const std\-::string \&path, const \hyperlink{class_json_1_1_path_argument}{Path\-Argument} \&a1=\hyperlink{class_json_1_1_path_argument}{Path\-Argument}(), const \hyperlink{class_json_1_1_path_argument}{Path\-Argument} \&a2=\hyperlink{class_json_1_1_path_argument}{Path\-Argument}(), const \hyperlink{class_json_1_1_path_argument}{Path\-Argument} \&a3=\hyperlink{class_json_1_1_path_argument}{Path\-Argument}(), const \hyperlink{class_json_1_1_path_argument}{Path\-Argument} \&a4=\hyperlink{class_json_1_1_path_argument}{Path\-Argument}(), const \hyperlink{class_json_1_1_path_argument}{Path\-Argument} \&a5=\hyperlink{class_json_1_1_path_argument}{Path\-Argument}())
+\item 
+const \hyperlink{class_json_1_1_value}{Value} \& \hyperlink{class_json_1_1_path_ae1d05fa985a6ee3c57f2b8ed186b5982}{resolve} (const \hyperlink{class_json_1_1_value}{Value} \&root) const 
+\item 
+\hyperlink{class_json_1_1_value}{Value} \hyperlink{class_json_1_1_path_a33d1749770a4cf74e9a3de419bc7febe}{resolve} (const \hyperlink{class_json_1_1_value}{Value} \&root, const \hyperlink{class_json_1_1_value}{Value} \&default\-Value) const 
+\item 
+\hyperlink{class_json_1_1_value}{Value} \& \hyperlink{class_json_1_1_path_a5289901fc58ad1fdca1de7fb5a0b620c}{make} (\hyperlink{class_json_1_1_value}{Value} \&root) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Experimental and untested\-: represents a \char`\"{}path\char`\"{} to access a node. 
+
+Syntax\-:
+\begin{DoxyItemize}
+\item \char`\"{}.\char`\"{} =$>$ root node
+\item \char`\"{}.\mbox{[}n\mbox{]}\char`\"{} =$>$ elements at index 'n' of root node (an array value)
+\item \char`\"{}.\-name\char`\"{} =$>$ member named 'name' of root node (an object value)
+\item \char`\"{}.\-name1.\-name2.\-name3\char`\"{}
+\item \char`\"{}.\mbox{[}0\mbox{]}\mbox{[}1\mbox{]}\mbox{[}2\mbox{]}.\-name1\mbox{[}3\mbox{]}\char`\"{}
+\item \char`\"{}.\%\char`\"{} =$>$ member name is provided as parameter
+\item \char`\"{}.\mbox{[}\%\mbox{]}\char`\"{} =$>$ index is provied as parameter 
+\end{DoxyItemize}
+
+Definition at line 905 of file json.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_json_1_1_path_aaa37a99650e770d0cd680bf53585ec99}{\index{Json\-::\-Path@{Json\-::\-Path}!Path@{Path}}
+\index{Path@{Path}!Json::Path@{Json\-::\-Path}}
+\subsubsection[{Path}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Path\-::\-Path (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{path, }
+\item[{const {\bf Path\-Argument} \&}]{a1 = {\ttfamily {\bf Path\-Argument}()}, }
+\item[{const {\bf Path\-Argument} \&}]{a2 = {\ttfamily {\bf Path\-Argument}()}, }
+\item[{const {\bf Path\-Argument} \&}]{a3 = {\ttfamily {\bf Path\-Argument}()}, }
+\item[{const {\bf Path\-Argument} \&}]{a4 = {\ttfamily {\bf Path\-Argument}()}, }
+\item[{const {\bf Path\-Argument} \&}]{a5 = {\ttfamily {\bf Path\-Argument}()}}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_path_aaa37a99650e770d0cd680bf53585ec99}
+
+
+Definition at line 2826 of file json.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_json_1_1_path_a5289901fc58ad1fdca1de7fb5a0b620c}{\index{Json\-::\-Path@{Json\-::\-Path}!make@{make}}
+\index{make@{make}!Json::Path@{Json\-::\-Path}}
+\subsubsection[{make}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Value} \& Json\-::\-Path\-::make (
+\begin{DoxyParamCaption}
+\item[{{\bf Value} \&}]{root}
+\end{DoxyParamCaption}
+) const}}\label{class_json_1_1_path_a5289901fc58ad1fdca1de7fb5a0b620c}
+Creates the \char`\"{}path\char`\"{} to access the specified node and returns a reference on the node. 
+
+Definition at line 2931 of file json.\-cpp.
+
+\hypertarget{class_json_1_1_path_ae1d05fa985a6ee3c57f2b8ed186b5982}{\index{Json\-::\-Path@{Json\-::\-Path}!resolve@{resolve}}
+\index{resolve@{resolve}!Json::Path@{Json\-::\-Path}}
+\subsubsection[{resolve}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Value} \& Json\-::\-Path\-::resolve (
+\begin{DoxyParamCaption}
+\item[{const {\bf Value} \&}]{root}
+\end{DoxyParamCaption}
+) const}}\label{class_json_1_1_path_ae1d05fa985a6ee3c57f2b8ed186b5982}
+
+
+Definition at line 2889 of file json.\-cpp.
+
+\hypertarget{class_json_1_1_path_a33d1749770a4cf74e9a3de419bc7febe}{\index{Json\-::\-Path@{Json\-::\-Path}!resolve@{resolve}}
+\index{resolve@{resolve}!Json::Path@{Json\-::\-Path}}
+\subsubsection[{resolve}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Value} Json\-::\-Path\-::resolve (
+\begin{DoxyParamCaption}
+\item[{const {\bf Value} \&}]{root, }
+\item[{const {\bf Value} \&}]{default\-Value}
+\end{DoxyParamCaption}
+) const}}\label{class_json_1_1_path_a33d1749770a4cf74e9a3de419bc7febe}
+
+
+Definition at line 2912 of file json.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/fushigisama/\-Documents/amon/includes/util/json/\hyperlink{json_8hpp}{json.\-hpp}\item 
+/home/fushigisama/\-Documents/amon/src/util/json/\hyperlink{json_8cpp}{json.\-cpp}\end{DoxyCompactItemize}

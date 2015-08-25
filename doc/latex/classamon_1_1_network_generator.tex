@@ -1,0 +1,164 @@
+\hypertarget{classamon_1_1_network_generator}{\section{amon\-:\-:Network\-Generator Class Reference}
+\label{classamon_1_1_network_generator}\index{amon\-::\-Network\-Generator@{amon\-::\-Network\-Generator}}
+}
+
+
+{\ttfamily \#include $<$network\-\_\-models.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classamon_1_1_network_generator_ae739a560fd0303645f489245561f84f9}{Network\-Generator} ()
+\item 
+\hyperlink{classamon_1_1_network_generator_a8793e18217d6b0601d41c72c9a0fd5f8}{Network\-Generator} (int seed)
+\item 
+\hyperlink{classamon_1_1_network_generator_a8f34b3e5ffbf06be52b30373d18b0224}{$\sim$\-Network\-Generator} ()
+\item 
+\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} \hyperlink{classamon_1_1_network_generator_ab1dca0f0df8a7f590cc93056b6c84da7}{undirected\-Erdos\-Renyi} (int n, double p)
+\item 
+\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} \hyperlink{classamon_1_1_network_generator_ac3cffe11a9628e3ca6a78e924b92dd07}{undirected\-Simple\-Erdos\-Renyi} (int n, double p)
+\item 
+\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} \hyperlink{classamon_1_1_network_generator_a0ca71ce45ccf355bb8737b36d5cb4c3c}{directed\-Erdos\-Renyi} (int n, double p)
+\item 
+\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} \hyperlink{classamon_1_1_network_generator_a908bd083e8ebbf1b4597b2d8d28e439d}{directed\-Simple\-Erdos\-Renyi} (int n, double p)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 9 of file network\-\_\-models.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classamon_1_1_network_generator_ae739a560fd0303645f489245561f84f9}{\index{amon\-::\-Network\-Generator@{amon\-::\-Network\-Generator}!Network\-Generator@{Network\-Generator}}
+\index{Network\-Generator@{Network\-Generator}!amon::NetworkGenerator@{amon\-::\-Network\-Generator}}
+\subsubsection[{Network\-Generator}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-Network\-Generator\-::\-Network\-Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_network_generator_ae739a560fd0303645f489245561f84f9}
+
+
+Definition at line 5 of file network\-\_\-models.\-cpp.
+
+\hypertarget{classamon_1_1_network_generator_a8793e18217d6b0601d41c72c9a0fd5f8}{\index{amon\-::\-Network\-Generator@{amon\-::\-Network\-Generator}!Network\-Generator@{Network\-Generator}}
+\index{Network\-Generator@{Network\-Generator}!amon::NetworkGenerator@{amon\-::\-Network\-Generator}}
+\subsubsection[{Network\-Generator}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-Network\-Generator\-::\-Network\-Generator (
+\begin{DoxyParamCaption}
+\item[{int}]{seed}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_network_generator_a8793e18217d6b0601d41c72c9a0fd5f8}
+
+
+Definition at line 9 of file network\-\_\-models.\-cpp.
+
+\hypertarget{classamon_1_1_network_generator_a8f34b3e5ffbf06be52b30373d18b0224}{\index{amon\-::\-Network\-Generator@{amon\-::\-Network\-Generator}!$\sim$\-Network\-Generator@{$\sim$\-Network\-Generator}}
+\index{$\sim$\-Network\-Generator@{$\sim$\-Network\-Generator}!amon::NetworkGenerator@{amon\-::\-Network\-Generator}}
+\subsubsection[{$\sim$\-Network\-Generator}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-Network\-Generator\-::$\sim$\-Network\-Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_network_generator_a8f34b3e5ffbf06be52b30373d18b0224}
+
+
+Definition at line 13 of file network\-\_\-models.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classamon_1_1_network_generator_a0ca71ce45ccf355bb8737b36d5cb4c3c}{\index{amon\-::\-Network\-Generator@{amon\-::\-Network\-Generator}!directed\-Erdos\-Renyi@{directed\-Erdos\-Renyi}}
+\index{directed\-Erdos\-Renyi@{directed\-Erdos\-Renyi}!amon::NetworkGenerator@{amon\-::\-Network\-Generator}}
+\subsubsection[{directed\-Erdos\-Renyi}]{\setlength{\rightskip}{0pt plus 5cm}{\bf amon\-::\-Graph} amon\-::\-Network\-Generator\-::directed\-Erdos\-Renyi (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{double}]{p}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_network_generator_a0ca71ce45ccf355bb8737b36d5cb4c3c}
+Random graph of Erdos-\/\-Renyi. May generate self-\/loops. Directed. O(\-E Log$^\wedge$2 E) 
+\begin{DoxyParams}{Parameters}
+{\em n} & The size of the graph. \\
+\hline
+{\em p} & Probability of a connection existing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random graph with given parameters. 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file network\-\_\-models.\-cpp.
+
+\hypertarget{classamon_1_1_network_generator_a908bd083e8ebbf1b4597b2d8d28e439d}{\index{amon\-::\-Network\-Generator@{amon\-::\-Network\-Generator}!directed\-Simple\-Erdos\-Renyi@{directed\-Simple\-Erdos\-Renyi}}
+\index{directed\-Simple\-Erdos\-Renyi@{directed\-Simple\-Erdos\-Renyi}!amon::NetworkGenerator@{amon\-::\-Network\-Generator}}
+\subsubsection[{directed\-Simple\-Erdos\-Renyi}]{\setlength{\rightskip}{0pt plus 5cm}{\bf amon\-::\-Graph} amon\-::\-Network\-Generator\-::directed\-Simple\-Erdos\-Renyi (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{double}]{p}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_network_generator_a908bd083e8ebbf1b4597b2d8d28e439d}
+Same as erdos\-Renyi but with an O(\-V$^\wedge$2) algotihm. Directed. 
+\begin{DoxyParams}{Parameters}
+{\em n} & The size of the graph. \\
+\hline
+{\em p} & Probability of a connection existing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random graph with given parameters. 
+\end{DoxyReturn}
+
+
+Definition at line 100 of file network\-\_\-models.\-cpp.
+
+\hypertarget{classamon_1_1_network_generator_ab1dca0f0df8a7f590cc93056b6c84da7}{\index{amon\-::\-Network\-Generator@{amon\-::\-Network\-Generator}!undirected\-Erdos\-Renyi@{undirected\-Erdos\-Renyi}}
+\index{undirected\-Erdos\-Renyi@{undirected\-Erdos\-Renyi}!amon::NetworkGenerator@{amon\-::\-Network\-Generator}}
+\subsubsection[{undirected\-Erdos\-Renyi}]{\setlength{\rightskip}{0pt plus 5cm}{\bf amon\-::\-Graph} amon\-::\-Network\-Generator\-::undirected\-Erdos\-Renyi (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{double}]{p}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_network_generator_ab1dca0f0df8a7f590cc93056b6c84da7}
+Random graph of Erdos-\/\-Renyi. Undirected. O(\-E Log$^\wedge$2 E) 
+\begin{DoxyParams}{Parameters}
+{\em n} & The size of the graph. \\
+\hline
+{\em p} & Probability of a connection existing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random graph with given parameters. 
+\end{DoxyReturn}
+
+
+Definition at line 56 of file network\-\_\-models.\-cpp.
+
+\hypertarget{classamon_1_1_network_generator_ac3cffe11a9628e3ca6a78e924b92dd07}{\index{amon\-::\-Network\-Generator@{amon\-::\-Network\-Generator}!undirected\-Simple\-Erdos\-Renyi@{undirected\-Simple\-Erdos\-Renyi}}
+\index{undirected\-Simple\-Erdos\-Renyi@{undirected\-Simple\-Erdos\-Renyi}!amon::NetworkGenerator@{amon\-::\-Network\-Generator}}
+\subsubsection[{undirected\-Simple\-Erdos\-Renyi}]{\setlength{\rightskip}{0pt plus 5cm}{\bf amon\-::\-Graph} amon\-::\-Network\-Generator\-::undirected\-Simple\-Erdos\-Renyi (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{double}]{p}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_network_generator_ac3cffe11a9628e3ca6a78e924b92dd07}
+Same as erdos\-Renyi but with an O(\-V$^\wedge$2) algotihm. Undirected. 
+\begin{DoxyParams}{Parameters}
+{\em n} & The size of the graph. \\
+\hline
+{\em p} & Probability of a connection existing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random graph with given parameters. 
+\end{DoxyReturn}
+
+
+Definition at line 114 of file network\-\_\-models.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/fushigisama/\-Documents/amon/includes/csys/\hyperlink{network__models_8hpp}{network\-\_\-models.\-hpp}\item 
+/home/fushigisama/\-Documents/amon/src/csys/\hyperlink{network__models_8cpp}{network\-\_\-models.\-cpp}\end{DoxyCompactItemize}

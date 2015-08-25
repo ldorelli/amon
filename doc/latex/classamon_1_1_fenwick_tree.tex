@@ -1,0 +1,102 @@
+\hypertarget{classamon_1_1_fenwick_tree}{\section{amon\-:\-:Fenwick\-Tree Class Reference}
+\label{classamon_1_1_fenwick_tree}\index{amon\-::\-Fenwick\-Tree@{amon\-::\-Fenwick\-Tree}}
+}
+
+
+{\ttfamily \#include $<$fenwick.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classamon_1_1_fenwick_tree_ad26fda62f83c3e8945d7fa1671e72197}{Fenwick\-Tree} (int n)
+\item 
+\hyperlink{classamon_1_1_fenwick_tree_a9e05cac381dc28d7d3dbfcaa66844e68}{$\sim$\-Fenwick\-Tree} ()
+\item 
+void \hyperlink{classamon_1_1_fenwick_tree_a690ed7f993820c730a04482bb9c330d7}{add} (int x, int v)
+\item 
+int \hyperlink{classamon_1_1_fenwick_tree_ac44569034b5bac7d16fa3ec48dfbd770}{query} (int x)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Simple implementation of the Fenwick Tree. O(\-N) space needed!! Operations\-: add(x, v)\-: adds x to position v (log\-N) query(x)\-: query sum of elements up to x (log\-N) 
+
+Definition at line 13 of file fenwick.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classamon_1_1_fenwick_tree_ad26fda62f83c3e8945d7fa1671e72197}{\index{amon\-::\-Fenwick\-Tree@{amon\-::\-Fenwick\-Tree}!Fenwick\-Tree@{Fenwick\-Tree}}
+\index{Fenwick\-Tree@{Fenwick\-Tree}!amon::FenwickTree@{amon\-::\-Fenwick\-Tree}}
+\subsubsection[{Fenwick\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-Fenwick\-Tree\-::\-Fenwick\-Tree (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_fenwick_tree_ad26fda62f83c3e8945d7fa1671e72197}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em n} & Number of elements. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 4 of file fenwick.\-cpp.
+
+\hypertarget{classamon_1_1_fenwick_tree_a9e05cac381dc28d7d3dbfcaa66844e68}{\index{amon\-::\-Fenwick\-Tree@{amon\-::\-Fenwick\-Tree}!$\sim$\-Fenwick\-Tree@{$\sim$\-Fenwick\-Tree}}
+\index{$\sim$\-Fenwick\-Tree@{$\sim$\-Fenwick\-Tree}!amon::FenwickTree@{amon\-::\-Fenwick\-Tree}}
+\subsubsection[{$\sim$\-Fenwick\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-Fenwick\-Tree\-::$\sim$\-Fenwick\-Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_fenwick_tree_a9e05cac381dc28d7d3dbfcaa66844e68}
+
+
+Definition at line 9 of file fenwick.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classamon_1_1_fenwick_tree_a690ed7f993820c730a04482bb9c330d7}{\index{amon\-::\-Fenwick\-Tree@{amon\-::\-Fenwick\-Tree}!add@{add}}
+\index{add@{add}!amon::FenwickTree@{amon\-::\-Fenwick\-Tree}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void amon\-::\-Fenwick\-Tree\-::add (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{v}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_fenwick_tree_a690ed7f993820c730a04482bb9c330d7}
+Adds v to position x in the tree. 
+\begin{DoxyParams}{Parameters}
+{\em x} & The position to increment \\
+\hline
+{\em v} & The value to increment \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file fenwick.\-cpp.
+
+\hypertarget{classamon_1_1_fenwick_tree_ac44569034b5bac7d16fa3ec48dfbd770}{\index{amon\-::\-Fenwick\-Tree@{amon\-::\-Fenwick\-Tree}!query@{query}}
+\index{query@{query}!amon::FenwickTree@{amon\-::\-Fenwick\-Tree}}
+\subsubsection[{query}]{\setlength{\rightskip}{0pt plus 5cm}int amon\-::\-Fenwick\-Tree\-::query (
+\begin{DoxyParamCaption}
+\item[{int}]{x}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_fenwick_tree_ac44569034b5bac7d16fa3ec48dfbd770}
+Queries sum of all positions up to x. 
+\begin{DoxyParams}{Parameters}
+{\em x} & The position to query up to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value sought. 
+\end{DoxyReturn}
+
+
+Definition at line 18 of file fenwick.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/fushigisama/\-Documents/amon/includes/util/\hyperlink{fenwick_8hpp}{fenwick.\-hpp}\item 
+/home/fushigisama/\-Documents/amon/src/util/\hyperlink{fenwick_8cpp}{fenwick.\-cpp}\end{DoxyCompactItemize}

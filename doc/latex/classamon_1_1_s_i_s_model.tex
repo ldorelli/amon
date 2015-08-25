@@ -1,0 +1,74 @@
+\hypertarget{classamon_1_1_s_i_s_model}{\section{amon\-:\-:S\-I\-S\-Model Class Reference}
+\label{classamon_1_1_s_i_s_model}\index{amon\-::\-S\-I\-S\-Model@{amon\-::\-S\-I\-S\-Model}}
+}
+
+
+{\ttfamily \#include $<$epidemics.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classamon_1_1_s_i_s_model_af6e3737ba4e52d8e6845c031e30a85ac}{S\-I\-S\-Model} (\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} g, double infection\-P, double cure\-P)
+\item 
+void \hyperlink{classamon_1_1_s_i_s_model_af5618b91dfd41f363c651723a9a93362}{step} ()
+\item 
+double \hyperlink{classamon_1_1_s_i_s_model_ac88cd70fc1ee45826422803be10fbf8a}{infected\-Ratio} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file epidemics.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classamon_1_1_s_i_s_model_af6e3737ba4e52d8e6845c031e30a85ac}{\index{amon\-::\-S\-I\-S\-Model@{amon\-::\-S\-I\-S\-Model}!S\-I\-S\-Model@{S\-I\-S\-Model}}
+\index{S\-I\-S\-Model@{S\-I\-S\-Model}!amon::SISModel@{amon\-::\-S\-I\-S\-Model}}
+\subsubsection[{S\-I\-S\-Model}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-S\-I\-S\-Model\-::\-S\-I\-S\-Model (
+\begin{DoxyParamCaption}
+\item[{{\bf amon\-::\-Graph}}]{g, }
+\item[{double}]{infection\-P, }
+\item[{double}]{cure\-P}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_s_i_s_model_af6e3737ba4e52d8e6845c031e30a85ac}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em g} & The network \\
+\hline
+{\em infection\-P} & The infection probability \\
+\hline
+{\em cure\-P} & The cure probability \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file epidemics.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classamon_1_1_s_i_s_model_ac88cd70fc1ee45826422803be10fbf8a}{\index{amon\-::\-S\-I\-S\-Model@{amon\-::\-S\-I\-S\-Model}!infected\-Ratio@{infected\-Ratio}}
+\index{infected\-Ratio@{infected\-Ratio}!amon::SISModel@{amon\-::\-S\-I\-S\-Model}}
+\subsubsection[{infected\-Ratio}]{\setlength{\rightskip}{0pt plus 5cm}double amon\-::\-S\-I\-S\-Model\-::infected\-Ratio (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_s_i_s_model_ac88cd70fc1ee45826422803be10fbf8a}
+Returns the current infected ratio Infected/n\-\_\-individuals \begin{DoxyReturn}{Returns}
+The ratio of infected individuals. 
+\end{DoxyReturn}
+\hypertarget{classamon_1_1_s_i_s_model_af5618b91dfd41f363c651723a9a93362}{\index{amon\-::\-S\-I\-S\-Model@{amon\-::\-S\-I\-S\-Model}!step@{step}}
+\index{step@{step}!amon::SISModel@{amon\-::\-S\-I\-S\-Model}}
+\subsubsection[{step}]{\setlength{\rightskip}{0pt plus 5cm}void amon\-::\-S\-I\-S\-Model\-::step (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_s_i_s_model_af5618b91dfd41f363c651723a9a93362}
+Steps on next moment of the simulation. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/fushigisama/\-Documents/amon/includes/csys/\hyperlink{epidemics_8hpp}{epidemics.\-hpp}\item 
+/home/fushigisama/\-Documents/amon/src/csys/\hyperlink{epidemics_8cpp}{epidemics.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,131 @@
+\hypertarget{class_json_1_1_fast_writer}{\section{Json\-:\-:Fast\-Writer Class Reference}
+\label{class_json_1_1_fast_writer}\index{Json\-::\-Fast\-Writer@{Json\-::\-Fast\-Writer}}
+}
+
+
+Outputs a \hyperlink{class_json_1_1_value}{Value} in \href{http://www.json.org}{\tt J\-S\-O\-N} format without formatting (not human friendly).  
+
+
+
+
+{\ttfamily \#include $<$json.\-hpp$>$}
+
+Inheritance diagram for Json\-:\-:Fast\-Writer\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_json_1_1_fast_writer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_json_1_1_fast_writer_a1bbc73ce1a1cc7b09cd1e02db3905170}{Fast\-Writer} ()
+\item 
+virtual \hyperlink{class_json_1_1_fast_writer_a7eb61405d041a915e5e980be97a707aa}{$\sim$\-Fast\-Writer} ()
+\item 
+void \hyperlink{class_json_1_1_fast_writer_a78d98e9f76d33660ad6e6a1abe287d45}{enable\-Y\-A\-M\-L\-Compatibility} ()
+\item 
+void \hyperlink{class_json_1_1_fast_writer_a6e93d8dce951e408517311026a065b40}{drop\-Null\-Placeholders} ()
+\begin{DoxyCompactList}\small\item\em Drop the \char`\"{}null\char`\"{} string from the writer's output for null\-Values. Strictly speaking, this is not valid J\-S\-O\-N. But when the output is being fed to a browser's Javascript, it makes for smaller output and the browser can handle the output just fine. \end{DoxyCompactList}\item 
+void \hyperlink{class_json_1_1_fast_writer_af4ee077d365d75941fb2688d97207a55}{omit\-Ending\-Line\-Feed} ()
+\item 
+virtual std\-::string \hyperlink{class_json_1_1_fast_writer_aa66218a56447222f91d64db618935a19}{write} (const \hyperlink{class_json_1_1_value}{Value} \&root)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Outputs a \hyperlink{class_json_1_1_value}{Value} in \href{http://www.json.org}{\tt J\-S\-O\-N} format without formatting (not human friendly). 
+
+The J\-S\-O\-N document is written in a single line. It is not intended for 'human' consumption, but may be usefull to support feature such as R\-P\-C where bandwith is limited. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_json_1_1_reader}{Reader}, \hyperlink{class_json_1_1_value}{Value} 
+\end{DoxySeeAlso}
+
+
+Definition at line 1801 of file json.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_json_1_1_fast_writer_a1bbc73ce1a1cc7b09cd1e02db3905170}{\index{Json\-::\-Fast\-Writer@{Json\-::\-Fast\-Writer}!Fast\-Writer@{Fast\-Writer}}
+\index{Fast\-Writer@{Fast\-Writer}!Json::FastWriter@{Json\-::\-Fast\-Writer}}
+\subsubsection[{Fast\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Fast\-Writer\-::\-Fast\-Writer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_fast_writer_a1bbc73ce1a1cc7b09cd1e02db3905170}
+
+
+Definition at line 3144 of file json.\-cpp.
+
+\hypertarget{class_json_1_1_fast_writer_a7eb61405d041a915e5e980be97a707aa}{\index{Json\-::\-Fast\-Writer@{Json\-::\-Fast\-Writer}!$\sim$\-Fast\-Writer@{$\sim$\-Fast\-Writer}}
+\index{$\sim$\-Fast\-Writer@{$\sim$\-Fast\-Writer}!Json::FastWriter@{Json\-::\-Fast\-Writer}}
+\subsubsection[{$\sim$\-Fast\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}virtual Json\-::\-Fast\-Writer\-::$\sim$\-Fast\-Writer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_json_1_1_fast_writer_a7eb61405d041a915e5e980be97a707aa}
+
+
+Definition at line 1804 of file json.\-hpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_json_1_1_fast_writer_a6e93d8dce951e408517311026a065b40}{\index{Json\-::\-Fast\-Writer@{Json\-::\-Fast\-Writer}!drop\-Null\-Placeholders@{drop\-Null\-Placeholders}}
+\index{drop\-Null\-Placeholders@{drop\-Null\-Placeholders}!Json::FastWriter@{Json\-::\-Fast\-Writer}}
+\subsubsection[{drop\-Null\-Placeholders}]{\setlength{\rightskip}{0pt plus 5cm}void Json\-::\-Fast\-Writer\-::drop\-Null\-Placeholders (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_fast_writer_a6e93d8dce951e408517311026a065b40}
+
+
+Drop the \char`\"{}null\char`\"{} string from the writer's output for null\-Values. Strictly speaking, this is not valid J\-S\-O\-N. But when the output is being fed to a browser's Javascript, it makes for smaller output and the browser can handle the output just fine. 
+
+
+
+Definition at line 3150 of file json.\-cpp.
+
+\hypertarget{class_json_1_1_fast_writer_a78d98e9f76d33660ad6e6a1abe287d45}{\index{Json\-::\-Fast\-Writer@{Json\-::\-Fast\-Writer}!enable\-Y\-A\-M\-L\-Compatibility@{enable\-Y\-A\-M\-L\-Compatibility}}
+\index{enable\-Y\-A\-M\-L\-Compatibility@{enable\-Y\-A\-M\-L\-Compatibility}!Json::FastWriter@{Json\-::\-Fast\-Writer}}
+\subsubsection[{enable\-Y\-A\-M\-L\-Compatibility}]{\setlength{\rightskip}{0pt plus 5cm}void Json\-::\-Fast\-Writer\-::enable\-Y\-A\-M\-L\-Compatibility (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_fast_writer_a78d98e9f76d33660ad6e6a1abe287d45}
+
+
+Definition at line 3148 of file json.\-cpp.
+
+\hypertarget{class_json_1_1_fast_writer_af4ee077d365d75941fb2688d97207a55}{\index{Json\-::\-Fast\-Writer@{Json\-::\-Fast\-Writer}!omit\-Ending\-Line\-Feed@{omit\-Ending\-Line\-Feed}}
+\index{omit\-Ending\-Line\-Feed@{omit\-Ending\-Line\-Feed}!Json::FastWriter@{Json\-::\-Fast\-Writer}}
+\subsubsection[{omit\-Ending\-Line\-Feed}]{\setlength{\rightskip}{0pt plus 5cm}void Json\-::\-Fast\-Writer\-::omit\-Ending\-Line\-Feed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_fast_writer_af4ee077d365d75941fb2688d97207a55}
+
+
+Definition at line 3152 of file json.\-cpp.
+
+\hypertarget{class_json_1_1_fast_writer_aa66218a56447222f91d64db618935a19}{\index{Json\-::\-Fast\-Writer@{Json\-::\-Fast\-Writer}!write@{write}}
+\index{write@{write}!Json::FastWriter@{Json\-::\-Fast\-Writer}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Json\-::\-Fast\-Writer\-::write (
+\begin{DoxyParamCaption}
+\item[{const {\bf Value} \&}]{root}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_json_1_1_fast_writer_aa66218a56447222f91d64db618935a19}
+
+
+Implements \hyperlink{class_json_1_1_writer_a7b2273a4ffd6f32b369ac8a53b7b5a0d}{Json\-::\-Writer}.
+
+
+
+Definition at line 3154 of file json.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/fushigisama/\-Documents/amon/includes/util/json/\hyperlink{json_8hpp}{json.\-hpp}\item 
+/home/fushigisama/\-Documents/amon/src/util/json/\hyperlink{json_8cpp}{json.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,246 @@
+\hypertarget{class_json_1_1_value_iterator}{\section{Json\-:\-:Value\-Iterator Class Reference}
+\label{class_json_1_1_value_iterator}\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}}
+}
+
+
+Iterator for object and array value.  
+
+
+
+
+{\ttfamily \#include $<$json.\-hpp$>$}
+
+Inheritance diagram for Json\-:\-:Value\-Iterator\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_json_1_1_value_iterator}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{class_json_1_1_value}{Value} \hyperlink{class_json_1_1_value_iterator_a2c5ba7be611f05546530c8a88b2d2e37}{value\-\_\-type}
+\item 
+typedef unsigned int \hyperlink{class_json_1_1_value_iterator_a308b8932ffc83eaa9d12dadd5c11a7dd}{size\-\_\-t}
+\item 
+typedef int \hyperlink{class_json_1_1_value_iterator_a2be1a9aa60bbfc8812e9dd1a7f1a8786}{difference\-\_\-type}
+\item 
+typedef \hyperlink{class_json_1_1_value}{Value} \& \hyperlink{class_json_1_1_value_iterator_ae87929b4567aa00372cf602c43b57160}{reference}
+\item 
+typedef \hyperlink{class_json_1_1_value}{Value} $\ast$ \hyperlink{class_json_1_1_value_iterator_acec45feb1ef1f3bf81240157d06d5432}{pointer}
+\item 
+typedef \hyperlink{class_json_1_1_value_iterator}{Value\-Iterator} \hyperlink{class_json_1_1_value_iterator_a23357670fdad61792670d86f62db7e16}{Self\-Type}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_json_1_1_value_iterator_a09425cf4dc12244072a942f290a5c0ec}{Value\-Iterator} ()
+\item 
+\hyperlink{class_json_1_1_value_iterator_aa85aa208670891670392259efa0143bb}{Value\-Iterator} (const \hyperlink{class_json_1_1_value_const_iterator}{Value\-Const\-Iterator} \&other)
+\item 
+\hyperlink{class_json_1_1_value_iterator_a7d5e58a9a4a553968acdf3064b39d21c}{Value\-Iterator} (const \hyperlink{class_json_1_1_value_iterator}{Value\-Iterator} \&other)
+\item 
+\hyperlink{class_json_1_1_value_iterator_base_a9d2a940d03ea06d20d972f41a89149ee}{Self\-Type} \& \hyperlink{class_json_1_1_value_iterator_a8e23312b1db874f7e403fd7e76611bdc}{operator=} (const \hyperlink{class_json_1_1_value_iterator_base_a9d2a940d03ea06d20d972f41a89149ee}{Self\-Type} \&other)
+\item 
+\hyperlink{class_json_1_1_value_iterator_base_a9d2a940d03ea06d20d972f41a89149ee}{Self\-Type} \hyperlink{class_json_1_1_value_iterator_abcf4ddd994a010742cd4a436d65acd08}{operator++} (int)
+\item 
+\hyperlink{class_json_1_1_value_iterator_base_a9d2a940d03ea06d20d972f41a89149ee}{Self\-Type} \hyperlink{class_json_1_1_value_iterator_a06d6a29d96caf6af324a53973159e12b}{operator-\/-\/} (int)
+\item 
+\hyperlink{class_json_1_1_value_iterator_base_a9d2a940d03ea06d20d972f41a89149ee}{Self\-Type} \& \hyperlink{class_json_1_1_value_iterator_a811302a868518a0995a9def955df5720}{operator-\/-\/} ()
+\item 
+\hyperlink{class_json_1_1_value_iterator_base_a9d2a940d03ea06d20d972f41a89149ee}{Self\-Type} \& \hyperlink{class_json_1_1_value_iterator_a92146c46f8249e2b2d12869e70cd4cee}{operator++} ()
+\item 
+\hyperlink{class_json_1_1_value_iterator_ae87929b4567aa00372cf602c43b57160}{reference} \hyperlink{class_json_1_1_value_iterator_aaa5be3457eedf0526a03b8a3b4c7c0a0}{operator$\ast$} () const 
+\item 
+\hyperlink{class_json_1_1_value_iterator_acec45feb1ef1f3bf81240157d06d5432}{pointer} \hyperlink{class_json_1_1_value_iterator_ad9882e4ce815cef6a504afa113544bfb}{operator-\/$>$} () const 
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_json_1_1_value_iterator_aeceedf6e1a7d48a588516ce2b1983d6f}{Value}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Iterator for object and array value. 
+
+Definition at line 1394 of file json.\-hpp.
+
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{class_json_1_1_value_iterator_a2be1a9aa60bbfc8812e9dd1a7f1a8786}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!difference\-\_\-type@{difference\-\_\-type}}
+\index{difference\-\_\-type@{difference\-\_\-type}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{difference\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf Json\-::\-Value\-Iterator\-::difference\-\_\-type}}}\label{class_json_1_1_value_iterator_a2be1a9aa60bbfc8812e9dd1a7f1a8786}
+
+
+Definition at line 1400 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_acec45feb1ef1f3bf81240157d06d5432}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!pointer@{pointer}}
+\index{pointer@{pointer}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{pointer}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Value}$\ast$ {\bf Json\-::\-Value\-Iterator\-::pointer}}}\label{class_json_1_1_value_iterator_acec45feb1ef1f3bf81240157d06d5432}
+
+
+Definition at line 1402 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_ae87929b4567aa00372cf602c43b57160}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!reference@{reference}}
+\index{reference@{reference}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{reference}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Value}\& {\bf Json\-::\-Value\-Iterator\-::reference}}}\label{class_json_1_1_value_iterator_ae87929b4567aa00372cf602c43b57160}
+
+
+Definition at line 1401 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_a23357670fdad61792670d86f62db7e16}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!Self\-Type@{Self\-Type}}
+\index{Self\-Type@{Self\-Type}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{Self\-Type}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Value\-Iterator} {\bf Json\-::\-Value\-Iterator\-::\-Self\-Type}}}\label{class_json_1_1_value_iterator_a23357670fdad61792670d86f62db7e16}
+
+
+Definition at line 1403 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_a308b8932ffc83eaa9d12dadd5c11a7dd}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!size\-\_\-t@{size\-\_\-t}}
+\index{size\-\_\-t@{size\-\_\-t}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{size\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int {\bf Json\-::\-Value\-Iterator\-::size\-\_\-t}}}\label{class_json_1_1_value_iterator_a308b8932ffc83eaa9d12dadd5c11a7dd}
+
+
+Definition at line 1399 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_a2c5ba7be611f05546530c8a88b2d2e37}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!value\-\_\-type@{value\-\_\-type}}
+\index{value\-\_\-type@{value\-\_\-type}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{value\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Value} {\bf Json\-::\-Value\-Iterator\-::value\-\_\-type}}}\label{class_json_1_1_value_iterator_a2c5ba7be611f05546530c8a88b2d2e37}
+
+
+Definition at line 1398 of file json.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_json_1_1_value_iterator_a09425cf4dc12244072a942f290a5c0ec}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!Value\-Iterator@{Value\-Iterator}}
+\index{Value\-Iterator@{Value\-Iterator}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{Value\-Iterator}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value\-Iterator\-::\-Value\-Iterator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_value_iterator_a09425cf4dc12244072a942f290a5c0ec}
+
+
+Definition at line 1434 of file json.\-cpp.
+
+\hypertarget{class_json_1_1_value_iterator_aa85aa208670891670392259efa0143bb}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!Value\-Iterator@{Value\-Iterator}}
+\index{Value\-Iterator@{Value\-Iterator}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{Value\-Iterator}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value\-Iterator\-::\-Value\-Iterator (
+\begin{DoxyParamCaption}
+\item[{const {\bf Value\-Const\-Iterator} \&}]{other}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_value_iterator_aa85aa208670891670392259efa0143bb}
+
+
+Definition at line 1447 of file json.\-cpp.
+
+\hypertarget{class_json_1_1_value_iterator_a7d5e58a9a4a553968acdf3064b39d21c}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!Value\-Iterator@{Value\-Iterator}}
+\index{Value\-Iterator@{Value\-Iterator}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{Value\-Iterator}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value\-Iterator\-::\-Value\-Iterator (
+\begin{DoxyParamCaption}
+\item[{const {\bf Value\-Iterator} \&}]{other}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_value_iterator_a7d5e58a9a4a553968acdf3064b39d21c}
+
+
+Definition at line 1450 of file json.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_json_1_1_value_iterator_aaa5be3457eedf0526a03b8a3b4c7c0a0}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reference} Json\-::\-Value\-Iterator\-::operator$\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_json_1_1_value_iterator_aaa5be3457eedf0526a03b8a3b4c7c0a0}
+
+
+Definition at line 1443 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_abcf4ddd994a010742cd4a436d65acd08}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{operator++}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Self\-Type} Json\-::\-Value\-Iterator\-::operator++ (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_json_1_1_value_iterator_abcf4ddd994a010742cd4a436d65acd08}
+
+
+Definition at line 1421 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_a92146c46f8249e2b2d12869e70cd4cee}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{operator++}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Self\-Type}\& Json\-::\-Value\-Iterator\-::operator++ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_json_1_1_value_iterator_a92146c46f8249e2b2d12869e70cd4cee}
+
+
+Definition at line 1438 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_a06d6a29d96caf6af324a53973159e12b}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{operator-\/-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Self\-Type} Json\-::\-Value\-Iterator\-::operator-\/-\/ (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_json_1_1_value_iterator_a06d6a29d96caf6af324a53973159e12b}
+
+
+Definition at line 1427 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_a811302a868518a0995a9def955df5720}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{operator-\/-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Self\-Type}\& Json\-::\-Value\-Iterator\-::operator-\/-\/ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_json_1_1_value_iterator_a811302a868518a0995a9def955df5720}
+
+
+Definition at line 1433 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_ad9882e4ce815cef6a504afa113544bfb}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{operator-\/$>$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pointer} Json\-::\-Value\-Iterator\-::operator-\/$>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_json_1_1_value_iterator_ad9882e4ce815cef6a504afa113544bfb}
+
+
+Definition at line 1445 of file json.\-hpp.
+
+\hypertarget{class_json_1_1_value_iterator_a8e23312b1db874f7e403fd7e76611bdc}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!operator=@{operator=}}
+\index{operator=@{operator=}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Value\-Iterator} \& Json\-::\-Value\-Iterator\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Self\-Type} \&}]{other}
+\end{DoxyParamCaption}
+)}}\label{class_json_1_1_value_iterator_a8e23312b1db874f7e403fd7e76611bdc}
+
+
+Definition at line 1453 of file json.\-cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_json_1_1_value_iterator_aeceedf6e1a7d48a588516ce2b1983d6f}{\index{Json\-::\-Value\-Iterator@{Json\-::\-Value\-Iterator}!Value@{Value}}
+\index{Value@{Value}!Json::ValueIterator@{Json\-::\-Value\-Iterator}}
+\subsubsection[{Value}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Value}\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_json_1_1_value_iterator_aeceedf6e1a7d48a588516ce2b1983d6f}
+
+
+Definition at line 1395 of file json.\-hpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/fushigisama/\-Documents/amon/includes/util/json/\hyperlink{json_8hpp}{json.\-hpp}\item 
+/home/fushigisama/\-Documents/amon/src/util/json/\hyperlink{json_8cpp}{json.\-cpp}\end{DoxyCompactItemize}
