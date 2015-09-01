@@ -1,3 +1,4 @@
+
 #include <graph.hpp>
 #include <iostream>
 #include <set>
@@ -212,4 +213,9 @@ std::vector<int> amon::Graph::bfs (int src) {
 		}
 	}
 	return ans;
+}
+
+bool amon::Graph::isDeleted (int index) {
+	if (index > (int) adj.size()) return false;
+	return validNodes[index];
 }

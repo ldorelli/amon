@@ -16,15 +16,15 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/libamon-csys.so
   OBJDIR = obj/Debug
   DEFINES +=
-  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/social -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -std=c++11 -fPIC -Wall
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared
+  LIBS += /usr/local/lib/libamon-graph.so -lpthread
+  LDDEPS += /usr/local/lib/libamon-graph.so
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -43,15 +43,15 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/libamon-csys.so
   OBJDIR = obj/Release
   DEFINES +=
-  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/social -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -std=c++11 -fPIC -Wall
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared
+  LIBS += /usr/local/lib/libamon-graph.so -lpthread
+  LDDEPS += /usr/local/lib/libamon-graph.so
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -65,6 +65,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/epidemics.o \
 	$(OBJDIR)/network_models.o \
 
 RESOURCES := \
@@ -123,6 +124,9 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
+$(OBJDIR)/epidemics.o: ../../src/csys/epidemics.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/network_models.o: ../../src/csys/network_models.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

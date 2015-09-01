@@ -16,15 +16,15 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/libamon-graph.so
   OBJDIR = obj/Debug
   DEFINES +=
-  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/social -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -std=c++11 -fPIC -Wall
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
+  LIBS += -lpthread
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -43,15 +43,15 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/libamon-graph.so
   OBJDIR = obj/Release
   DEFINES +=
-  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/graph -I../../includes/util -I../../includes/util/json
+  INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/social -I../../includes/graph -I../../includes/util -I../../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -std=c++11 -fPIC -Wall
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
+  LIBS += -lpthread
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef

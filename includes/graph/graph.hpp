@@ -134,6 +134,13 @@ public:
 		& iterator, int node);
 
 
+	/**
+	 * Tests if node is deleted
+	 * @param index Index of the node to test
+	 * @return True if given node is deleted.
+	 */
+	bool isDeleted(int index);
+
 
 private:
 	int nodesCount, edgesCount;

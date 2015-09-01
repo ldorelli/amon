@@ -13,7 +13,7 @@ endif
 ifeq ($(config),debug)
   RESCOMP = windres
   TARGETDIR = /usr/local/lib
-  TARGET = $(TARGETDIR)/libamon-utils.so
+  TARGET = $(TARGETDIR)/libamon-social.so
   OBJDIR = obj/Debug
   DEFINES +=
   INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/social -I../../includes/graph -I../../includes/util -I../../includes/util/json
@@ -22,8 +22,8 @@ ifeq ($(config),debug)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
-  LDDEPS +=
+  LIBS += /usr/local/lib/libamon-graph.so /usr/local/lib/libamon-utils.so -lpthread
+  LDDEPS += /usr/local/lib/libamon-graph.so /usr/local/lib/libamon-utils.so
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -40,7 +40,7 @@ endif
 ifeq ($(config),release)
   RESCOMP = windres
   TARGETDIR = /usr/local/lib
-  TARGET = $(TARGETDIR)/libamon-utils.so
+  TARGET = $(TARGETDIR)/libamon-social.so
   OBJDIR = obj/Release
   DEFINES +=
   INCLUDES += -I../../includes/csys -I../../includes/gpu -I../../includes/social -I../../includes/graph -I../../includes/util -I../../includes/util/json
@@ -49,8 +49,8 @@ ifeq ($(config),release)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
-  LDDEPS +=
+  LIBS += /usr/local/lib/libamon-graph.so /usr/local/lib/libamon-utils.so -lpthread
+  LDDEPS += /usr/local/lib/libamon-graph.so /usr/local/lib/libamon-utils.so
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -65,9 +65,8 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/fenwick.o \
-	$(OBJDIR)/json.o \
-	$(OBJDIR)/progress_bar.o \
+	$(OBJDIR)/social_networks.o \
+	$(OBJDIR)/twitter.o \
 
 RESOURCES := \
 
@@ -82,7 +81,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
-	@echo Linking amon-utils
+	@echo Linking amon-social
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -103,7 +102,7 @@ else
 endif
 
 clean:
-	@echo Cleaning amon-utils
+	@echo Cleaning amon-social
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -125,13 +124,10 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/fenwick.o: ../../src/util/fenwick.cpp
+$(OBJDIR)/social_networks.o: ../../src/social/social_networks.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/json.o: ../../src/util/json/json.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/progress_bar.o: ../../src/util/progress_bar.cpp
+$(OBJDIR)/twitter.o: ../../src/social/twitter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

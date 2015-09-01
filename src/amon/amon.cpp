@@ -3,34 +3,29 @@
 #include <cstdio>
 #include <iostream>
 #include <network_models.hpp>
+#include <epidemics.hpp>
+#include <twitter.hpp>
 
 using namespace std;
 using namespace amon;
 
 
-int main (void) {
+int main (int argv, char* argc[]) {
 
 	Json::Value root;
-	// for (int i = 0; i < 10; ++i)
-	// 	g.addNode();
+	// NetworkGenerator generator;
+	// amon::Graph g = generator.undirectedSimpleErdosRenyi(5000, 0.018);
+	
+	// cerr << "Starting\n";
+	// amon::SISModel sis(g, 0.0015, 0.01, 0);
+	// for (int i = 0; i < 200; ++i) {
+	// 	sis.step();
+	// 	printf("%.5lf\n", sis.infectedRatio());
+	// }
 
-	// g.addUndirectedEdge(0, 1, 1);
-	// g.addUndirectedEdge(1, 2, 1);
-	// g.addUndirectedEdge(0, 2, 1);
-	// g.addUndirectedEdge(2, 4, 1);
-	// g.addUndirectedEdge(4, 5, 1);
-	// g.addUndirectedEdge(3, 8, 1);
-	// g.addUndirectedEdge(8, 9, 1);
-
-	int sz = 0;
-	for (int i = 0; i < 30; ++i) {
-		NetworkGenerator generator;
-		amon::Graph g = generator.undirectedErdosRenyi(5000, 0.002);
-		sz += g.edgesQty();
-		printf("Edges: %d\n", g.edgesQty());
-		// printf("Clustering: %.15lf\n", g.globalClusteringCoefficient());
-	}
-	printf("%d\n", sz/30);
+	cerr << "Loading network " << argc[1] << endl;
+	TweetLoader loader(argc[1], 1.0, 
+		TweetLoader::NetworkType::FOLLOWING_NETWORK);
 
 	// g = generator.simpleErdos(5000, 0.3);
 	// printf("Edges: %d\n", g.edgesQty());
