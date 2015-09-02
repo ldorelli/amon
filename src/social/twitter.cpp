@@ -9,6 +9,8 @@ void amon::TweetLoader::loadFollowers(std::string json) {
 	Json::Value v;
 	Json::Reader reader;
 	reader.parse(json, v);
+	
+	
 }
 
 
@@ -26,6 +28,9 @@ amon::TweetLoader::TweetLoader(std::string jsonFile, double p,
 	in.open(jsonFile, std::ios::in);
 	Json::Reader reader;
 	amon::ProgressBar bar(totc, 0.0001);
+
+	std::cerr << "Loading tweets network...\n";
+	std::cerr << "Using " << NUM_THREADS << " threads " << std::endl;
 
 	std::ios::sync_with_stdio(false);
 

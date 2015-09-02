@@ -43,12 +43,13 @@ private:
 	amon::Graph socialNetwork;
 	std::queue <std::string> Q;
 
-	// Following Network Parameters
+	// Users in the input tweets file
  	std::unordered_map<std::string, int> users;
 
  	void loadFollowers (std::string json);
 
- 	const unsigned int NUM_THREADS = 4;
+
+ 	const unsigned int NUM_THREADS = std::thread::hardware_concurrency();
 };
 }
 

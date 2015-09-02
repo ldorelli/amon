@@ -23,7 +23,6 @@ int main (int argv, char* argc[]) {
 	// 	printf("%.5lf\n", sis.infectedRatio());
 	// }
 
-	cerr << "Loading network " << argc[1] << endl;
 	TweetLoader loader(argc[1], 1.0, 
 		TweetLoader::NetworkType::FOLLOWING_NETWORK);
 
