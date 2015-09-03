@@ -16,6 +16,15 @@ solution "AmonRa"
 	-- all include dirs
 	includedirs { "includes/**" }
 
+	 platforms {
+	 	"native",
+        "win32",
+        "win64",
+        "macos",
+        "linux86",
+        "linux64",
+    }
+
 	-- configurations for GMAKE
 	configuration "gmake"
        -- Because yes
@@ -29,10 +38,8 @@ solution "AmonRa"
         buildoptions { "-Wall" }
  		-- GDB 
  		buildoptions { "-g" }
-
         -- Oh well
         buildoptions { "-pthread" }
-
         -- Link pthread
 		linkoptions { "-pthread" }        
 		-- gdb
@@ -50,15 +57,14 @@ solution "AmonRa"
         buildoptions { "-Wall" }
  		-- GDB 
  		buildoptions { "-g" }
-
         -- Oh well
         buildoptions { "-pthread" }
-
         -- Link pthread
 		linkoptions { "-pthread" }        
 		-- gdb
 		linkoptions { "-g" }
-		
+
+
 	-- -- independent, ai lib
 	-- project "ai"
 	-- 	kind "SharedLib"
@@ -70,56 +76,31 @@ solution "AmonRa"
 	-- 	}
 
 	-- graph lib
-	project "amon-graph"
+	project "amon"
 		kind "SharedLib"
 		language  "C++"
-		location  "build/graph"
-		targetdir "/usr/local/lib"
+		location  "build/"
+		-- targetdir "lib/"
+		-- targetdir "/usr/local/lib"
 		files  {
 			"src/graph/**.cpp",
-		}
-		links { "pthread" }
-
-	-- complex systems lib 
-	project "amon-csys"
-		kind "SharedLib"
-		language  "C++"
-		location  "build/csys"
-		targetdir "/usr/local/lib"
-		files  {
 			"src/csys/**.cpp",
-		}
-		links { "amon-graph", "pthread" }
-
-	-- social network stuff
-	project "amon-social"
-		kind "SharedLib"
-		language  "C++"
-		location  "build/soc"
-		targetdir "/usr/local/lib"
-		files  {
 			"src/social/**.cpp",
-		}
-		links { "amon-graph","amon-utils", "pthread" }
-
-	-- utilities
-	project "amon-utils"
-		kind "SharedLib"
-		language  "C++"
-		location  "build/util"
-		targetdir "/usr/local/lib"
-		files  {
 			"src/util/**.cpp",
 		}
 		links { "pthread" }
 
-	project "amon"
+	project "amonet"
 		kind "ConsoleApp"
-		location  "build/Amon"
-		targetdir "/usr/local/bin"
+		location  "build/"
+
+		-- targetdir "bin/"
+		-- targetdir "/usr/local/bin"
+		-- targetdir "bin/"
+
 		language  "C++"
 		files  {
 			"src/amon/**.cpp",
 		}
-		links { "pthread", "amon-utils", "amon-graph", "amon-csys", "amon-social" } 
+		links { "pthread", "amon" } 
 

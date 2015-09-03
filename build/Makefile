@@ -3,85 +3,105 @@
 .NOTPARALLEL:
 
 ifndef config
-  config=debug
+  config=debug_native
 endif
 
 ifndef verbose
   SILENT = @
 endif
 
-ifeq ($(config),debug)
-  amon_graph_config = debug
-  amon_csys_config = debug
-  amon_social_config = debug
-  amon_utils_config = debug
-  amon_config = debug
+ifeq ($(config),debug_native)
+  amon_config = debug_native
+  amonet_config = debug_native
 endif
-ifeq ($(config),release)
-  amon_graph_config = release
-  amon_csys_config = release
-  amon_social_config = release
-  amon_utils_config = release
-  amon_config = release
+ifeq ($(config),debug_win32)
+  amon_config = debug_win32
+  amonet_config = debug_win32
+endif
+ifeq ($(config),debug_win64)
+  amon_config = debug_win64
+  amonet_config = debug_win64
+endif
+ifeq ($(config),debug_macos)
+  amon_config = debug_macos
+  amonet_config = debug_macos
+endif
+ifeq ($(config),debug_linux86)
+  amon_config = debug_linux86
+  amonet_config = debug_linux86
+endif
+ifeq ($(config),debug_linux64)
+  amon_config = debug_linux64
+  amonet_config = debug_linux64
+endif
+ifeq ($(config),release_native)
+  amon_config = release_native
+  amonet_config = release_native
+endif
+ifeq ($(config),release_win32)
+  amon_config = release_win32
+  amonet_config = release_win32
+endif
+ifeq ($(config),release_win64)
+  amon_config = release_win64
+  amonet_config = release_win64
+endif
+ifeq ($(config),release_macos)
+  amon_config = release_macos
+  amonet_config = release_macos
+endif
+ifeq ($(config),release_linux86)
+  amon_config = release_linux86
+  amonet_config = release_linux86
+endif
+ifeq ($(config),release_linux64)
+  amon_config = release_linux64
+  amonet_config = release_linux64
 endif
 
-PROJECTS := amon-graph amon-csys amon-social amon-utils amon
+PROJECTS := amon amonet
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
 
-amon-graph:
-ifneq (,$(amon_graph_config))
-	@echo "==== Building amon-graph ($(amon_graph_config)) ===="
-	@${MAKE} --no-print-directory -C graph -f Makefile config=$(amon_graph_config)
-endif
-
-amon-csys: amon-graph
-ifneq (,$(amon_csys_config))
-	@echo "==== Building amon-csys ($(amon_csys_config)) ===="
-	@${MAKE} --no-print-directory -C csys -f Makefile config=$(amon_csys_config)
-endif
-
-amon-social: amon-graph amon-utils
-ifneq (,$(amon_social_config))
-	@echo "==== Building amon-social ($(amon_social_config)) ===="
-	@${MAKE} --no-print-directory -C soc -f Makefile config=$(amon_social_config)
-endif
-
-amon-utils:
-ifneq (,$(amon_utils_config))
-	@echo "==== Building amon-utils ($(amon_utils_config)) ===="
-	@${MAKE} --no-print-directory -C util -f Makefile config=$(amon_utils_config)
-endif
-
-amon: amon-utils amon-graph amon-csys amon-social
+amon:
 ifneq (,$(amon_config))
 	@echo "==== Building amon ($(amon_config)) ===="
-	@${MAKE} --no-print-directory -C Amon -f Makefile config=$(amon_config)
+	@${MAKE} --no-print-directory -C . -f amon.make config=$(amon_config)
+endif
+
+amonet: amon
+ifneq (,$(amonet_config))
+	@echo "==== Building amonet ($(amonet_config)) ===="
+	@${MAKE} --no-print-directory -C . -f amonet.make config=$(amonet_config)
 endif
 
 clean:
-	@${MAKE} --no-print-directory -C graph -f Makefile clean
-	@${MAKE} --no-print-directory -C csys -f Makefile clean
-	@${MAKE} --no-print-directory -C soc -f Makefile clean
-	@${MAKE} --no-print-directory -C util -f Makefile clean
-	@${MAKE} --no-print-directory -C Amon -f Makefile clean
+	@${MAKE} --no-print-directory -C . -f amon.make clean
+	@${MAKE} --no-print-directory -C . -f amonet.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
 	@echo ""
 	@echo "CONFIGURATIONS:"
-	@echo "  debug"
-	@echo "  release"
+	@echo "  debug_native"
+	@echo "  debug_win32"
+	@echo "  debug_win64"
+	@echo "  debug_macos"
+	@echo "  debug_linux86"
+	@echo "  debug_linux64"
+	@echo "  release_native"
+	@echo "  release_win32"
+	@echo "  release_win64"
+	@echo "  release_macos"
+	@echo "  release_linux86"
+	@echo "  release_linux64"
 	@echo ""
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
-	@echo "   amon-graph"
-	@echo "   amon-csys"
-	@echo "   amon-social"
-	@echo "   amon-utils"
 	@echo "   amon"
+	@echo "   amonet"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"

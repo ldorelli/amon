@@ -1,2 +1,3 @@
 make
-cp ../lib/*.so /usr/local/lib
+cp libamon.so /usr/local/lib/
+cp amonet /usr/local/bin/
