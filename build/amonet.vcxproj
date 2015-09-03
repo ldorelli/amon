@@ -259,7 +259,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -275,7 +275,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -291,7 +291,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -307,7 +307,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -323,7 +323,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -339,7 +339,7 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -359,7 +359,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -381,7 +381,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -403,7 +403,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -425,7 +425,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -447,7 +447,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -469,7 +469,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

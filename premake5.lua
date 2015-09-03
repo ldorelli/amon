@@ -46,14 +46,7 @@ solution "AmonRa"
 		linkoptions { "-g" }        
 
 	configuration "vs2015"
-		-- Because yes
-        buildoptions { "-Wl,--no-as-needed" }
-		-- C++ 11
-		buildoptions { "-std=c++1y" }
-		-- Needed on 64-bit platforms to be able
-        -- to link static libraries to shared libraries.
-        buildoptions { "-fPIC" }
-        -- Enables some additional warnings.
+		-- Enables some additional warnings.
         buildoptions { "-Wall" }
  		-- GDB 
  		buildoptions { "-g" }
