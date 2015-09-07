@@ -7,6 +7,7 @@ var searchData=
   ['getmembernames',['getMemberNames',['../class_json_1_1_value.html#a30fa08af88f2d0a038b22ba9f4e88b2a',1,'Json::Value']]],
   ['getoffsetlimit',['getOffsetLimit',['../class_json_1_1_value.html#acd7114469bc39368e9d93c29b54d8c8f',1,'Json::Value']]],
   ['getoffsetstart',['getOffsetStart',['../class_json_1_1_value.html#a10142eda11ae0b1caecbcc9f436854d1',1,'Json::Value']]],
+  ['getsocialnetwork',['getSocialNetwork',['../classamon_1_1_tweet_loader.html#a292bc02ccb78e803ef5b1f84d713ea57',1,'amon::TweetLoader']]],
   ['getstructurederrors',['getStructuredErrors',['../class_json_1_1_reader.html#a08c2ea5ffc7d2a9c9e35020835624f0b',1,'Json::Reader']]],
   ['globalclusteringcoefficient',['globalClusteringCoefficient',['../classamon_1_1_graph.html#a6e9098ead3849a382e3a5d1949599947',1,'amon::Graph']]],
   ['good',['good',['../class_json_1_1_reader.html#a06b52dcc656549506b1ae6f05167ecf4',1,'Json::Reader']]],

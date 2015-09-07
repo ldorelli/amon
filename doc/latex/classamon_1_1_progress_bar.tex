@@ -1,0 +1,116 @@
+\hypertarget{classamon_1_1_progress_bar}{\section{amon\-:\-:Progress\-Bar Class Reference}
+\label{classamon_1_1_progress_bar}\index{amon\-::\-Progress\-Bar@{amon\-::\-Progress\-Bar}}
+}
+
+
+{\ttfamily \#include $<$progress\-\_\-bar.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classamon_1_1_progress_bar_a37469b1d7bd316bdbfa148321cec9bb7}{Progress\-Bar} (long long tot\-Oper, double display\-Rate)
+\begin{DoxyCompactList}\small\item\em \{ Initializes a new progress bar. \} \end{DoxyCompactList}\item 
+\hyperlink{classamon_1_1_progress_bar}{Progress\-Bar} \hyperlink{classamon_1_1_progress_bar_a2cb43fc40242d47254dfe6a0f3613be1}{operator+=} (long long operations)
+\begin{DoxyCompactList}\small\item\em \{ Adds a certain number of operations to the counter. \} \end{DoxyCompactList}\item 
+void \hyperlink{classamon_1_1_progress_bar_a16b5c543b03b1f452abd49bc5c63eb69}{display} ()
+\begin{DoxyCompactList}\small\item\em \{ Displays the progress bar on the stderr. \} \end{DoxyCompactList}\item 
+double \hyperlink{classamon_1_1_progress_bar_aad3a864a2d40756b2720c7725ad23599}{progress} ()
+\begin{DoxyCompactList}\small\item\em \{ Returns the current progress of the task. \} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 8 of file progress\-\_\-bar.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classamon_1_1_progress_bar_a37469b1d7bd316bdbfa148321cec9bb7}{\index{amon\-::\-Progress\-Bar@{amon\-::\-Progress\-Bar}!Progress\-Bar@{Progress\-Bar}}
+\index{Progress\-Bar@{Progress\-Bar}!amon::ProgressBar@{amon\-::\-Progress\-Bar}}
+\subsubsection[{Progress\-Bar}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-Progress\-Bar\-::\-Progress\-Bar (
+\begin{DoxyParamCaption}
+\item[{long long}]{tot\-Oper, }
+\item[{double}]{display\-Rate}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_progress_bar_a37469b1d7bd316bdbfa148321cec9bb7}
+
+
+\{ Initializes a new progress bar. \} 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em tot\-Oper} & \{ The total number of operations in the task. \} \\
+\hline
+\mbox{\tt in}  & {\em display\-Rate} & \{ The percentage needed for an automatic display. \} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file progress\-\_\-bar.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classamon_1_1_progress_bar_a16b5c543b03b1f452abd49bc5c63eb69}{\index{amon\-::\-Progress\-Bar@{amon\-::\-Progress\-Bar}!display@{display}}
+\index{display@{display}!amon::ProgressBar@{amon\-::\-Progress\-Bar}}
+\subsubsection[{display}]{\setlength{\rightskip}{0pt plus 5cm}void amon\-::\-Progress\-Bar\-::display (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_progress_bar_a16b5c543b03b1f452abd49bc5c63eb69}
+
+
+\{ Displays the progress bar on the stderr. \} 
+
+
+
+Definition at line 19 of file progress\-\_\-bar.\-cpp.
+
+\hypertarget{classamon_1_1_progress_bar_a2cb43fc40242d47254dfe6a0f3613be1}{\index{amon\-::\-Progress\-Bar@{amon\-::\-Progress\-Bar}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!amon::ProgressBar@{amon\-::\-Progress\-Bar}}
+\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf amon\-::\-Progress\-Bar} amon\-::\-Progress\-Bar\-::operator+= (
+\begin{DoxyParamCaption}
+\item[{long long}]{operations}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_progress_bar_a2cb43fc40242d47254dfe6a0f3613be1}
+
+
+\{ Adds a certain number of operations to the counter. \} 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em operations} & \{ The number of operations that happened. \}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{ The \hyperlink{classamon_1_1_progress_bar}{Progress\-Bar} object. \} 
+\end{DoxyReturn}
+
+
+Definition at line 10 of file progress\-\_\-bar.\-cpp.
+
+\hypertarget{classamon_1_1_progress_bar_aad3a864a2d40756b2720c7725ad23599}{\index{amon\-::\-Progress\-Bar@{amon\-::\-Progress\-Bar}!progress@{progress}}
+\index{progress@{progress}!amon::ProgressBar@{amon\-::\-Progress\-Bar}}
+\subsubsection[{progress}]{\setlength{\rightskip}{0pt plus 5cm}double amon\-::\-Progress\-Bar\-::progress (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_progress_bar_aad3a864a2d40756b2720c7725ad23599}
+
+
+\{ Returns the current progress of the task. \} 
+
+\begin{DoxyReturn}{Returns}
+\{ The percentage done. \} 
+\end{DoxyReturn}
+
+
+Definition at line 24 of file progress\-\_\-bar.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+includes/util/\hyperlink{progress__bar_8hpp}{progress\-\_\-bar.\-hpp}\item 
+src/util/\hyperlink{progress__bar_8cpp}{progress\-\_\-bar.\-cpp}\end{DoxyCompactItemize}

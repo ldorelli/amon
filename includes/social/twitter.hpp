@@ -8,7 +8,8 @@
 #include <fstream>
 #include <unordered_map>
 #include <vector>
-#include <future>
+#include <mutex>
+#include <thread>
 
 namespace amon {
 
@@ -44,11 +45,14 @@ private:
 	std::queue <std::string> Q;
 
 	// Users in the input tweets file
+ 	std::unordered_map<std::string, int> tweets;
  	std::unordered_map<std::string, int> users;
+ 	std::mutex qtMutex;
 
- 	void loadFollowers (std::string json);
+ 	void loadRetweetNetwork (std::string json);
 
 
+ 	const unsigned short MAX_CHARS = 200;
  	const unsigned int NUM_THREADS = std::thread::hardware_concurrency();
 };
 }

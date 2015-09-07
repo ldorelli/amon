@@ -28,5 +28,5 @@ var searchData=
   ['asuint',['asUInt',['../class_json_1_1_value.html#a2019d1bd296b89356c1b0da5970c918c',1,'Json::Value']]],
   ['asuint64',['asUInt64',['../class_json_1_1_value.html#a4aa617bc0625ae0f208fa54b7c6326ad',1,'Json::Value']]],
   ['averagedistance',['averageDistance',['../classamon_1_1_graph.html#ac0e052c99a3842aa205480156217c52b',1,'amon::Graph']]],
-  ['amon',['amon',['../md__home_fushigisama__documents_amon__r_e_a_d_m_e.html',1,'']]]
+  ['amon',['amon',['../md__r_e_a_d_m_e.html',1,'']]]
 ];

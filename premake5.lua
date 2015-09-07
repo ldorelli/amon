@@ -1,7 +1,7 @@
 
 
 -- premake5.lua
-solution "AmonRa"
+solution "Amonet"
 	configurations { "Debug", "Release" }
 	location "build"
 
@@ -45,19 +45,7 @@ solution "AmonRa"
 		-- gdb
 		linkoptions { "-g" }        
 
-	configuration "vs2015"
-		-- Enables some additional warnings.
-        buildoptions { "-Wall" }
- 		-- GDB 
- 		buildoptions { "-g" }
-        -- Oh well
-        buildoptions { "-pthread" }
-        -- Link pthread
-		linkoptions { "-pthread" }        
-		-- gdb
-		linkoptions { "-g" }
-
-
+	
 	-- -- independent, ai lib
 	-- project "ai"
 	-- 	kind "SharedLib"

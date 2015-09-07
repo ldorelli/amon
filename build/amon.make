@@ -336,9 +336,9 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/epidemics.o \
+	$(OBJDIR)/information_spread.o \
 	$(OBJDIR)/network_models.o \
 	$(OBJDIR)/graph.o \
-	$(OBJDIR)/social_networks.o \
 	$(OBJDIR)/twitter.o \
 	$(OBJDIR)/fenwick.o \
 	$(OBJDIR)/json.o \
@@ -403,13 +403,13 @@ endif
 $(OBJDIR)/epidemics.o: ../src/csys/epidemics.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/information_spread.o: ../src/csys/information_spread.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/network_models.o: ../src/csys/network_models.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/graph.o: ../src/graph/graph.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/social_networks.o: ../src/social/social_networks.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/twitter.o: ../src/social/twitter.cpp

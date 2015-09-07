@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['valuetype',['ValueType',['../namespace_json.html#a7d654b75c16a57007925868e38212b4e',1,'Json']]]
+  ['networktype',['NetworkType',['../classamon_1_1_tweet_loader.html#ad125f05eb6d11acbdc8adf728d98f085',1,'amon::TweetLoader']]]
 ];

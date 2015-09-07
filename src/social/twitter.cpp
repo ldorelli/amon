@@ -5,12 +5,46 @@
 #include <thread>
 
 
-void amon::TweetLoader::loadFollowers(std::string json) {
+amon::Graph amon::TweetLoader::getSocialNetwork() {
+	return socialNetwork;
+}
+
+void amon::TweetLoader::loadRetweetNetwork (std::string json) {
 	Json::Value v;
 	Json::Reader reader;
 	reader.parse(json, v);
+
+	std::string rt_user;
+
+	char usr[MAX_CHARS];
+
+	std::string text = v["text"].asString();
+	std::string strip_text;
+
+	int p1 = text.find("RT @:");
+	sscanf(text.c_str() + p1 + 5, "%[^:]", usr);
+	rt_user = usr;
+	// Get the tweet
+	for (int i = p1 + 5 + rt_user.size() + 2; i < (int) text.size(); ++i) {
+		strip_text += text[i]; 
+	}
+
+	std::string user = v["user"].asString(); 
+
+	qtMutex.lock();
 	
+	if (tweets.count(strip_text) == 0) tweets[strip_text] = tweets.size();
+
+	if(!users.count(user)) {
+		users[user] = socialNetwork.addNode();
+	} 
+
+	if (!users.count(rt_user)) {
+		users[rt_user] = socialNetwork.addNode();
+	} 
 	
+	socialNetwork.addDirectedEdge(users[rt_user], users[user], tweets[strip_text]);
+	qtMutex.unlock(); 
 }
 
 
@@ -33,8 +67,10 @@ amon::TweetLoader::TweetLoader(std::string jsonFile, double p,
 	std::cerr << "Using " << NUM_THREADS << " threads " << std::endl;
 
 	std::ios::sync_with_stdio(false);
+	int tot_twt = 0;
 
 	while (getline(in, line)) {
+		tot_twt++;
 		if (line.size() == 0) continue;
 
 		Q.push(line);		
@@ -42,7 +78,7 @@ amon::TweetLoader::TweetLoader(std::string jsonFile, double p,
 			// Spawns a thread to poll lines
 			std::vector<std::thread> v;
 			while (!Q.empty()) {
-				v.push_back(std::thread(&amon::TweetLoader::loadFollowers, this, line));
+				v.push_back(std::thread(&amon::TweetLoader::loadRetweetNetwork, this, Q.front()));
 				Q.pop();
 			}
 			for (auto& t : v) {
@@ -53,12 +89,11 @@ amon::TweetLoader::TweetLoader(std::string jsonFile, double p,
 		if (bar.progress() >= p) break;
 	}
 
-	std::vector<std::thread> v;
 	while (!Q.empty()) {
-		v.push_back(std::thread(&amon::TweetLoader::loadFollowers, this, line));
+		loadRetweetNetwork(Q.front());
 		Q.pop();
 	}
-	for (auto& t : v) {
-		t.join();
-	}
+
+	std::cerr << "\nGot " << tweets.size() << " different tweets from " << tot_twt << std::endl;
+	std::cerr << "\nLoaded tweets from " << socialNetwork.nodesQty() << " users\n";
 }

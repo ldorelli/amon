@@ -101,8 +101,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af6e3737ba4e52d8e6845c031e30a85ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_s_i_s_model.html#af6e3737ba4e52d8e6845c031e30a85ac">SISModel</a> (<a class="el" href="classamon_1_1_graph.html">amon::Graph</a> g, double infectionP, double cureP)</td></tr>
-<tr class="separator:af6e3737ba4e52d8e6845c031e30a85ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac689fbd6cf5c95e15514957dac07d501"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_s_i_s_model.html#ac689fbd6cf5c95e15514957dac07d501">SISModel</a> (<a class="el" href="classamon_1_1_graph.html">amon::Graph</a> g, double infectionP, double cureP, int firstInfected)</td></tr>
+<tr class="separator:ac689fbd6cf5c95e15514957dac07d501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a780e14829a8ffbdc793267348e99673e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_s_i_s_model.html#a780e14829a8ffbdc793267348e99673e">SISModel</a> (<a class="el" href="classamon_1_1_graph.html">amon::Graph</a> g, double infectionP, double cureP, int firstInfected, int seed)</td></tr>
+<tr class="memdesc:a780e14829a8ffbdc793267348e99673e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a780e14829a8ffbdc793267348e99673e">More...</a><br/></td></tr>
+<tr class="separator:a780e14829a8ffbdc793267348e99673e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5618b91dfd41f363c651723a9a93362"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_s_i_s_model.html#af5618b91dfd41f363c651723a9a93362">step</a> ()</td></tr>
 <tr class="separator:af5618b91dfd41f363c651723a9a93362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac88cd70fc1ee45826422803be10fbf8a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_s_i_s_model.html#ac88cd70fc1ee45826422803be10fbf8a">infectedRatio</a> ()</td></tr>
@@ -112,7 +115,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p>Definition at line <a class="el" href="epidemics_8hpp_source.html#l00010">10</a> of file <a class="el" href="epidemics_8hpp_source.html">epidemics.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="af6e3737ba4e52d8e6845c031e30a85ac"></a>
+<a class="anchor" id="ac689fbd6cf5c95e15514957dac07d501"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -132,7 +135,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>cureP</em>&#160;</td>
+          <td class="paramname"><em>cureP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>firstInfected</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -147,11 +156,70 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">g</td><td>The network </td></tr>
     <tr><td class="paramname">infectionP</td><td>The infection probability </td></tr>
     <tr><td class="paramname">cureP</td><td>The cure probability </td></tr>
+    <tr><td class="paramname">firstInfected</td><td>The first infected node </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="epidemics_8cpp_source.html#l00003">3</a> of file <a class="el" href="epidemics_8cpp_source.html">epidemics.cpp</a>.</p>
+<p>Definition at line <a class="el" href="epidemics_8cpp_source.html#l00005">5</a> of file <a class="el" href="epidemics_8cpp_source.html">epidemics.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a780e14829a8ffbdc793267348e99673e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">amon::SISModel::SISModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classamon_1_1_graph.html">amon::Graph</a>&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>infectionP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>cureP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>firstInfected</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>seed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">g</td><td>{ The network } </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">infectionP</td><td>{ Infection probability } </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cureP</td><td>{ Cure probability } </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">firstInfected</td><td>{The first infected seed} </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">seed</td><td>{ Seed for the random numbers } </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="epidemics_8cpp_source.html#l00017">17</a> of file <a class="el" href="epidemics_8cpp_source.html">epidemics.cpp</a>.</p>
 
 </div>
 </div>
@@ -171,6 +239,8 @@ Public Member Functions</h2></td></tr>
 <p>Returns the current infected ratio Infected/n_individuals </p>
 <dl class="section return"><dt>Returns</dt><dd>The ratio of infected individuals. </dd></dl>
 
+<p>Definition at line <a class="el" href="epidemics_8cpp_source.html#l00063">63</a> of file <a class="el" href="epidemics_8cpp_source.html">epidemics.cpp</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af5618b91dfd41f363c651723a9a93362"></a>
@@ -187,16 +257,18 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Steps on next moment of the simulation. </p>
 
+<p>Definition at line <a class="el" href="epidemics_8cpp_source.html#l00030">30</a> of file <a class="el" href="epidemics_8cpp_source.html">epidemics.cpp</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/fushigisama/Documents/amon/includes/csys/<a class="el" href="epidemics_8hpp_source.html">epidemics.hpp</a></li>
-<li>/home/fushigisama/Documents/amon/src/csys/<a class="el" href="epidemics_8cpp_source.html">epidemics.cpp</a></li>
+<li>includes/csys/<a class="el" href="epidemics_8hpp_source.html">epidemics.hpp</a></li>
+<li>src/csys/<a class="el" href="epidemics_8cpp_source.html">epidemics.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 25 2015 00:50:18 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 7 2015 20:18:26 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

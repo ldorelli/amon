@@ -4,7 +4,7 @@
 #include <set>
 #include <algorithm>
 #include <queue>
-
+#include <sstream>
 
 const double amon::Graph::EPS = 1e-7;
 
@@ -104,6 +104,10 @@ void amon::Graph::nextNeighboor (
 	}
 }
 
+int amon::Graph::outDegree(int x) {
+	return adj[x].size();
+}
+
 double amon::Graph::meanDegree () {
 	return (double) edgesCount/nodesCount;
 }
@@ -198,16 +202,16 @@ double  amon::Graph::meanDegree (double percent) {
 	return res/qt;
 }
 
-std::vector<int> amon::Graph::bfs (int src) {
+std::unordered_map<int, int> amon::Graph::bfs (int src) {
 	std::queue<int> q;
-	std::vector <int> ans(adj.size(), -1);
+	std::unordered_map<int, int> ans;
 	ans[0] = 0;
 	q.push(src);
 	while (!q.empty()) {
 		int n = q.front(); q.pop();
 		for (auto& e : adj[n]) {
 			int v = e.first;
-			if (ans[v] != -1) continue;
+			if (ans.count(v) != 0) continue;
 			ans[v] = ans[n] + 1;
 			q.push(v);
 		}
@@ -217,5 +221,38 @@ std::vector<int> amon::Graph::bfs (int src) {
 
 bool amon::Graph::isDeleted (int index) {
 	if (index > (int) adj.size()) return false;
-	return validNodes[index];
+	return !validNodes[index];
+}
+
+std::string amon::Graph::toDot (bool isDirected) {
+	
+	std::stringstream ff;
+
+	ff << ((isDirected) ? ("digraph g {\n") : ("graph g{\n"));
+
+	for (int i = 0; i < (int) adj.size(); ++i) {
+		for (auto& v : adj[i]) {
+			int to = v.first;
+			ff << i << ((isDirected) ? " -> " : " -- ") << to << std::endl;
+		}
+	}
+	ff << "}";
+	return ff.str();
+}
+
+std::string amon::Graph::toDot (bool isDirected, std::vector<bool> inc) {
+	std::stringstream ff;
+
+	ff << ((isDirected) ? ("digraph g {\n") : ("graph g{\n"));
+
+	for (int i = 0; i < (int) adj.size(); ++i) {
+		if (!inc[i]) continue;
+		for (auto& v : adj[i]) {
+			int to = v.first;
+			if (!inc[to]) continue;
+			ff << i << ((isDirected) ? " -> " : " -- ") << to << std::endl;
+		}
+	}
+	ff << "}";
+	return ff.str();
 }

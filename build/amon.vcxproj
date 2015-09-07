@@ -259,14 +259,12 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -275,14 +273,12 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug win64|Win32'">
@@ -291,14 +287,12 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug macos|Win32'">
@@ -307,14 +301,12 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug linux86|Win32'">
@@ -323,14 +315,12 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug linux64|Win32'">
@@ -339,14 +329,12 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\includes\csys;..\includes\gpu;..\includes\social;..\includes\graph;..\includes\util;..\includes\util\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release native|Win32'">
@@ -359,7 +347,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -368,7 +355,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -381,7 +367,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -390,7 +375,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release win64|Win32'">
@@ -403,7 +387,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -412,7 +395,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release macos|Win32'">
@@ -425,7 +407,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -434,7 +415,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release linux86|Win32'">
@@ -447,7 +427,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -456,7 +435,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release linux64|Win32'">
@@ -469,7 +447,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <AdditionalOptions>-Wall -g -pthread %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -478,7 +455,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>pthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>amon.lib</ImportLibrary>
-      <AdditionalOptions>-pthread -g %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

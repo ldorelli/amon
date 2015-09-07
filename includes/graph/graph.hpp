@@ -2,10 +2,13 @@
 #define __GRAPH_H__
 
 #include <vector>
+#include <string>
 #include <set>
 #include <queue>
 #include <utility>
 #include <list>
+#include <map>
+#include <unordered_map>
 
 namespace amon {
 class Graph {
@@ -68,6 +71,14 @@ public:
 
 
 	/**
+	 * @brief      { Returns the outDegree of node x. }
+	 *
+	 * @param[in]  x     { The index of the node. }
+	 *
+	 * @return     { The outDegree of the node. }
+	 */
+	int outDegree (int x);
+	/**
 	 *	Calculates the mean degree of the graph
 	 *  @return The mean degree of the graph
 	 */
@@ -121,9 +132,9 @@ public:
 	/**
 	 *	Breadth-First search to find minimum paths.
 	 * 	@param src The source node.
-	 *  @return A vector containing the distances from nodes to the source.
+	 *  @return An unordered_map containing the distances to nodes rechable from the source.
 	 */
-	std::vector<int> bfs (int src);
+	std::unordered_map<int, int> bfs (int src);
 
 	/**
 	 * Advances the adjacency list iterator to the next neighboor. 
@@ -140,6 +151,25 @@ public:
 	 * @return True if given node is deleted.
 	 */
 	bool isDeleted(int index);
+
+
+	/**
+	 * @brief      { Returns a .dot description of the graph. }
+	 *
+	 * @param isDirected True if graph is directed.
+	 * @return     { A std::string containing a .dot description of the graph }
+	 */
+	std::string toDot (bool isDirected);
+
+	/**
+	 * @brief      { Returns a .dot description of the graph. }
+	 *
+	 * @param[in]  isDirected  { True if graph is directed. }
+	 * @param[in]  inc         { A vector of bools that is 1 in the i-th position if the i-th node should be included. }
+	 *
+	 * @return     { A std::string containing a .dot description of the graph }
+	 */
+	std::string toDot (bool isDirected, std::vector<bool> inc);
 
 
 private:

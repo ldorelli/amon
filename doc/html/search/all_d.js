@@ -7,6 +7,7 @@ var searchData=
   ['network_5fmodels_2ehpp',['network_models.hpp',['../network__models_8hpp.html',1,'']]],
   ['networkgenerator',['NetworkGenerator',['../classamon_1_1_network_generator.html',1,'amon']]],
   ['networkgenerator',['NetworkGenerator',['../classamon_1_1_network_generator.html#ae739a560fd0303645f489245561f84f9',1,'amon::NetworkGenerator::NetworkGenerator()'],['../classamon_1_1_network_generator.html#a8793e18217d6b0601d41c72c9a0fd5f8',1,'amon::NetworkGenerator::NetworkGenerator(int seed)']]],
+  ['networktype',['NetworkType',['../classamon_1_1_tweet_loader.html#ad125f05eb6d11acbdc8adf728d98f085',1,'amon::TweetLoader']]],
   ['nextneighboor',['nextNeighboor',['../classamon_1_1_graph.html#a88ee59e7d320f210c4bb9eb1e4eff476',1,'amon::Graph']]],
   ['nodesqty',['nodesQty',['../classamon_1_1_graph.html#a7c7ef2759921bb87aa8c69c28ea62f8f',1,'amon::Graph']]],
   ['null',['null',['../class_json_1_1_value.html#a6d6e9ea6807e46d5b7ded66d3032f607',1,'Json::Value']]],

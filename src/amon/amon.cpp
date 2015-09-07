@@ -5,6 +5,8 @@
 #include <network_models.hpp>
 #include <epidemics.hpp>
 #include <twitter.hpp>
+#include <information_spread.hpp>
+#include <unordered_map>
 
 using namespace std;
 using namespace amon;
@@ -25,7 +27,25 @@ int main (int argv, char* argc[]) {
 
 	TweetLoader loader(argc[1], 1.0, 
 		TweetLoader::NetworkType::FOLLOWING_NETWORK);
-
+	Graph g = loader.getSocialNetwork();
+	// for (int i = 0; i < g.nodesQty(); ++i) {
+	// 	cout << g.outDegree(i) << " ";
+	// }
+	InformationNetwork in(g);
+	vector< pair<int, int> > res = in.informationDepth();
+	for (auto &p : res) {
+		printf("%d %d\n", p.first, p.second);
+	}
+	// vector <bool> drawMe(g.nodesQty(), false);
+	// for (int i = 0; i < g.nodesQty(); ++i) {
+	// 	if (res[i].second > 15) {
+	// 		drawMe[i] = true;
+	// 		unordered_map <int, int> B = g.bfs(i);
+	// 		for (auto v : B) drawMe[v.first] = true;
+	// 	}
+	// }
+	// cout << g.toDot(true, drawMe);
+	// std::cout << r << std::endl;	
 	// g = generator.simpleErdos(5000, 0.3);
 	// printf("Edges: %d\n", g.edgesQty());
 	// printf("Clustering: %.15lf\n", g.globalClusteringCoefficient());

@@ -1,0 +1,81 @@
+\hypertarget{classamon_1_1_information_network}{\section{amon\-:\-:Information\-Network Class Reference}
+\label{classamon_1_1_information_network}\index{amon\-::\-Information\-Network@{amon\-::\-Information\-Network}}
+}
+
+
+\{ Provides analysis on networks that represent information spread from people to people. \}  
+
+
+
+
+{\ttfamily \#include $<$information\-\_\-spread.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classamon_1_1_information_network_ac1ac48f7de78b78667fe432ea98f17b8}{Information\-Network} (\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} g)
+\begin{DoxyCompactList}\small\item\em \{ Constructor \} \end{DoxyCompactList}\item 
+std\-::vector$<$ std\-::pair$<$ int, \\*
+int $>$ $>$ \hyperlink{classamon_1_1_information_network_ae4b4110a07671dda3f0431d36a1d94a7}{information\-Depth} ()
+\begin{DoxyCompactList}\small\item\em \{ Returns a series of pairs (r, d). \} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\{ Provides analysis on networks that represent information spread from people to people. \} 
+
+Definition at line 13 of file information\-\_\-spread.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classamon_1_1_information_network_ac1ac48f7de78b78667fe432ea98f17b8}{\index{amon\-::\-Information\-Network@{amon\-::\-Information\-Network}!Information\-Network@{Information\-Network}}
+\index{Information\-Network@{Information\-Network}!amon::InformationNetwork@{amon\-::\-Information\-Network}}
+\subsubsection[{Information\-Network}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-Information\-Network\-::\-Information\-Network (
+\begin{DoxyParamCaption}
+\item[{{\bf amon\-::\-Graph}}]{g}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_information_network_ac1ac48f7de78b78667fe432ea98f17b8}
+
+
+\{ Constructor \} 
+
+Initializes the class with given network. Nodes should be users and connections should observe the flow of information from one user to another.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em $<$unnamed$>$} & \{ A graph representing the network. \} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 10 of file information\-\_\-spread.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classamon_1_1_information_network_ae4b4110a07671dda3f0431d36a1d94a7}{\index{amon\-::\-Information\-Network@{amon\-::\-Information\-Network}!information\-Depth@{information\-Depth}}
+\index{information\-Depth@{information\-Depth}!amon::InformationNetwork@{amon\-::\-Information\-Network}}
+\subsubsection[{information\-Depth}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::pair$<$ int, int $>$ $>$ amon\-::\-Information\-Network\-::information\-Depth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_information_network_ae4b4110a07671dda3f0431d36a1d94a7}
+
+
+\{ Returns a series of pairs (r, d). \} 
+
+Returns a series of pairs (r, d), where r is the rate out degree of the i-\/th node and d is the depth of reach of this user in the observed network.
+
+\begin{DoxyReturn}{Returns}
+\{ A vector containing the (r, d) pairs. \} 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file information\-\_\-spread.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+includes/csys/\hyperlink{information__spread_8hpp}{information\-\_\-spread.\-hpp}\item 
+src/csys/\hyperlink{information__spread_8cpp}{information\-\_\-spread.\-cpp}\end{DoxyCompactItemize}

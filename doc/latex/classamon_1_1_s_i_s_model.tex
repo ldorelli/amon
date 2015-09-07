@@ -8,8 +8,10 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classamon_1_1_s_i_s_model_af6e3737ba4e52d8e6845c031e30a85ac}{S\-I\-S\-Model} (\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} g, double infection\-P, double cure\-P)
+\hyperlink{classamon_1_1_s_i_s_model_ac689fbd6cf5c95e15514957dac07d501}{S\-I\-S\-Model} (\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} g, double infection\-P, double cure\-P, int first\-Infected)
 \item 
+\hyperlink{classamon_1_1_s_i_s_model_a780e14829a8ffbdc793267348e99673e}{S\-I\-S\-Model} (\hyperlink{classamon_1_1_graph}{amon\-::\-Graph} g, double infection\-P, double cure\-P, int first\-Infected, int seed)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 void \hyperlink{classamon_1_1_s_i_s_model_af5618b91dfd41f363c651723a9a93362}{step} ()
 \item 
 double \hyperlink{classamon_1_1_s_i_s_model_ac88cd70fc1ee45826422803be10fbf8a}{infected\-Ratio} ()
@@ -24,15 +26,16 @@ Definition at line 10 of file epidemics.\-hpp.
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classamon_1_1_s_i_s_model_af6e3737ba4e52d8e6845c031e30a85ac}{\index{amon\-::\-S\-I\-S\-Model@{amon\-::\-S\-I\-S\-Model}!S\-I\-S\-Model@{S\-I\-S\-Model}}
+\hypertarget{classamon_1_1_s_i_s_model_ac689fbd6cf5c95e15514957dac07d501}{\index{amon\-::\-S\-I\-S\-Model@{amon\-::\-S\-I\-S\-Model}!S\-I\-S\-Model@{S\-I\-S\-Model}}
 \index{S\-I\-S\-Model@{S\-I\-S\-Model}!amon::SISModel@{amon\-::\-S\-I\-S\-Model}}
 \subsubsection[{S\-I\-S\-Model}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-S\-I\-S\-Model\-::\-S\-I\-S\-Model (
 \begin{DoxyParamCaption}
 \item[{{\bf amon\-::\-Graph}}]{g, }
 \item[{double}]{infection\-P, }
-\item[{double}]{cure\-P}
+\item[{double}]{cure\-P, }
+\item[{int}]{first\-Infected}
 \end{DoxyParamCaption}
-)}}\label{classamon_1_1_s_i_s_model_af6e3737ba4e52d8e6845c031e30a85ac}
+)}}\label{classamon_1_1_s_i_s_model_ac689fbd6cf5c95e15514957dac07d501}
 Constructor 
 \begin{DoxyParams}{Parameters}
 {\em g} & The network \\
@@ -41,10 +44,44 @@ Constructor
 \hline
 {\em cure\-P} & The cure probability \\
 \hline
+{\em first\-Infected} & The first infected node \\
+\hline
 \end{DoxyParams}
 
 
-Definition at line 3 of file epidemics.\-cpp.
+Definition at line 5 of file epidemics.\-cpp.
+
+\hypertarget{classamon_1_1_s_i_s_model_a780e14829a8ffbdc793267348e99673e}{\index{amon\-::\-S\-I\-S\-Model@{amon\-::\-S\-I\-S\-Model}!S\-I\-S\-Model@{S\-I\-S\-Model}}
+\index{S\-I\-S\-Model@{S\-I\-S\-Model}!amon::SISModel@{amon\-::\-S\-I\-S\-Model}}
+\subsubsection[{S\-I\-S\-Model}]{\setlength{\rightskip}{0pt plus 5cm}amon\-::\-S\-I\-S\-Model\-::\-S\-I\-S\-Model (
+\begin{DoxyParamCaption}
+\item[{{\bf amon\-::\-Graph}}]{g, }
+\item[{double}]{infection\-P, }
+\item[{double}]{cure\-P, }
+\item[{int}]{first\-Infected, }
+\item[{int}]{seed}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_s_i_s_model_a780e14829a8ffbdc793267348e99673e}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em g} & \{ The network \} \\
+\hline
+\mbox{\tt in}  & {\em infection\-P} & \{ Infection probability \} \\
+\hline
+\mbox{\tt in}  & {\em cure\-P} & \{ Cure probability \} \\
+\hline
+\mbox{\tt in}  & {\em first\-Infected} & \{The first infected seed\} \\
+\hline
+\mbox{\tt in}  & {\em seed} & \{ Seed for the random numbers \} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 17 of file epidemics.\-cpp.
 
 
 
@@ -59,6 +96,10 @@ Definition at line 3 of file epidemics.\-cpp.
 Returns the current infected ratio Infected/n\-\_\-individuals \begin{DoxyReturn}{Returns}
 The ratio of infected individuals. 
 \end{DoxyReturn}
+
+
+Definition at line 63 of file epidemics.\-cpp.
+
 \hypertarget{classamon_1_1_s_i_s_model_af5618b91dfd41f363c651723a9a93362}{\index{amon\-::\-S\-I\-S\-Model@{amon\-::\-S\-I\-S\-Model}!step@{step}}
 \index{step@{step}!amon::SISModel@{amon\-::\-S\-I\-S\-Model}}
 \subsubsection[{step}]{\setlength{\rightskip}{0pt plus 5cm}void amon\-::\-S\-I\-S\-Model\-::step (
@@ -68,7 +109,11 @@ The ratio of infected individuals.
 )}}\label{classamon_1_1_s_i_s_model_af5618b91dfd41f363c651723a9a93362}
 Steps on next moment of the simulation. 
 
+Definition at line 30 of file epidemics.\-cpp.
+
+
+
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/fushigisama/\-Documents/amon/includes/csys/\hyperlink{epidemics_8hpp}{epidemics.\-hpp}\item 
-/home/fushigisama/\-Documents/amon/src/csys/\hyperlink{epidemics_8cpp}{epidemics.\-cpp}\end{DoxyCompactItemize}
+includes/csys/\hyperlink{epidemics_8hpp}{epidemics.\-hpp}\item 
+src/csys/\hyperlink{epidemics_8cpp}{epidemics.\-cpp}\end{DoxyCompactItemize}
