@@ -3,6 +3,7 @@
 #include <iostream>
 #include <set>
 #include <algorithm>
+#include <iomanip>    
 #include <queue>
 #include <sstream>
 
@@ -229,11 +230,11 @@ std::string amon::Graph::toDot (bool isDirected) {
 	std::stringstream ff;
 
 	ff << ((isDirected) ? ("digraph g {\n") : ("graph g{\n"));
-
 	for (int i = 0; i < (int) adj.size(); ++i) {
 		for (auto& v : adj[i]) {
 			int to = v.first;
-			ff << i << ((isDirected) ? " -> " : " -- ") << to << std::endl;
+			ff << i << ((isDirected) ? " -> " : " -- ") << to << " [ weight=\"" <<
+				std::setprecision(4) << v.second << "\"]" << std::endl;
 		}
 	}
 	ff << "}";
@@ -250,9 +251,32 @@ std::string amon::Graph::toDot (bool isDirected, std::vector<bool> inc) {
 		for (auto& v : adj[i]) {
 			int to = v.first;
 			if (!inc[to]) continue;
-			ff << i << ((isDirected) ? " -> " : " -- ") << to << std::endl;
+			ff << i << ((isDirected) ? " -> " : " -- ") << to << " [ weight=\"" <<
+				std::setprecision(4) << v.second << "\"]" << std::endl;
 		}
 	}
 	ff << "}";
 	return ff.str();
+}
+
+long double amon::Graph::mixingAssortativy () {
+	long double exy = 0.0;
+	long double ex_ey = 0.0;
+	long double ex_ey2 = 0.0;
+	long double m = 0;
+	for (int i = 0; i < nodesCount; ++i) {
+		for (auto &v : adj[i]) {
+			int to = v.first;
+			long double g1 = adj[to].size();
+			long double g2 = adj[i].size();
+			exy += g1*g2;
+			ex_ey += 0.5*(g1 + g2);
+			ex_ey2 += 0.5*(g1*g1 + g2*g2);
+			m += 1.0;
+		}
+	}
+	exy /= m;
+	ex_ey /= m;
+	ex_ey2 /= m;
+	return (exy - ex_ey*ex_ey)/(ex_ey2 - ex_ey*ex_ey);
 }

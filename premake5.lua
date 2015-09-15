@@ -38,6 +38,8 @@ solution "Amonet"
         buildoptions { "-Wall" }
  		-- GDB 
  		buildoptions { "-g" }
+ 		-- Optmize
+ 		buildoptions { "-O2" }
         -- Oh well
         buildoptions { "-pthread" }
         -- Link pthread

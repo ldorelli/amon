@@ -23,14 +23,21 @@ public:
 	InformationNetwork(amon::Graph g);
 
 	/**
-	 * Returns a series of pairs (r, d), where r is the rate out degree of the i-th node 
-	 * and d is the depth of reach of this user in the observed network.
+	 * Returns a series of pairs (r, d), where r is the reachability (the number of reachable nodes from)
+	 * of the i-th node and d is the depth of reach of this user in the observed network.
 	 *
 	 * @brief      { Returns a series of pairs (r, d). }
 	 *
 	 * @return     { A vector containing the (r, d) pairs. }
 	 */
 	std::vector< std::pair<int, int> > informationDepth();
+
+	/**
+	 * @brief      { Returns the attention loss index for every vertex on the network. }
+	 *
+	 * @return     { A std::vector with the attention loss. }
+	 */
+	std::vector<double> lossOfAttention();
 
 private:
 	amon::Graph g;

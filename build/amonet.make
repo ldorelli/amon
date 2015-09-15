@@ -19,7 +19,7 @@ ifeq ($(config),debug_native)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -46,7 +46,7 @@ ifeq ($(config),debug_win32)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -73,7 +73,7 @@ ifeq ($(config),debug_win64)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -100,7 +100,7 @@ ifeq ($(config),debug_macos)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -127,7 +127,7 @@ ifeq ($(config),debug_linux86)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -154,7 +154,7 @@ ifeq ($(config),debug_linux64)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -181,7 +181,7 @@ ifeq ($(config),release_native)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -208,7 +208,7 @@ ifeq ($(config),release_win32)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -235,7 +235,7 @@ ifeq ($(config),release_win64)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -262,7 +262,7 @@ ifeq ($(config),release_macos)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -289,7 +289,7 @@ ifeq ($(config),release_linux86)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread
@@ -316,7 +316,7 @@ ifeq ($(config),release_linux64)
   INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += libamon.so -lpthread

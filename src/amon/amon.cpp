@@ -31,20 +31,35 @@ int main (int argv, char* argc[]) {
 	// for (int i = 0; i < g.nodesQty(); ++i) {
 	// 	cout << g.outDegree(i) << " ";
 	// }
+
+
+	// INFORMATION DEPTH 
 	InformationNetwork in(g);
 	vector< pair<int, int> > res = in.informationDepth();
+	int i = 0;
 	for (auto &p : res) {
-		printf("%d %d\n", p.first, p.second);
+		printf("%d %d\n", g.outDegree(i++), p.first);
 	}
+	
+	// vector<double> res = in.lossOfAttention();
+	// for (int i = 0; i < g.nodesQty(); ++i) {
+	// 	if (res[i] != -1)
+	// 		printf("%d %.4lf\n", g.outDegree(i), res[i]);
+	// }
+
+
+	// DRAW NETWORK
 	// vector <bool> drawMe(g.nodesQty(), false);
 	// for (int i = 0; i < g.nodesQty(); ++i) {
-	// 	if (res[i].second > 15) {
+	// 	if (res[i].second > 20) {
 	// 		drawMe[i] = true;
 	// 		unordered_map <int, int> B = g.bfs(i);
 	// 		for (auto v : B) drawMe[v.first] = true;
 	// 	}
 	// }
 	// cout << g.toDot(true, drawMe);
+
+
 	// std::cout << r << std::endl;	
 	// g = generator.simpleErdos(5000, 0.3);
 	// printf("Edges: %d\n", g.edgesQty());

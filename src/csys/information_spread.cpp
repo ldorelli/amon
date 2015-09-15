@@ -11,6 +11,32 @@ amon::InformationNetwork::InformationNetwork (amon::Graph g) {
 	this->g = g;
 }
 
+std::vector<double> amon::InformationNetwork::lossOfAttention() {
+	std::queue<int> Q;
+	std::vector<double> vres;
+	double res = 0.0;
+	double tot = 0.0;
+
+	std::cerr << "Calculating loss of attention indexes...\n";
+	amon::ProgressBar bar(g.nodesQty(), 0.001);
+
+	for (int i = 0; i < g.nodesQty(); ++i) {
+		if (g.isDeleted(i)) continue;
+		res = 0.0;
+		tot = 0.0;
+		for (auto e = g.neighboorsBegin(i); e != g.neighboorsEnd(i); g.nextNeighboor(e, i)) {
+			int v = e->first;
+			int subject = e->second;
+			for (auto f = g.neighboorsBegin(v); f != g.neighboorsEnd(v); g.nextNeighboor(f, v)) {
+				if (subject == f->second) res += 1.0;
+				tot += 1.0;
+			}
+		}
+		vres.push_back((tot != 0.0) ? (res/tot) : -1.0);
+		bar += 1;
+	}
+	return vres;
+}
 
 std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() {
 	std::vector <std::pair<int, int> > res;
@@ -36,8 +62,8 @@ std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() 
 					for (auto p : v) {
 						int d = p.second;
 						depth = std::max(depth, d);
-						if (d == 1) d1 += 1.0;
 					}
+					d1 = v.size();
 					// p.set_value(std::make_pair(1.0, 1));
 					return std::make_pair(d1, depth);
 				});

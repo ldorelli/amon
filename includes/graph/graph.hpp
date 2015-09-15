@@ -171,11 +171,20 @@ public:
 	 */
 	std::string toDot (bool isDirected, std::vector<bool> inc);
 
+	/**
+	 * Returns the undirected Mixing Assortativity Coefficient of the graph, as proposed by Newman.
+	 * @brief      { Returns the undirected Mixing Assortativity Coefficient of the graph. }
+	 *
+	 * @return     { The mixing assortativity of the graph. }
+	 */
+	long double mixingAssortativy();
+
 
 private:
 	int nodesCount, edgesCount;
 	// Adjacency list and weights
 	std::vector< std::list <std::pair<int, double> > > adj;
+	std::vector <std::list<std::string> > edgeValues;
 	// validNotes[i] is true if node i is active
 	std::vector <bool> validNodes;
 	std::queue <int> availableIndexes;
