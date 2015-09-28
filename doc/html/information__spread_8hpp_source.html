@@ -95,33 +95,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define __INFORMATION_SPREAD_H__</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="graph_8hpp.html">graph.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="graph_8hpp.html">graph/graph.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>amon {</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classamon_1_1_information_network.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classamon_1_1_information_network.html">InformationNetwork</a> {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classamon_1_1_information_network.html#ac1ac48f7de78b78667fe432ea98f17b8">InformationNetwork</a>(<a class="code" href="classamon_1_1_graph.html">amon::Graph</a> g);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::vector&lt; std::pair&lt;int, int&gt; &gt; <a class="code" href="classamon_1_1_information_network.html#ae4b4110a07671dda3f0431d36a1d94a7">informationDepth</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classamon_1_1_graph.html">amon::Graph</a> g;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NUM_THREADS = std::thread::hardware_concurrency();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>amon {</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classamon_1_1_information_network.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classamon_1_1_information_network.html">InformationNetwork</a> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classamon_1_1_information_network.html#ac1ac48f7de78b78667fe432ea98f17b8">InformationNetwork</a>(<a class="code" href="classamon_1_1_graph.html">amon::Graph</a> g);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::vector&lt; std::pair&lt;int, int&gt; &gt; <a class="code" href="classamon_1_1_information_network.html#ae4b4110a07671dda3f0431d36a1d94a7">informationDepth</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    std::vector&lt;double&gt; <a class="code" href="classamon_1_1_information_network.html#ac134e23dd425ba9b2fdd3d4ab7206a7d">lossOfAttention</a>();</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif </span></div>
-<div class="ttc" id="classamon_1_1_graph_html"><div class="ttname"><a href="classamon_1_1_graph.html">amon::Graph</a></div><div class="ttdef"><b>Definition:</b> <a href="graph_8hpp_source.html#l00014">graph.hpp:14</a></div></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classamon_1_1_graph.html">amon::Graph</a> g;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NUM_THREADS = std::thread::hardware_concurrency();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif </span></div>
+<div class="ttc" id="classamon_1_1_graph_html"><div class="ttname"><a href="classamon_1_1_graph.html">amon::Graph</a></div><div class="ttdef"><b>Definition:</b> <a href="graph_8hpp_source.html#l00019">graph.hpp:19</a></div></div>
 <div class="ttc" id="graph_8hpp_html"><div class="ttname"><a href="graph_8hpp.html">graph.hpp</a></div></div>
-<div class="ttc" id="classamon_1_1_information_network_html_ac1ac48f7de78b78667fe432ea98f17b8"><div class="ttname"><a href="classamon_1_1_information_network.html#ac1ac48f7de78b78667fe432ea98f17b8">amon::InformationNetwork::InformationNetwork</a></div><div class="ttdeci">InformationNetwork(amon::Graph g)</div><div class="ttdoc">{ Constructor } </div><div class="ttdef"><b>Definition:</b> <a href="information__spread_8cpp_source.html#l00010">information_spread.cpp:10</a></div></div>
-<div class="ttc" id="classamon_1_1_information_network_html_ae4b4110a07671dda3f0431d36a1d94a7"><div class="ttname"><a href="classamon_1_1_information_network.html#ae4b4110a07671dda3f0431d36a1d94a7">amon::InformationNetwork::informationDepth</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; int, int &gt; &gt; informationDepth()</div><div class="ttdoc">{ Returns a series of pairs (r, d). } </div><div class="ttdef"><b>Definition:</b> <a href="information__spread_8cpp_source.html#l00015">information_spread.cpp:15</a></div></div>
-<div class="ttc" id="classamon_1_1_information_network_html"><div class="ttname"><a href="classamon_1_1_information_network.html">amon::InformationNetwork</a></div><div class="ttdoc">{ Provides analysis on networks that represent information spread from people to people. } </div><div class="ttdef"><b>Definition:</b> <a href="information__spread_8hpp_source.html#l00013">information_spread.hpp:13</a></div></div>
+<div class="ttc" id="classamon_1_1_information_network_html_ac1ac48f7de78b78667fe432ea98f17b8"><div class="ttname"><a href="classamon_1_1_information_network.html#ac1ac48f7de78b78667fe432ea98f17b8">amon::InformationNetwork::InformationNetwork</a></div><div class="ttdeci">InformationNetwork(amon::Graph g)</div><div class="ttdoc">{ Constructor } </div><div class="ttdef"><b>Definition:</b> <a href="information__spread_8cpp_source.html#l00009">information_spread.cpp:9</a></div></div>
+<div class="ttc" id="classamon_1_1_information_network_html_ae4b4110a07671dda3f0431d36a1d94a7"><div class="ttname"><a href="classamon_1_1_information_network.html#ae4b4110a07671dda3f0431d36a1d94a7">amon::InformationNetwork::informationDepth</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; int, int &gt; &gt; informationDepth()</div><div class="ttdoc">{ Returns a series of pairs (r, d). } </div><div class="ttdef"><b>Definition:</b> <a href="information__spread_8cpp_source.html#l00040">information_spread.cpp:40</a></div></div>
+<div class="ttc" id="classamon_1_1_information_network_html_ac134e23dd425ba9b2fdd3d4ab7206a7d"><div class="ttname"><a href="classamon_1_1_information_network.html#ac134e23dd425ba9b2fdd3d4ab7206a7d">amon::InformationNetwork::lossOfAttention</a></div><div class="ttdeci">std::vector&lt; double &gt; lossOfAttention()</div><div class="ttdoc">{ Returns the attention loss index for every vertex on the network. } </div><div class="ttdef"><b>Definition:</b> <a href="information__spread_8cpp_source.html#l00013">information_spread.cpp:13</a></div></div>
+<div class="ttc" id="classamon_1_1_information_network_html"><div class="ttname"><a href="classamon_1_1_information_network.html">amon::InformationNetwork</a></div><div class="ttdoc">{ Provides analysis on networks that represent information spread from people to people. } </div><div class="ttdef"><b>Definition:</b> <a href="information__spread_8hpp_source.html#l00012">information_spread.hpp:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 7 2015 20:18:25 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 28 2015 10:07:44 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

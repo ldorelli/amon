@@ -1,8 +1,8 @@
 #ifndef __TWITTER_H__
 #define __TWITTER_H__
 
-#include <graph.hpp>
-#include <json.hpp>
+#include <graph/graph.hpp>
+#include <util/json/json.hpp>
 #include <string>
 #include <queue>
 #include <fstream>

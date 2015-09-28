@@ -1,9 +1,8 @@
-#include <information_spread.hpp>
-
+#include <csys/information_spread.hpp>
 #include <future>
 #include <thread>
 #include <algorithm>
-#include <progress_bar.hpp>
+#include <util/progress_bar.hpp>
 #include <iostream>
 #include <unordered_map>
 
@@ -41,10 +40,9 @@ std::vector<double> amon::InformationNetwork::lossOfAttention() {
 std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() {
 	std::vector <std::pair<int, int> > res;
 	std::queue<int> Q;
-
 	amon::ProgressBar bar(g.nodesQty(), 0.001);
-
-	std::cerr << "Calculating information depth\n";
+	std::cerr << "Calculating information depth...[" << NUM_THREADS << " threads]\n";
+	
 	for (int i = 0; i < g.nodesQty(); ++i) {
 		if (!g.isDeleted(i)) {
 			Q.push(i);
@@ -57,15 +55,16 @@ std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() 
 			while(!Q.empty()) {
 				auto fut = std::async(std::launch::async, [this, i]() {
 					std::unordered_map <int, int> v = this->g.bfs(i);
-					int d1 = 0.0;
+					int d1 = 0;
 					int depth = 0;
 					for (auto p : v) {
 						int d = p.second;
 						depth = std::max(depth, d);
+						if (d == 1) d1 += 1;
 					}
-					d1 = v.size();
+					int d2 = v.size();
 					// p.set_value(std::make_pair(1.0, 1));
-					return std::make_pair(d1, depth);
+					return std::make_pair(d1, d2);
 				});
 				futures.push_back(std::move(fut));
 				Q.pop();

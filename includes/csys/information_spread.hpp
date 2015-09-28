@@ -2,9 +2,8 @@
 #define __INFORMATION_SPREAD_H__
 
 #include <vector>
-#include <graph.hpp>
+#include <graph/graph.hpp>
 #include <thread>
-
 
 namespace amon {
 /**

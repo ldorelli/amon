@@ -14,7 +14,7 @@ solution "Amonet"
 	filter {}
 
 	-- all include dirs
-	includedirs { "includes/**" }
+	includedirs { "includes/", "/usr/include/python2.7/" }
 
 	 platforms {
 	 	"native",
@@ -34,8 +34,6 @@ solution "Amonet"
 		-- Needed on 64-bit platforms to be able
         -- to link static libraries to shared libraries.
         buildoptions { "-fPIC" }
-        -- Enables some additional warnings.
-        buildoptions { "-Wall" }
  		-- GDB 
  		buildoptions { "-g" }
  		-- Optmize
@@ -45,7 +43,7 @@ solution "Amonet"
         -- Link pthread
 		linkoptions { "-pthread" }        
 		-- gdb
-		linkoptions { "-g" }        
+		linkoptions { "-g" }      
 
 	
 	-- -- independent, ai lib
@@ -63,27 +61,20 @@ solution "Amonet"
 		kind "SharedLib"
 		language  "C++"
 		location  "build/"
-		-- targetdir "lib/"
-		-- targetdir "/usr/local/lib"
 		files  {
 			"src/graph/**.cpp",
 			"src/csys/**.cpp",
 			"src/social/**.cpp",
 			"src/util/**.cpp",
 		}
-		links { "pthread" }
+		links { "pthread", "boost_python-py27", "boost_system", "python2.7" }
 
 	project "amonet"
 		kind "ConsoleApp"
 		location  "build/"
-
-		-- targetdir "bin/"
-		-- targetdir "/usr/local/bin"
-		-- targetdir "bin/"
-
 		language  "C++"
 		files  {
 			"src/amon/**.cpp",
 		}
-		links { "pthread", "amon" } 
+		links { "pthread",  "python2.7" , "amon" } 
 

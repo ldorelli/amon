@@ -1,7 +1,7 @@
 #ifndef __NET_MODELS_H__
 #define __NET_MODELS_H__
 
-#include <graph.hpp>
+#include <graph/graph.hpp>
 #include <random>
 
 

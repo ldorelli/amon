@@ -1,5 +1,5 @@
-#include <epidemics.hpp>
-#include <graph.hpp>
+#include <csys/epidemics.hpp>
+#include <graph/graph.hpp>
 #include <iostream>
 
 amon::SISModel::SISModel (amon::Graph g, double ip, double cp, int firstInfected) {

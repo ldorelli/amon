@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">progress_bar.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="progress__bar_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="progress__bar_8hpp.html">progress_bar.hpp</a>&gt;</span></div>
+<a href="progress__bar_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="progress__bar_8hpp.html">util/progress_bar.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
 <div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="classamon_1_1_progress_bar.html#a37469b1d7bd316bdbfa148321cec9bb7">    3</a></span>&#160;<a class="code" href="classamon_1_1_progress_bar.html#a37469b1d7bd316bdbfa148321cec9bb7">amon::ProgressBar::ProgressBar</a> (<span class="keywordtype">long</span> <span class="keywordtype">long</span> totalOperations, <span class="keywordtype">double</span> displayRate) {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    this-&gt;opCount = 0;</div>
@@ -111,7 +111,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classamon_1_1_progress_bar.html#a16b5c543b03b1f452abd49bc5c63eb69">   19</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_progress_bar.html#a16b5c543b03b1f452abd49bc5c63eb69">amon::ProgressBar::display</a>() {</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">double</span> disp = (double) opCount/total;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;\r%.2lf&quot;</span>, disp * 100.00);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;\r%.2lf%%&quot;</span>, disp * 100.00);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classamon_1_1_progress_bar.html#aad3a864a2d40756b2720c7725ad23599">   24</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classamon_1_1_progress_bar.html#aad3a864a2d40756b2720c7725ad23599">amon::ProgressBar::progress</a>() {</div>
@@ -126,7 +126,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 7 2015 20:18:26 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 28 2015 10:07:44 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

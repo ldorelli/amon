@@ -12,6 +12,8 @@
 \item 
 \hyperlink{classamon_1_1_graph_a40dd78be5732f86fa3df8d687d0e5728}{Graph} (int n)
 \item 
+void \hyperlink{classamon_1_1_graph_a3fb78df14f92175270f5dec661fc37a2}{load\-From\-Edge\-File\-Undirected} (std\-::string file)
+\begin{DoxyCompactList}\small\item\em \{ Loads a network from a file containing the edge information \} \end{DoxyCompactList}\item 
 int \hyperlink{classamon_1_1_graph_a7c7ef2759921bb87aa8c69c28ea62f8f}{nodes\-Qty} () const 
 \item 
 int \hyperlink{classamon_1_1_graph_a705be004387c64a5ce5aa668b0c4e9d7}{edges\-Qty} () const 
@@ -22,7 +24,11 @@ void \hyperlink{classamon_1_1_graph_af3a842a93c90db66a7f301c685e51b3a}{remove\-N
 \item 
 void \hyperlink{classamon_1_1_graph_a02016704b31a4bf3a277fb4fcb8c1d72}{add\-Directed\-Edge} (int A, int B, double w)
 \item 
+void \hyperlink{classamon_1_1_graph_ae7e1e36c734c6085ecc4e733e7428b97}{add\-Directed\-Edge} (int A, int B)
+\item 
 void \hyperlink{classamon_1_1_graph_a98b71efc14d469813b8d1c679ca22fa3}{add\-Undirected\-Edge} (int A, int B, double w)
+\item 
+void \hyperlink{classamon_1_1_graph_a5b9260a41af2a7c15acd0cba2976c0c3}{add\-Undirected\-Edge} (int A, int B)
 \item 
 int \hyperlink{classamon_1_1_graph_a2500d2f93404a3ce691396db4ca0ea92}{out\-Degree} (int x)
 \begin{DoxyCompactList}\small\item\em \{ Returns the out\-Degree of node x. \} \end{DoxyCompactList}\item 
@@ -51,7 +57,13 @@ bool \hyperlink{classamon_1_1_graph_a17d2727539c869cb0a047d81b0236dad}{is\-Delet
 std\-::string \hyperlink{classamon_1_1_graph_ad18818eecab5f005c6c3a12ca2461c52}{to\-Dot} (bool is\-Directed)
 \begin{DoxyCompactList}\small\item\em \{ Returns a .dot description of the graph. \} \end{DoxyCompactList}\item 
 std\-::string \hyperlink{classamon_1_1_graph_ad2c36a69520088dd76da23e13b372464}{to\-Dot} (bool is\-Directed, std\-::vector$<$ bool $>$ inc)
-\begin{DoxyCompactList}\small\item\em \{ Returns a .dot description of the graph. \} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \{ Returns a .dot description of the graph. \} \end{DoxyCompactList}\item 
+long double \hyperlink{classamon_1_1_graph_a80813937a24ddca97dbdcaa4611cc1ab}{mixing\-Assortativy} ()
+\begin{DoxyCompactList}\small\item\em \{ Returns the undirected Mixing Assortativity Coefficient of the graph. \} \end{DoxyCompactList}\item 
+std\-::vector$<$ double $>$ \hyperlink{classamon_1_1_graph_abbc6d9053073d33ade4d9d964dabf563}{unweighted\-Betweennss\-Centrality} ()
+\begin{DoxyCompactList}\small\item\em \{ Returns a vector containing the unweighted betweeness centrality for each vector. \} \end{DoxyCompactList}\item 
+void \hyperlink{classamon_1_1_graph_a8efa34317aa2fa6444357c352a28c121}{clear} ()
+\begin{DoxyCompactList}\small\item\em \{ Clears the graph. \} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -62,7 +74,7 @@ static const double \hyperlink{classamon_1_1_graph_a1bddebc6360d5154a86dbd75856b
 \subsection{Detailed Description}
 
 
-Definition at line 14 of file graph.\-hpp.
+Definition at line 19 of file graph.\-hpp.
 
 
 
@@ -76,7 +88,7 @@ Definition at line 14 of file graph.\-hpp.
 )}}\label{classamon_1_1_graph_a8dbd046ce57a0c624c7abe573b174ce1}
 Empty Constructor 
 
-Definition at line 11 of file graph.\-cpp.
+Definition at line 25 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a40dd78be5732f86fa3df8d687d0e5728}{\index{amon\-::\-Graph@{amon\-::\-Graph}!Graph@{Graph}}
 \index{Graph@{Graph}!amon::Graph@{amon\-::\-Graph}}
@@ -92,7 +104,7 @@ Creates a graph with n nodes
 \end{DoxyParams}
 
 
-Definition at line 17 of file graph.\-cpp.
+Definition at line 31 of file graph.\-cpp.
 
 
 
@@ -117,7 +129,26 @@ Adds a directed edge between vertices A and B with weight w.
 \end{DoxyParams}
 
 
-Definition at line 56 of file graph.\-cpp.
+Definition at line 70 of file graph.\-cpp.
+
+\hypertarget{classamon_1_1_graph_ae7e1e36c734c6085ecc4e733e7428b97}{\index{amon\-::\-Graph@{amon\-::\-Graph}!add\-Directed\-Edge@{add\-Directed\-Edge}}
+\index{add\-Directed\-Edge@{add\-Directed\-Edge}!amon::Graph@{amon\-::\-Graph}}
+\subsubsection[{add\-Directed\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}void amon\-::\-Graph\-::add\-Directed\-Edge (
+\begin{DoxyParamCaption}
+\item[{int}]{A, }
+\item[{int}]{B}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_graph_ae7e1e36c734c6085ecc4e733e7428b97}
+Adds a directed edge between vertices A and B with weight 1. 
+\begin{DoxyParams}{Parameters}
+{\em A} & The source of the edge \\
+\hline
+{\em B} & The destination of the edge \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 77 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_aa7f39dcf5b2fab62d0b9399bc759ff27}{\index{amon\-::\-Graph@{amon\-::\-Graph}!add\-Node@{add\-Node}}
 \index{add\-Node@{add\-Node}!amon::Graph@{amon\-::\-Graph}}
@@ -131,7 +162,7 @@ The index of the newly created node.
 \end{DoxyReturn}
 
 
-Definition at line 33 of file graph.\-cpp.
+Definition at line 47 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a98b71efc14d469813b8d1c679ca22fa3}{\index{amon\-::\-Graph@{amon\-::\-Graph}!add\-Undirected\-Edge@{add\-Undirected\-Edge}}
 \index{add\-Undirected\-Edge@{add\-Undirected\-Edge}!amon::Graph@{amon\-::\-Graph}}
@@ -153,7 +184,26 @@ Adds an undirected edge between vertices A and B with weight w.
 \end{DoxyParams}
 
 
-Definition at line 63 of file graph.\-cpp.
+Definition at line 85 of file graph.\-cpp.
+
+\hypertarget{classamon_1_1_graph_a5b9260a41af2a7c15acd0cba2976c0c3}{\index{amon\-::\-Graph@{amon\-::\-Graph}!add\-Undirected\-Edge@{add\-Undirected\-Edge}}
+\index{add\-Undirected\-Edge@{add\-Undirected\-Edge}!amon::Graph@{amon\-::\-Graph}}
+\subsubsection[{add\-Undirected\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}void amon\-::\-Graph\-::add\-Undirected\-Edge (
+\begin{DoxyParamCaption}
+\item[{int}]{A, }
+\item[{int}]{B}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_graph_a5b9260a41af2a7c15acd0cba2976c0c3}
+Adds an undirected edge between vertices A and B with weight 1. 
+\begin{DoxyParams}{Parameters}
+{\em A} & One of the end-\/points of the edge \\
+\hline
+{\em B} & The other endpoint \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 81 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_ac0e052c99a3842aa205480156217c52b}{\index{amon\-::\-Graph@{amon\-::\-Graph}!average\-Distance@{average\-Distance}}
 \index{average\-Distance@{average\-Distance}!amon::Graph@{amon\-::\-Graph}}
@@ -182,7 +232,7 @@ An unordered\-\_\-map containing the distances to nodes rechable from the source
 \end{DoxyReturn}
 
 
-Definition at line 205 of file graph.\-cpp.
+Definition at line 228 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a0ea3919c713485cfc5b24fe3ef1aaf24}{\index{amon\-::\-Graph@{amon\-::\-Graph}!bridges@{bridges}}
 \index{bridges@{bridges}!amon::Graph@{amon\-::\-Graph}}
@@ -196,7 +246,22 @@ Number of bridges
 \end{DoxyReturn}
 
 
-Definition at line 177 of file graph.\-cpp.
+Definition at line 200 of file graph.\-cpp.
+
+\hypertarget{classamon_1_1_graph_a8efa34317aa2fa6444357c352a28c121}{\index{amon\-::\-Graph@{amon\-::\-Graph}!clear@{clear}}
+\index{clear@{clear}!amon::Graph@{amon\-::\-Graph}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void amon\-::\-Graph\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_graph_a8efa34317aa2fa6444357c352a28c121}
+
+
+\{ Clears the graph. \} 
+
+
+
+Definition at line 377 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a705be004387c64a5ce5aa668b0c4e9d7}{\index{amon\-::\-Graph@{amon\-::\-Graph}!edges\-Qty@{edges\-Qty}}
 \index{edges\-Qty@{edges\-Qty}!amon::Graph@{amon\-::\-Graph}}
@@ -210,7 +275,7 @@ The number of edges in the graph.
 \end{DoxyReturn}
 
 
-Definition at line 29 of file graph.\-cpp.
+Definition at line 43 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a6e9098ead3849a382e3a5d1949599947}{\index{amon\-::\-Graph@{amon\-::\-Graph}!global\-Clustering\-Coefficient@{global\-Clustering\-Coefficient}}
 \index{global\-Clustering\-Coefficient@{global\-Clustering\-Coefficient}!amon::Graph@{amon\-::\-Graph}}
@@ -224,7 +289,7 @@ The clustering coefficient of the graph
 \end{DoxyReturn}
 
 
-Definition at line 115 of file graph.\-cpp.
+Definition at line 138 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a17d2727539c869cb0a047d81b0236dad}{\index{amon\-::\-Graph@{amon\-::\-Graph}!is\-Deleted@{is\-Deleted}}
 \index{is\-Deleted@{is\-Deleted}!amon::Graph@{amon\-::\-Graph}}
@@ -243,7 +308,27 @@ True if given node is deleted.
 \end{DoxyReturn}
 
 
-Definition at line 222 of file graph.\-cpp.
+Definition at line 245 of file graph.\-cpp.
+
+\hypertarget{classamon_1_1_graph_a3fb78df14f92175270f5dec661fc37a2}{\index{amon\-::\-Graph@{amon\-::\-Graph}!load\-From\-Edge\-File\-Undirected@{load\-From\-Edge\-File\-Undirected}}
+\index{load\-From\-Edge\-File\-Undirected@{load\-From\-Edge\-File\-Undirected}!amon::Graph@{amon\-::\-Graph}}
+\subsubsection[{load\-From\-Edge\-File\-Undirected}]{\setlength{\rightskip}{0pt plus 5cm}void amon\-::\-Graph\-::load\-From\-Edge\-File\-Undirected (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{file}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_graph_a3fb78df14f92175270f5dec661fc37a2}
+
+
+\{ Loads a network from a file containing the edge information \} 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & \{ The file path to read from. \} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 386 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_ac97e95d56f333fa63755458cc9443cc6}{\index{amon\-::\-Graph@{amon\-::\-Graph}!mean\-Degree@{mean\-Degree}}
 \index{mean\-Degree@{mean\-Degree}!amon::Graph@{amon\-::\-Graph}}
@@ -257,7 +342,7 @@ The mean degree of the graph
 \end{DoxyReturn}
 
 
-Definition at line 111 of file graph.\-cpp.
+Definition at line 134 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a31712319c837723444fc5f83a272b41d}{\index{amon\-::\-Graph@{amon\-::\-Graph}!mean\-Degree@{mean\-Degree}}
 \index{mean\-Degree@{mean\-Degree}!amon::Graph@{amon\-::\-Graph}}
@@ -276,7 +361,25 @@ The mean degree.
 \end{DoxyReturn}
 
 
-Definition at line 189 of file graph.\-cpp.
+Definition at line 212 of file graph.\-cpp.
+
+\hypertarget{classamon_1_1_graph_a80813937a24ddca97dbdcaa4611cc1ab}{\index{amon\-::\-Graph@{amon\-::\-Graph}!mixing\-Assortativy@{mixing\-Assortativy}}
+\index{mixing\-Assortativy@{mixing\-Assortativy}!amon::Graph@{amon\-::\-Graph}}
+\subsubsection[{mixing\-Assortativy}]{\setlength{\rightskip}{0pt plus 5cm}long double amon\-::\-Graph\-::mixing\-Assortativy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_graph_a80813937a24ddca97dbdcaa4611cc1ab}
+
+
+\{ Returns the undirected Mixing Assortativity Coefficient of the graph. \} 
+
+Returns the undirected Mixing Assortativity Coefficient of the graph, as proposed by Newman. \begin{DoxyReturn}{Returns}
+\{ The mixing assortativity of the graph. \} 
+\end{DoxyReturn}
+
+
+Definition at line 284 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a182d3611b27058fda589269589b62b41}{\index{amon\-::\-Graph@{amon\-::\-Graph}!neighboors\-Begin@{neighboors\-Begin}}
 \index{neighboors\-Begin@{neighboors\-Begin}!amon::Graph@{amon\-::\-Graph}}
@@ -295,7 +398,7 @@ An iterator to the beggining of the node list.
 \end{DoxyReturn}
 
 
-Definition at line 72 of file graph.\-cpp.
+Definition at line 95 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_acaeb02df5f8d9bd71cf4aae11e89532f}{\index{amon\-::\-Graph@{amon\-::\-Graph}!neighboors\-End@{neighboors\-End}}
 \index{neighboors\-End@{neighboors\-End}!amon::Graph@{amon\-::\-Graph}}
@@ -311,7 +414,7 @@ Returns a const\-\_\-iterator to the end of the adjacency list of node.
 \end{DoxyParams}
 
 
-Definition at line 86 of file graph.\-cpp.
+Definition at line 109 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a88ee59e7d320f210c4bb9eb1e4eff476}{\index{amon\-::\-Graph@{amon\-::\-Graph}!next\-Neighboor@{next\-Neighboor}}
 \index{next\-Neighboor@{next\-Neighboor}!amon::Graph@{amon\-::\-Graph}}
@@ -330,7 +433,7 @@ Advances the adjacency list iterator to the next neighboor.
 \end{DoxyParams}
 
 
-Definition at line 94 of file graph.\-cpp.
+Definition at line 117 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a7c7ef2759921bb87aa8c69c28ea62f8f}{\index{amon\-::\-Graph@{amon\-::\-Graph}!nodes\-Qty@{nodes\-Qty}}
 \index{nodes\-Qty@{nodes\-Qty}!amon::Graph@{amon\-::\-Graph}}
@@ -344,7 +447,7 @@ The number of nodes in the graph.
 \end{DoxyReturn}
 
 
-Definition at line 25 of file graph.\-cpp.
+Definition at line 39 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_a2500d2f93404a3ce691396db4ca0ea92}{\index{amon\-::\-Graph@{amon\-::\-Graph}!out\-Degree@{out\-Degree}}
 \index{out\-Degree@{out\-Degree}!amon::Graph@{amon\-::\-Graph}}
@@ -367,7 +470,7 @@ Definition at line 25 of file graph.\-cpp.
 \end{DoxyReturn}
 
 
-Definition at line 107 of file graph.\-cpp.
+Definition at line 130 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_af3a842a93c90db66a7f301c685e51b3a}{\index{amon\-::\-Graph@{amon\-::\-Graph}!remove\-Node@{remove\-Node}}
 \index{remove\-Node@{remove\-Node}!amon::Graph@{amon\-::\-Graph}}
@@ -383,7 +486,7 @@ Removes a node from the graph/
 \end{DoxyParams}
 
 
-Definition at line 50 of file graph.\-cpp.
+Definition at line 64 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_ad18818eecab5f005c6c3a12ca2461c52}{\index{amon\-::\-Graph@{amon\-::\-Graph}!to\-Dot@{to\-Dot}}
 \index{to\-Dot@{to\-Dot}!amon::Graph@{amon\-::\-Graph}}
@@ -406,7 +509,7 @@ Definition at line 50 of file graph.\-cpp.
 \end{DoxyReturn}
 
 
-Definition at line 227 of file graph.\-cpp.
+Definition at line 250 of file graph.\-cpp.
 
 \hypertarget{classamon_1_1_graph_ad2c36a69520088dd76da23e13b372464}{\index{amon\-::\-Graph@{amon\-::\-Graph}!to\-Dot@{to\-Dot}}
 \index{to\-Dot@{to\-Dot}!amon::Graph@{amon\-::\-Graph}}
@@ -432,7 +535,25 @@ Definition at line 227 of file graph.\-cpp.
 \end{DoxyReturn}
 
 
-Definition at line 243 of file graph.\-cpp.
+Definition at line 266 of file graph.\-cpp.
+
+\hypertarget{classamon_1_1_graph_abbc6d9053073d33ade4d9d964dabf563}{\index{amon\-::\-Graph@{amon\-::\-Graph}!unweighted\-Betweennss\-Centrality@{unweighted\-Betweennss\-Centrality}}
+\index{unweighted\-Betweennss\-Centrality@{unweighted\-Betweennss\-Centrality}!amon::Graph@{amon\-::\-Graph}}
+\subsubsection[{unweighted\-Betweennss\-Centrality}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ double $>$ amon\-::\-Graph\-::unweighted\-Betweennss\-Centrality (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_graph_abbc6d9053073d33ade4d9d964dabf563}
+
+
+\{ Returns a vector containing the unweighted betweeness centrality for each vector. \} 
+
+\begin{DoxyReturn}{Returns}
+\{ A vector containing the betweeness centrality. \} 
+\end{DoxyReturn}
+
+
+Definition at line 343 of file graph.\-cpp.
 
 
 
@@ -442,7 +563,7 @@ Definition at line 243 of file graph.\-cpp.
 \subsubsection[{E\-P\-S}]{\setlength{\rightskip}{0pt plus 5cm}const double amon\-::\-Graph\-::\-E\-P\-S = 1e-\/7\hspace{0.3cm}{\ttfamily [static]}}}\label{classamon_1_1_graph_a1bddebc6360d5154a86dbd75856b6a6c}
 
 
-Definition at line 18 of file graph.\-hpp.
+Definition at line 23 of file graph.\-hpp.
 
 
 

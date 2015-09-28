@@ -106,6 +106,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8dbd046ce57a0c624c7abe573b174ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40dd78be5732f86fa3df8d687d0e5728"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a40dd78be5732f86fa3df8d687d0e5728">Graph</a> (int n)</td></tr>
 <tr class="separator:a40dd78be5732f86fa3df8d687d0e5728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fb78df14f92175270f5dec661fc37a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a3fb78df14f92175270f5dec661fc37a2">loadFromEdgeFileUndirected</a> (std::string file)</td></tr>
+<tr class="memdesc:a3fb78df14f92175270f5dec661fc37a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ Loads a network from a file containing the edge information }  <a href="#a3fb78df14f92175270f5dec661fc37a2">More...</a><br/></td></tr>
+<tr class="separator:a3fb78df14f92175270f5dec661fc37a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c7ef2759921bb87aa8c69c28ea62f8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a7c7ef2759921bb87aa8c69c28ea62f8f">nodesQty</a> () const </td></tr>
 <tr class="separator:a7c7ef2759921bb87aa8c69c28ea62f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a705be004387c64a5ce5aa668b0c4e9d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a705be004387c64a5ce5aa668b0c4e9d7">edgesQty</a> () const </td></tr>
@@ -116,8 +119,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af3a842a93c90db66a7f301c685e51b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02016704b31a4bf3a277fb4fcb8c1d72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72">addDirectedEdge</a> (int A, int B, double w)</td></tr>
 <tr class="separator:a02016704b31a4bf3a277fb4fcb8c1d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7e1e36c734c6085ecc4e733e7428b97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#ae7e1e36c734c6085ecc4e733e7428b97">addDirectedEdge</a> (int A, int B)</td></tr>
+<tr class="separator:ae7e1e36c734c6085ecc4e733e7428b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98b71efc14d469813b8d1c679ca22fa3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3">addUndirectedEdge</a> (int A, int B, double w)</td></tr>
 <tr class="separator:a98b71efc14d469813b8d1c679ca22fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b9260a41af2a7c15acd0cba2976c0c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a5b9260a41af2a7c15acd0cba2976c0c3">addUndirectedEdge</a> (int A, int B)</td></tr>
+<tr class="separator:a5b9260a41af2a7c15acd0cba2976c0c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2500d2f93404a3ce691396db4ca0ea92"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a2500d2f93404a3ce691396db4ca0ea92">outDegree</a> (int x)</td></tr>
 <tr class="memdesc:a2500d2f93404a3ce691396db4ca0ea92"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ Returns the outDegree of node x. }  <a href="#a2500d2f93404a3ce691396db4ca0ea92">More...</a><br/></td></tr>
 <tr class="separator:a2500d2f93404a3ce691396db4ca0ea92"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +156,15 @@ double &gt; &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a
 <tr class="memitem:ad2c36a69520088dd76da23e13b372464"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#ad2c36a69520088dd76da23e13b372464">toDot</a> (bool isDirected, std::vector&lt; bool &gt; inc)</td></tr>
 <tr class="memdesc:ad2c36a69520088dd76da23e13b372464"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ Returns a .dot description of the graph. }  <a href="#ad2c36a69520088dd76da23e13b372464">More...</a><br/></td></tr>
 <tr class="separator:ad2c36a69520088dd76da23e13b372464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80813937a24ddca97dbdcaa4611cc1ab"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a80813937a24ddca97dbdcaa4611cc1ab">mixingAssortativy</a> ()</td></tr>
+<tr class="memdesc:a80813937a24ddca97dbdcaa4611cc1ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ Returns the undirected Mixing Assortativity Coefficient of the graph. }  <a href="#a80813937a24ddca97dbdcaa4611cc1ab">More...</a><br/></td></tr>
+<tr class="separator:a80813937a24ddca97dbdcaa4611cc1ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc6d9053073d33ade4d9d964dabf563"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#abbc6d9053073d33ade4d9d964dabf563">unweightedBetweennssCentrality</a> ()</td></tr>
+<tr class="memdesc:abbc6d9053073d33ade4d9d964dabf563"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ Returns a vector containing the unweighted betweeness centrality for each vector. }  <a href="#abbc6d9053073d33ade4d9d964dabf563">More...</a><br/></td></tr>
+<tr class="separator:abbc6d9053073d33ade4d9d964dabf563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8efa34317aa2fa6444357c352a28c121"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_graph.html#a8efa34317aa2fa6444357c352a28c121">clear</a> ()</td></tr>
+<tr class="memdesc:a8efa34317aa2fa6444357c352a28c121"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ Clears the graph. }  <a href="#a8efa34317aa2fa6444357c352a28c121">More...</a><br/></td></tr>
+<tr class="separator:a8efa34317aa2fa6444357c352a28c121"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -157,7 +173,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="graph_8hpp_source.html#l00014">14</a> of file <a class="el" href="graph_8hpp_source.html">graph.hpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8hpp_source.html#l00019">19</a> of file <a class="el" href="graph_8hpp_source.html">graph.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a8dbd046ce57a0c624c7abe573b174ce1"></a>
 <div class="memitem">
@@ -173,7 +189,7 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Empty Constructor </p>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00011">11</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00025">25</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -198,7 +214,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00017">17</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00031">31</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -242,7 +258,43 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00056">56</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00070">70</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae7e1e36c734c6085ecc4e733e7428b97"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void amon::Graph::addDirectedEdge </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a directed edge between vertices A and B with weight 1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>The source of the edge </td></tr>
+    <tr><td class="paramname">B</td><td>The destination of the edge </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00077">77</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -261,7 +313,7 @@ Static Public Attributes</h2></td></tr>
 <p>Adds a node to the graph. </p>
 <dl class="section return"><dt>Returns</dt><dd>The index of the newly created node. </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00033">33</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00047">47</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -304,7 +356,43 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00063">63</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00085">85</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5b9260a41af2a7c15acd0cba2976c0c3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void amon::Graph::addUndirectedEdge </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds an undirected edge between vertices A and B with weight 1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>One of the end-points of the edge </td></tr>
+    <tr><td class="paramname">B</td><td>The other endpoint </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00081">81</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -347,7 +435,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An unordered_map containing the distances to nodes rechable from the source. </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00205">205</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00228">228</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -366,7 +454,26 @@ Static Public Attributes</h2></td></tr>
 <p>Count the number of bridges on the graph. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of bridges </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00177">177</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00200">200</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8efa34317aa2fa6444357c352a28c121"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void amon::Graph::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>{ Clears the graph. } </p>
+
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00377">377</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -385,7 +492,7 @@ Static Public Attributes</h2></td></tr>
 <p>Returns the number of edges in the graph. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of edges in the graph. </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00029">29</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00043">43</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -404,7 +511,7 @@ Static Public Attributes</h2></td></tr>
 <p>The clustering coefficient of the graph </p>
 <dl class="section return"><dt>Returns</dt><dd>The clustering coefficient of the graph </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00115">115</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00138">138</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +537,33 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if given node is deleted. </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00222">222</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00245">245</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3fb78df14f92175270f5dec661fc37a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void amon::Graph::loadFromEdgeFileUndirected </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>{ Loads a network from a file containing the edge information } </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>{ The file path to read from. } </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00386">386</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -449,7 +582,7 @@ Static Public Attributes</h2></td></tr>
 <p>Calculates the mean degree of the graph </p>
 <dl class="section return"><dt>Returns</dt><dd>The mean degree of the graph </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00111">111</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00134">134</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -475,7 +608,28 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The mean degree. </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00189">189</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00212">212</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a80813937a24ddca97dbdcaa4611cc1ab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long double amon::Graph::mixingAssortativy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>{ Returns the undirected Mixing Assortativity Coefficient of the graph. } </p>
+<p>Returns the undirected Mixing Assortativity Coefficient of the graph, as proposed by Newman. </p>
+<dl class="section return"><dt>Returns</dt><dd>{ The mixing assortativity of the graph. } </dd></dl>
+
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00284">284</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -501,7 +655,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An iterator to the beggining of the node list. </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00072">72</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00095">95</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -526,7 +680,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00086">86</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00109">109</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -562,7 +716,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00094">94</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00117">117</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -581,7 +735,7 @@ Static Public Attributes</h2></td></tr>
 <p>Returns the number of nodes in the graph. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of nodes in the graph. </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00025">25</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00039">39</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -608,7 +762,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>{ The outDegree of the node. } </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00107">107</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00130">130</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +787,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00050">50</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00064">64</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -660,7 +814,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>{ A std::string containing a .dot description of the graph } </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00227">227</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00250">250</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -698,7 +852,27 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>{ A std::string containing a .dot description of the graph } </dd></dl>
 
-<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00243">243</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00266">266</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abbc6d9053073d33ade4d9d964dabf563"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; amon::Graph::unweightedBetweennssCentrality </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>{ Returns a vector containing the unweighted betweeness centrality for each vector. } </p>
+<dl class="section return"><dt>Returns</dt><dd>{ A vector containing the betweeness centrality. } </dd></dl>
+
+<p>Definition at line <a class="el" href="graph_8cpp_source.html#l00343">343</a> of file <a class="el" href="graph_8cpp_source.html">graph.cpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +895,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="graph_8hpp_source.html#l00018">18</a> of file <a class="el" href="graph_8hpp_source.html">graph.hpp</a>.</p>
+<p>Definition at line <a class="el" href="graph_8hpp_source.html#l00023">23</a> of file <a class="el" href="graph_8hpp_source.html">graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -732,7 +906,7 @@ Static Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 7 2015 20:18:26 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 28 2015 10:07:44 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

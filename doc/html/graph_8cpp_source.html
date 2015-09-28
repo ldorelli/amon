@@ -92,286 +92,442 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="graph_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="graph_8hpp.html">graph.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="graph_8hpp.html">graph/graph.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;set&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="classamon_1_1_graph.html#a1bddebc6360d5154a86dbd75856b6a6c">amon::Graph::EPS</a> = 1e-7;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a8dbd046ce57a0c624c7abe573b174ce1">   11</a></span>&#160;<a class="code" href="classamon_1_1_graph.html#a8dbd046ce57a0c624c7abe573b174ce1">amon::Graph::Graph</a>() {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    edgesCount = 0;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    nodesCount = 0;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span>    </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;future&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="progress__bar_8hpp.html">util/progress_bar.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;stack&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="classamon_1_1_graph.html#a1bddebc6360d5154a86dbd75856b6a6c">amon::Graph::EPS</a> = 1e-7;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a40dd78be5732f86fa3df8d687d0e5728">   17</a></span>&#160;<a class="code" href="classamon_1_1_graph.html#a8dbd046ce57a0c624c7abe573b174ce1">amon::Graph::Graph</a>(<span class="keywordtype">int</span> n) {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    edgesCount = nodesCount = 0;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; ++i) {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        addNode();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="graph_8cpp.html#a57e87b9f9e5206523c8da3a2d379008a">   18</a></span>&#160;<a class="code" href="graph_8cpp.html#a57e87b9f9e5206523c8da3a2d379008a">BOOST_PYTHON_MODULE</a>(amon_graph)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    class_&lt;amon::Graph&gt;(<span class="stringliteral">&quot;Graph&quot;</span>, init&lt;&gt;())</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        .def(<span class="stringliteral">&quot;load_undirected&quot;</span>, &amp;<a class="code" href="classamon_1_1_graph.html#a3fb78df14f92175270f5dec661fc37a2">amon::Graph::loadFromEdgeFileUndirected</a>)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a7c7ef2759921bb87aa8c69c28ea62f8f">   25</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#a7c7ef2759921bb87aa8c69c28ea62f8f">amon::Graph::nodesQty</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">return</span> nodesCount;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a705be004387c64a5ce5aa668b0c4e9d7">   29</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#a705be004387c64a5ce5aa668b0c4e9d7">amon::Graph::edgesQty</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> edgesCount;  </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#aa7f39dcf5b2fab62d0b9399bc759ff27">   33</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#aa7f39dcf5b2fab62d0b9399bc759ff27">amon::Graph::addNode</a> () {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span> idx;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">if</span> (availableIndexes.size()) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        idx = availableIndexes.front();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        availableIndexes.pop();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        validNodes[idx] = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        adj[idx].clear();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        idx = adj.size();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        adj.push_back(std::list&lt;std::pair&lt;int, double&gt; &gt;());</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        validNodes.push_back(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    nodesCount++;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> idx;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#af3a842a93c90db66a7f301c685e51b3a">   50</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#af3a842a93c90db66a7f301c685e51b3a">amon::Graph::removeNode</a> (<span class="keywordtype">int</span> index) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> (index &gt; (<span class="keywordtype">int</span>) adj.size() or index &lt; 0) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    adj[index].clear();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    validNodes[index] = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72">   56</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72">amon::Graph::addDirectedEdge</a> (<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b, <span class="keywordtype">double</span> w) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">if</span> (a &lt; 0 or a &gt; nodesCount or !validNodes[a]) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span> (b &lt; 0 or b &gt; nodesCount or !validNodes[b]) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    adj[a].push_back(std::make_pair(b, w));</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    this-&gt;edgesCount++;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a8dbd046ce57a0c624c7abe573b174ce1">   25</a></span>&#160;<a class="code" href="classamon_1_1_graph.html#a8dbd046ce57a0c624c7abe573b174ce1">amon::Graph::Graph</a>() {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    edgesCount = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    nodesCount = 0;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a40dd78be5732f86fa3df8d687d0e5728">   31</a></span>&#160;<a class="code" href="classamon_1_1_graph.html#a8dbd046ce57a0c624c7abe573b174ce1">amon::Graph::Graph</a>(<span class="keywordtype">int</span> n) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    edgesCount = nodesCount = 0;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; ++i) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        addNode();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a7c7ef2759921bb87aa8c69c28ea62f8f">   39</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#a7c7ef2759921bb87aa8c69c28ea62f8f">amon::Graph::nodesQty</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> nodesCount;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a705be004387c64a5ce5aa668b0c4e9d7">   43</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#a705be004387c64a5ce5aa668b0c4e9d7">amon::Graph::edgesQty</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> edgesCount;  </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#aa7f39dcf5b2fab62d0b9399bc759ff27">   47</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#aa7f39dcf5b2fab62d0b9399bc759ff27">amon::Graph::addNode</a> () {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">int</span> idx;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span> (availableIndexes.size()) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        idx = availableIndexes.front();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        availableIndexes.pop();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        validNodes[idx] = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        adj[idx].clear();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        idx = adj.size();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        adj.push_back(std::list&lt;std::pair&lt;int, double&gt; &gt;());</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        validNodes.push_back(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    nodesCount++;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> idx;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3">   63</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3">amon::Graph::addUndirectedEdge</a>(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b, <span class="keywordtype">double</span> w) {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span> (a &lt; 0 or a &gt; nodesCount or !validNodes[a]) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (b &lt; 0 or b &gt; nodesCount or !validNodes[b]) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    adj[a].push_back( std::make_pair (b, w));</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    adj[b].push_back( std::make_pair(a, w));</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    this-&gt;edgesCount++;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;std::list&lt;std::pair&lt;int, double&gt; &gt;::iterator</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a182d3611b27058fda589269589b62b41">   72</a></span>&#160;    <a class="code" href="classamon_1_1_graph.html#a182d3611b27058fda589269589b62b41">amon::Graph::neighboorsBegin</a> (<span class="keywordtype">int</span> node) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span> (node &lt; 0 or node &gt; nodesCount or !validNodes[node]) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">throw</span> <span class="stringliteral">&quot;Invalid node index&quot;</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">auto</span> it = adj[node].begin();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">while</span> (it != adj[node].end() and !validNodes[it-&gt;first]) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        it = adj[node].erase(it);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> it;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#af3a842a93c90db66a7f301c685e51b3a">   64</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#af3a842a93c90db66a7f301c685e51b3a">amon::Graph::removeNode</a> (<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (index &gt; (<span class="keywordtype">int</span>) adj.size() or index &lt; 0) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    adj[index].clear();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    validNodes[index] = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72">   70</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72">amon::Graph::addDirectedEdge</a> (<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b, <span class="keywordtype">double</span> w) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (a &lt; 0 or a &gt; nodesCount or !validNodes[a]) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span> (b &lt; 0 or b &gt; nodesCount or !validNodes[b]) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    adj[a].push_back(std::make_pair(b, w));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    this-&gt;edgesCount++;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#ae7e1e36c734c6085ecc4e733e7428b97">   77</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72">amon::Graph::addDirectedEdge</a> (<span class="keywordtype">int</span> A, <span class="keywordtype">int</span> B) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    addDirectedEdge(A, B, 1.0);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a5b9260a41af2a7c15acd0cba2976c0c3">   81</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3">amon::Graph::addUndirectedEdge</a>(<span class="keywordtype">int</span> A, <span class="keywordtype">int</span> B) {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    addUndirectedEdge(A, B, 1.0);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;std::list&lt;std::pair&lt;int, double&gt; &gt;::iterator</div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#acaeb02df5f8d9bd71cf4aae11e89532f">   86</a></span>&#160;    <a class="code" href="classamon_1_1_graph.html#acaeb02df5f8d9bd71cf4aae11e89532f">amon::Graph::neighboorsEnd</a> (<span class="keywordtype">int</span> node) {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span> (node &lt; 0 or node &gt; nodesCount or !validNodes[node]) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">throw</span> <span class="stringliteral">&quot;Invalid node index&quot;</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> adj[node].end();</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3">   85</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3">amon::Graph::addUndirectedEdge</a>(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b, <span class="keywordtype">double</span> w) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">if</span> (a &lt; 0 or a &gt; nodesCount or !validNodes[a]) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span> (b &lt; 0 or b &gt; nodesCount or !validNodes[b]) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    adj[a].push_back( std::make_pair (b, w));</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    adj[b].push_back( std::make_pair(a, w));</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    this-&gt;edgesCount++;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a88ee59e7d320f210c4bb9eb1e4eff476">   94</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a88ee59e7d320f210c4bb9eb1e4eff476">amon::Graph::nextNeighboor</a> (</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    std::list&lt;std::pair&lt;int, double&gt; &gt;::iterator &amp;it, <span class="keywordtype">int</span> node) {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;std::list&lt;std::pair&lt;int, double&gt; &gt;::iterator</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a182d3611b27058fda589269589b62b41">   95</a></span>&#160;    <a class="code" href="classamon_1_1_graph.html#a182d3611b27058fda589269589b62b41">amon::Graph::neighboorsBegin</a> (<span class="keywordtype">int</span> node) {</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> (it == adj[node].end()) <span class="keywordflow">return</span>;  </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">int</span> edge = it-&gt;first;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span> (!validNodes[edge]) {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        it = adj[node].erase(it);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        it++;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> (node &lt; 0 or node &gt; nodesCount or !validNodes[node]) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">throw</span> <span class="stringliteral">&quot;Invalid node index&quot;</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">auto</span> it = adj[node].begin();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">while</span> (it != adj[node].end() and !validNodes[it-&gt;first]) {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        it = adj[node].erase(it);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span> it;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a2500d2f93404a3ce691396db4ca0ea92">  107</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#a2500d2f93404a3ce691396db4ca0ea92">amon::Graph::outDegree</a>(<span class="keywordtype">int</span> x) {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">return</span> adj[x].size();</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#ac97e95d56f333fa63755458cc9443cc6">  111</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classamon_1_1_graph.html#ac97e95d56f333fa63755458cc9443cc6">amon::Graph::meanDegree</a> () {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> (<span class="keywordtype">double</span>) edgesCount/nodesCount;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a6e9098ead3849a382e3a5d1949599947">  115</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classamon_1_1_graph.html#a6e9098ead3849a382e3a5d1949599947">amon::Graph::globalClusteringCoefficient</a>() {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    std::vector &lt; std::set&lt;int&gt; &gt; L;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    std::vector &lt; std::pair&lt;int, int&gt; &gt; nodes;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)adj.size(); ++i) {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">if</span> (!validNodes[i]) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        nodes.push_back( std::make_pair(i, L.size()) );</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        L.push_back(std::set&lt;int&gt;());</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> e : adj[i]) {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            L[i].insert(e.first);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">double</span> triangles = 0.0, triplets = 0.0;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)nodes.size(); ++i) {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i+1; j &lt; (int)nodes.size(); ++j) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keywordtype">int</span> ii = nodes[i].second;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordtype">int</span> jj = nodes[j].second;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="comment">// They do not connect to each other</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordflow">if</span> (!L[ii].count(jj) or !L[jj].count(ii)) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="comment">// Size of union -&gt; triplets</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordtype">int</span> sz = L[ii].size() + L[jj].size();</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            std::vector &lt;int&gt; I(sz), U(sz);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordtype">int</span> usz = std::set_union(L[ii].begin(), L[ii].end(),</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                L[jj].begin(), L[jj].end(), U.begin()) - U.begin();</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordtype">int</span> isz = std::set_intersection(L[ii].begin(), L[ii].end(),</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                L[jj].begin(), L[jj].end(), I.begin()) - I.begin();</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            triangles += isz;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            triplets += usz - 2;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        }</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    triangles /= 3.0;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    triplets -= triangles*3.0;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    triplets /= 2.0;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    triplets += triangles;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">return</span> triangles/triplets;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;}</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a0ea3919c713485cfc5b24fe3ef1aaf24">amon::Graph::bridges</a>(<span class="keywordtype">int</span> p, <span class="keywordtype">int</span> l, <span class="keywordtype">int</span>&amp; num, </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    std::vector&lt;int&gt;&amp; dfsnum, std::vector&lt;int&gt;&amp; dfslow, <span class="keywordtype">int</span>&amp; ans) {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    dfsnum[p] = dfslow[p] = num++;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; e : adj[p]) {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keywordtype">int</span> v = e.first;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordflow">if</span> (v == l) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordflow">if</span> (dfsnum[v] == 0) {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            bridges(v, p, num, dfsnum, dfslow, ans);    </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="keywordflow">if</span> (dfslow[v] &gt; dfsnum[p]) {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                ++ans;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            }</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            dfslow[p] = std::min(dfslow[p], dfslow[v]);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            dfslow[p] = std::min(dfslow[p], dfsnum[v]);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        }</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;std::list&lt;std::pair&lt;int, double&gt; &gt;::iterator</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#acaeb02df5f8d9bd71cf4aae11e89532f">  109</a></span>&#160;    <a class="code" href="classamon_1_1_graph.html#acaeb02df5f8d9bd71cf4aae11e89532f">amon::Graph::neighboorsEnd</a> (<span class="keywordtype">int</span> node) {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">if</span> (node &lt; 0 or node &gt; nodesCount or !validNodes[node]) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">throw</span> <span class="stringliteral">&quot;Invalid node index&quot;</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">return</span> adj[node].end();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a88ee59e7d320f210c4bb9eb1e4eff476">  117</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a88ee59e7d320f210c4bb9eb1e4eff476">amon::Graph::nextNeighboor</a> (</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    std::list&lt;std::pair&lt;int, double&gt; &gt;::iterator &amp;it, <span class="keywordtype">int</span> node) {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">if</span> (it == adj[node].end()) <span class="keywordflow">return</span>;  </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">int</span> edge = it-&gt;first;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">if</span> (!validNodes[edge]) {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        it = adj[node].erase(it);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        it++;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a2500d2f93404a3ce691396db4ca0ea92">  130</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#a2500d2f93404a3ce691396db4ca0ea92">amon::Graph::outDegree</a>(<span class="keywordtype">int</span> x) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">return</span> adj[x].size();</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;}</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#ac97e95d56f333fa63755458cc9443cc6">  134</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classamon_1_1_graph.html#ac97e95d56f333fa63755458cc9443cc6">amon::Graph::meanDegree</a> () {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">return</span> (<span class="keywordtype">double</span>) edgesCount/nodesCount;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a6e9098ead3849a382e3a5d1949599947">  138</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classamon_1_1_graph.html#a6e9098ead3849a382e3a5d1949599947">amon::Graph::globalClusteringCoefficient</a>() {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    std::vector &lt; std::set&lt;int&gt; &gt; L;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    std::vector &lt; std::pair&lt;int, int&gt; &gt; nodes;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)adj.size(); ++i) {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">if</span> (!validNodes[i]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        nodes.push_back( std::make_pair(i, L.size()) );</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        L.push_back(std::set&lt;int&gt;());</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> e : adj[i]) {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            L[i].insert(e.first);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    }</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">double</span> triangles = 0.0, triplets = 0.0;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)nodes.size(); ++i) {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i+1; j &lt; (int)nodes.size(); ++j) {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordtype">int</span> ii = nodes[i].second;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordtype">int</span> jj = nodes[j].second;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="comment">// They do not connect to each other</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">if</span> (!L[ii].count(jj) or !L[jj].count(ii)) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="comment">// Size of union -&gt; triplets</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <span class="keywordtype">int</span> sz = L[ii].size() + L[jj].size();</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            std::vector &lt;int&gt; I(sz), U(sz);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keywordtype">int</span> usz = std::set_union(L[ii].begin(), L[ii].end(),</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                L[jj].begin(), L[jj].end(), U.begin()) - U.begin();</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            <span class="keywordtype">int</span> isz = std::set_intersection(L[ii].begin(), L[ii].end(),</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                L[jj].begin(), L[jj].end(), I.begin()) - I.begin();</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            triangles += isz;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            triplets += usz - 2;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    }</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    triangles /= 3.0;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    triplets -= triangles*3.0;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    triplets /= 2.0;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    triplets += triangles;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">return</span> triangles/triplets;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
-<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a0ea3919c713485cfc5b24fe3ef1aaf24">  177</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#a0ea3919c713485cfc5b24fe3ef1aaf24">amon::Graph::bridges</a> () {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordtype">int</span> num = 1, ans = 0;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    std::vector&lt;int&gt; dfsnum(adj.size(), 0);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    std::vector&lt;int&gt; dfslow(adj.size(), 0);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)adj.size(); ++i) {</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordflow">if</span> (validNodes[i] and dfsnum[i] == 0) {</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            bridges(i, -1, num, dfsnum, dfslow, ans);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        }</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    }</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">return</span> ans;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;}</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a31712319c837723444fc5f83a272b41d">  189</a></span>&#160;<span class="keywordtype">double</span>  <a class="code" href="classamon_1_1_graph.html#ac97e95d56f333fa63755458cc9443cc6">amon::Graph::meanDegree</a> (<span class="keywordtype">double</span> percent) {</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    std::vector &lt;double&gt; degs;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)adj.size(); ++i) {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keywordflow">if</span> (validNodes[i]) {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            degs.push_back(adj[i].size());</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        }</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    sort(degs.begin(), degs.end(), std::greater&lt;double&gt;());</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordtype">int</span> qt = percent * nodesCount;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordtype">double</span> res = 0.0;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; qt; ++i) {</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        res += degs[i];</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    }</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">return</span> res/qt;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
-<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a658ec90c39eb57958a286574cf463224">  205</a></span>&#160;std::unordered_map&lt;int, int&gt; <a class="code" href="classamon_1_1_graph.html#a658ec90c39eb57958a286574cf463224">amon::Graph::bfs</a> (<span class="keywordtype">int</span> src) {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    std::queue&lt;int&gt; q;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    std::unordered_map&lt;int, int&gt; ans;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    ans[0] = 0;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    q.push(src);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">while</span> (!q.empty()) {</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordtype">int</span> n = q.front(); q.pop();</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; e : adj[n]) {</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keywordtype">int</span> v = e.first;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordflow">if</span> (ans.count(v) != 0) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            ans[v] = ans[n] + 1;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            q.push(v);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a0ea3919c713485cfc5b24fe3ef1aaf24">amon::Graph::bridges</a>(<span class="keywordtype">int</span> p, <span class="keywordtype">int</span> l, <span class="keywordtype">int</span>&amp; num, </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    std::vector&lt;int&gt;&amp; dfsnum, std::vector&lt;int&gt;&amp; dfslow, <span class="keywordtype">int</span>&amp; ans) {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    dfsnum[p] = dfslow[p] = num++;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; e : adj[p]) {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keywordtype">int</span> v = e.first;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">if</span> (v == l) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordflow">if</span> (dfsnum[v] == 0) {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            bridges(v, p, num, dfsnum, dfslow, ans);    </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <span class="keywordflow">if</span> (dfslow[v] &gt; dfsnum[p]) {</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                ++ans;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            dfslow[p] = std::min(dfslow[p], dfslow[v]);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            dfslow[p] = std::min(dfslow[p], dfsnum[v]);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a0ea3919c713485cfc5b24fe3ef1aaf24">  200</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classamon_1_1_graph.html#a0ea3919c713485cfc5b24fe3ef1aaf24">amon::Graph::bridges</a> () {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordtype">int</span> num = 1, ans = 0;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    std::vector&lt;int&gt; dfsnum(adj.size(), 0);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    std::vector&lt;int&gt; dfslow(adj.size(), 0);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)adj.size(); ++i) {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">if</span> (validNodes[i] and dfsnum[i] == 0) {</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            bridges(i, -1, num, dfsnum, dfslow, ans);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">return</span> ans;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;}</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a31712319c837723444fc5f83a272b41d">  212</a></span>&#160;<span class="keywordtype">double</span>  <a class="code" href="classamon_1_1_graph.html#ac97e95d56f333fa63755458cc9443cc6">amon::Graph::meanDegree</a> (<span class="keywordtype">double</span> percent) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    std::vector &lt;double&gt; degs;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)adj.size(); ++i) {</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="keywordflow">if</span> (validNodes[i]) {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            degs.push_back(adj[i].size());</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        }</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    }</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordflow">return</span> ans;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
-<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a17d2727539c869cb0a047d81b0236dad">  222</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classamon_1_1_graph.html#a17d2727539c869cb0a047d81b0236dad">amon::Graph::isDeleted</a> (<span class="keywordtype">int</span> index) {</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">if</span> (index &gt; (<span class="keywordtype">int</span>) adj.size()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordflow">return</span> !validNodes[index];</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#ad18818eecab5f005c6c3a12ca2461c52">  227</a></span>&#160;std::string <a class="code" href="classamon_1_1_graph.html#ad18818eecab5f005c6c3a12ca2461c52">amon::Graph::toDot</a> (<span class="keywordtype">bool</span> isDirected) {</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    std::stringstream ff;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    ff &lt;&lt; ((isDirected) ? (<span class="stringliteral">&quot;digraph g {\n&quot;</span>) : (<span class="stringliteral">&quot;graph g{\n&quot;</span>));</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int) adj.size(); ++i) {</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; v : adj[i]) {</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            <span class="keywordtype">int</span> to = v.first;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            ff &lt;&lt; i &lt;&lt; ((isDirected) ? <span class="stringliteral">&quot; -&gt; &quot;</span> : <span class="stringliteral">&quot; -- &quot;</span>) &lt;&lt; to &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        }</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    ff &lt;&lt; <span class="stringliteral">&quot;}&quot;</span>;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">return</span> ff.str();</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;}</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
-<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#ad2c36a69520088dd76da23e13b372464">  243</a></span>&#160;std::string <a class="code" href="classamon_1_1_graph.html#ad18818eecab5f005c6c3a12ca2461c52">amon::Graph::toDot</a> (<span class="keywordtype">bool</span> isDirected, std::vector&lt;bool&gt; inc) {</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    std::stringstream ff;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    ff &lt;&lt; ((isDirected) ? (<span class="stringliteral">&quot;digraph g {\n&quot;</span>) : (<span class="stringliteral">&quot;graph g{\n&quot;</span>));</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int) adj.size(); ++i) {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">if</span> (!inc[i]) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; v : adj[i]) {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            <span class="keywordtype">int</span> to = v.first;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            <span class="keywordflow">if</span> (!inc[to]) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            ff &lt;&lt; i &lt;&lt; ((isDirected) ? <span class="stringliteral">&quot; -&gt; &quot;</span> : <span class="stringliteral">&quot; -- &quot;</span>) &lt;&lt; to &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        }</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    }</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    ff &lt;&lt; <span class="stringliteral">&quot;}&quot;</span>;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">return</span> ff.str();</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;}</div>
-<div class="ttc" id="classamon_1_1_graph_html_a0ea3919c713485cfc5b24fe3ef1aaf24"><div class="ttname"><a href="classamon_1_1_graph.html#a0ea3919c713485cfc5b24fe3ef1aaf24">amon::Graph::bridges</a></div><div class="ttdeci">int bridges()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00177">graph.cpp:177</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a8dbd046ce57a0c624c7abe573b174ce1"><div class="ttname"><a href="classamon_1_1_graph.html#a8dbd046ce57a0c624c7abe573b174ce1">amon::Graph::Graph</a></div><div class="ttdeci">Graph()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00011">graph.cpp:11</a></div></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    sort(degs.begin(), degs.end(), std::greater&lt;double&gt;());</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordtype">int</span> qt = percent * nodesCount;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordtype">double</span> res = 0.0;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; qt; ++i) {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        res += degs[i];</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    }</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordflow">return</span> res/qt;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;}</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a658ec90c39eb57958a286574cf463224">  228</a></span>&#160;std::unordered_map&lt;int, int&gt; <a class="code" href="classamon_1_1_graph.html#a658ec90c39eb57958a286574cf463224">amon::Graph::bfs</a> (<span class="keywordtype">int</span> src) {</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    std::queue&lt;int&gt; q;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    std::unordered_map&lt;int, int&gt; ans;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    ans[src] = 0;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    q.push(src);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordflow">while</span> (!q.empty()) {</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordtype">int</span> n = q.front(); q.pop();</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; e : adj[n]) {</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <span class="keywordtype">int</span> v = e.first;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="keywordflow">if</span> (ans.count(v) != 0) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            ans[v] = ans[n] + 1;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            q.push(v);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    }</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordflow">return</span> ans;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;}</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a17d2727539c869cb0a047d81b0236dad">  245</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classamon_1_1_graph.html#a17d2727539c869cb0a047d81b0236dad">amon::Graph::isDeleted</a> (<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordflow">if</span> (index &gt; (<span class="keywordtype">int</span>) adj.size()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordflow">return</span> !validNodes[index];</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;}</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
+<div class="line"><a name="l00250"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#ad18818eecab5f005c6c3a12ca2461c52">  250</a></span>&#160;std::string <a class="code" href="classamon_1_1_graph.html#ad18818eecab5f005c6c3a12ca2461c52">amon::Graph::toDot</a> (<span class="keywordtype">bool</span> isDirected) {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    std::stringstream ff;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    ff &lt;&lt; ((isDirected) ? (<span class="stringliteral">&quot;digraph g {\n&quot;</span>) : (<span class="stringliteral">&quot;graph g{\n&quot;</span>));</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int) adj.size(); ++i) {</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; v : adj[i]) {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="keywordtype">int</span> to = v.first;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            ff &lt;&lt; i &lt;&lt; ((isDirected) ? <span class="stringliteral">&quot; -&gt; &quot;</span> : <span class="stringliteral">&quot; -- &quot;</span>) &lt;&lt; to &lt;&lt; <span class="stringliteral">&quot; [ weight=\&quot;&quot;</span> &lt;&lt;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                std::setprecision(4) &lt;&lt; v.second &lt;&lt; <span class="stringliteral">&quot;\&quot;]&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    }</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    ff &lt;&lt; <span class="stringliteral">&quot;}&quot;</span>;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">return</span> ff.str();</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;}</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
+<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#ad2c36a69520088dd76da23e13b372464">  266</a></span>&#160;std::string <a class="code" href="classamon_1_1_graph.html#ad18818eecab5f005c6c3a12ca2461c52">amon::Graph::toDot</a> (<span class="keywordtype">bool</span> isDirected, std::vector&lt;bool&gt; inc) {</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    std::stringstream ff;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    ff &lt;&lt; ((isDirected) ? (<span class="stringliteral">&quot;digraph g {\n&quot;</span>) : (<span class="stringliteral">&quot;graph g{\n&quot;</span>));</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int) adj.size(); ++i) {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keywordflow">if</span> (!inc[i]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; v : adj[i]) {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordtype">int</span> to = v.first;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <span class="keywordflow">if</span> (!inc[to]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            ff &lt;&lt; i &lt;&lt; ((isDirected) ? <span class="stringliteral">&quot; -&gt; &quot;</span> : <span class="stringliteral">&quot; -- &quot;</span>) &lt;&lt; to &lt;&lt; <span class="stringliteral">&quot; [ weight=\&quot;&quot;</span> &lt;&lt;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                std::setprecision(4) &lt;&lt; v.second &lt;&lt; <span class="stringliteral">&quot;\&quot;]&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    ff &lt;&lt; <span class="stringliteral">&quot;}&quot;</span>;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordflow">return</span> ff.str();</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;}</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a80813937a24ddca97dbdcaa4611cc1ab">  284</a></span>&#160;<span class="keywordtype">long</span> <span class="keywordtype">double</span> <a class="code" href="classamon_1_1_graph.html#a80813937a24ddca97dbdcaa4611cc1ab">amon::Graph::mixingAssortativy</a> () {</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> exy = 0.0;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> ex_ey = 0.0;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> ex_ey2 = 0.0;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> m = 0;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nodesCount; ++i) {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;v : adj[i]) {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            <span class="keywordtype">int</span> to = v.first;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            <span class="keywordtype">long</span> <span class="keywordtype">double</span> g1 = adj[to].size();</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            <span class="keywordtype">long</span> <span class="keywordtype">double</span> g2 = adj[i].size();</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            exy += g1*g2;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            ex_ey += 0.5*(g1 + g2);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            ex_ey2 += 0.5*(g1*g1 + g2*g2);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            m += 1.0;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    }</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    exy /= m;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    ex_ey /= m;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    ex_ey2 /= m;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordflow">return</span> (exy - ex_ey*ex_ey)/(ex_ey2 - ex_ey*ex_ey);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;}</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="keywordtype">void</span> amon::Graph::betweennessUnweighted(<span class="keywordtype">int</span> x, std::vector&lt;double&gt;&amp; res) {</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    std::vector &lt;double&gt; sigma(nodesCount, 0.0), dist(nodesCount, -1);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    std::stack &lt;int&gt; S;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    std::vector &lt; std::vector&lt;int&gt; &gt; P (nodesCount);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    std::queue &lt;int&gt; Q;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    Q.push(x);  </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    sigma[x] = 1.0;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    dist[x] = 0;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordflow">while</span> (!Q.empty()) {</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keywordtype">int</span> v = Q.front(); Q.pop();</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        S.push(v);</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> p : adj[v]) {</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            <span class="keywordtype">int</span> w = p.first;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            <span class="keywordflow">if</span> (dist[w] == -1) {</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                dist[w] = dist[v] + 1;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                Q.push(w);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="keywordflow">if</span> (dist[w] == dist[v] + 1) {</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                sigma[w] += sigma[v];</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                P[w].push_back(v);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            }</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        }</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    }</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    std::vector &lt;double&gt; delta(nodesCount);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordflow">while</span> (!S.empty()) {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keywordtype">int</span> w = S.top();</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)P[w].size(); ++i) {</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            <span class="keywordtype">int</span> v = P[w][i];</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            delta[v] += (sigma[v]/sigma[w]) * (1 + delta[w]);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="keywordflow">if</span> (w != x) res[w] += delta[w];</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        S.pop();</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    }</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;}</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
+<div class="line"><a name="l00343"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#abbc6d9053073d33ade4d9d964dabf563">  343</a></span>&#160;std::vector&lt;double&gt; <a class="code" href="classamon_1_1_graph.html#abbc6d9053073d33ade4d9d964dabf563">amon::Graph::unweightedBetweennssCentrality</a> () {</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    std::vector &lt; std::vector &lt;double&gt; &gt; res_t (NUM_THREADS, </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        std::vector&lt;double&gt; (nodesCount, 0.0));</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    std::vector &lt;double&gt; res (nodesCount, 0.0);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    std::queue&lt;int&gt; Q;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="comment">// Log the the percentage it is taking</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <a class="code" href="classamon_1_1_progress_bar.html">amon::ProgressBar</a> bar(nodesCount, 0.00001);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;Calculating betweenness centrality...[&quot;</span> &lt;&lt; NUM_THREADS &lt;&lt; <span class="stringliteral">&quot; threads]\n&quot;</span>;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nodesCount; ++i) {</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <span class="keywordflow">if</span> (!validNodes[i]) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        Q.push(i);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <span class="keywordflow">if</span> (Q.size() == NUM_THREADS || i == nodesCount - 1) {</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            std::vector&lt;std::thread&gt; v;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            <span class="keywordflow">while</span>(!Q.empty()) {</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                <span class="keywordtype">int</span> p = Q.front();</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                Q.pop();</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                v.push_back(</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                    std::thread(&amp;amon::Graph::betweennessUnweighted, <span class="keyword">this</span>, p, </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                        std::ref(res_t[p%NUM_THREADS])));</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            }</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; t : v) t.join();</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            bar += v.size();</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        }</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    }</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)res_t.size(); ++i) {</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; (int)res_t[i].size(); ++k) {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            res[k] += res_t[i][k];</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        }</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    }</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; v : res) v /= ((nodesCount-1)*(nodesCount-2));</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keywordflow">return</span> res;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;}</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
+<div class="line"><a name="l00377"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a8efa34317aa2fa6444357c352a28c121">  377</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a8efa34317aa2fa6444357c352a28c121">amon::Graph::clear</a>() {</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    edgesCount = nodesCount = 0;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    adj.clear();</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    validNodes.clear();</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordflow">while</span>(availableIndexes.size()) {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        availableIndexes.pop();</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;}</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;</div>
+<div class="line"><a name="l00386"></a><span class="lineno"><a class="line" href="classamon_1_1_graph.html#a3fb78df14f92175270f5dec661fc37a2">  386</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classamon_1_1_graph.html#a3fb78df14f92175270f5dec661fc37a2">amon::Graph::loadFromEdgeFileUndirected</a>(std::string file) {</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    std::ios::sync_with_stdio(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    std::fstream f (file, std::ios::in);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <span class="keywordflow">if</span> (!f) {</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="keywordflow">throw</span> <span class="stringliteral">&quot;Error opening file &quot;</span> + file;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordtype">int</span> a, b;</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keywordtype">int</span> m = 0;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    clear();</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    std::list &lt; std::pair&lt;int, int&gt; &gt; l;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">while</span> (f &gt;&gt; a &gt;&gt; b) {</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        m = std::max(m, std::max(a + 1, b + 1));</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        l.push_back(std::make_pair(a, b));</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    }</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m; ++i) {</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        addNode();</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> p : l) {</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        std::cerr &lt;&lt; <span class="stringliteral">&quot;Read &quot;</span> &lt;&lt; p.first &lt;&lt; <span class="stringliteral">&quot; to  &quot;</span> &lt;&lt; p.second &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        addUndirectedEdge(p.first, p.second);</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    }</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;}</div>
+<div class="ttc" id="classamon_1_1_graph_html_a0ea3919c713485cfc5b24fe3ef1aaf24"><div class="ttname"><a href="classamon_1_1_graph.html#a0ea3919c713485cfc5b24fe3ef1aaf24">amon::Graph::bridges</a></div><div class="ttdeci">int bridges()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00200">graph.cpp:200</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a8dbd046ce57a0c624c7abe573b174ce1"><div class="ttname"><a href="classamon_1_1_graph.html#a8dbd046ce57a0c624c7abe573b174ce1">amon::Graph::Graph</a></div><div class="ttdeci">Graph()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00025">graph.cpp:25</a></div></div>
 <div class="ttc" id="graph_8hpp_html"><div class="ttname"><a href="graph_8hpp.html">graph.hpp</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a88ee59e7d320f210c4bb9eb1e4eff476"><div class="ttname"><a href="classamon_1_1_graph.html#a88ee59e7d320f210c4bb9eb1e4eff476">amon::Graph::nextNeighboor</a></div><div class="ttdeci">void nextNeighboor(std::list&lt; std::pair&lt; int, double &gt; &gt;::iterator &amp;iterator, int node)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00094">graph.cpp:94</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_af3a842a93c90db66a7f301c685e51b3a"><div class="ttname"><a href="classamon_1_1_graph.html#af3a842a93c90db66a7f301c685e51b3a">amon::Graph::removeNode</a></div><div class="ttdeci">void removeNode(int index)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00050">graph.cpp:50</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_aa7f39dcf5b2fab62d0b9399bc759ff27"><div class="ttname"><a href="classamon_1_1_graph.html#aa7f39dcf5b2fab62d0b9399bc759ff27">amon::Graph::addNode</a></div><div class="ttdeci">int addNode()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00033">graph.cpp:33</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a2500d2f93404a3ce691396db4ca0ea92"><div class="ttname"><a href="classamon_1_1_graph.html#a2500d2f93404a3ce691396db4ca0ea92">amon::Graph::outDegree</a></div><div class="ttdeci">int outDegree(int x)</div><div class="ttdoc">{ Returns the outDegree of node x. } </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00107">graph.cpp:107</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a98b71efc14d469813b8d1c679ca22fa3"><div class="ttname"><a href="classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3">amon::Graph::addUndirectedEdge</a></div><div class="ttdeci">void addUndirectedEdge(int A, int B, double w)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00063">graph.cpp:63</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a705be004387c64a5ce5aa668b0c4e9d7"><div class="ttname"><a href="classamon_1_1_graph.html#a705be004387c64a5ce5aa668b0c4e9d7">amon::Graph::edgesQty</a></div><div class="ttdeci">int edgesQty() const </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00029">graph.cpp:29</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a6e9098ead3849a382e3a5d1949599947"><div class="ttname"><a href="classamon_1_1_graph.html#a6e9098ead3849a382e3a5d1949599947">amon::Graph::globalClusteringCoefficient</a></div><div class="ttdeci">double globalClusteringCoefficient()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00115">graph.cpp:115</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_acaeb02df5f8d9bd71cf4aae11e89532f"><div class="ttname"><a href="classamon_1_1_graph.html#acaeb02df5f8d9bd71cf4aae11e89532f">amon::Graph::neighboorsEnd</a></div><div class="ttdeci">std::list&lt; std::pair&lt; int, double &gt; &gt;::iterator neighboorsEnd(int node)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00086">graph.cpp:86</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_ac97e95d56f333fa63755458cc9443cc6"><div class="ttname"><a href="classamon_1_1_graph.html#ac97e95d56f333fa63755458cc9443cc6">amon::Graph::meanDegree</a></div><div class="ttdeci">double meanDegree()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00111">graph.cpp:111</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a182d3611b27058fda589269589b62b41"><div class="ttname"><a href="classamon_1_1_graph.html#a182d3611b27058fda589269589b62b41">amon::Graph::neighboorsBegin</a></div><div class="ttdeci">std::list&lt; std::pair&lt; int, double &gt; &gt;::iterator neighboorsBegin(int node)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00072">graph.cpp:72</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a1bddebc6360d5154a86dbd75856b6a6c"><div class="ttname"><a href="classamon_1_1_graph.html#a1bddebc6360d5154a86dbd75856b6a6c">amon::Graph::EPS</a></div><div class="ttdeci">static const double EPS</div><div class="ttdef"><b>Definition:</b> <a href="graph_8hpp_source.html#l00018">graph.hpp:18</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a17d2727539c869cb0a047d81b0236dad"><div class="ttname"><a href="classamon_1_1_graph.html#a17d2727539c869cb0a047d81b0236dad">amon::Graph::isDeleted</a></div><div class="ttdeci">bool isDeleted(int index)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00222">graph.cpp:222</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a658ec90c39eb57958a286574cf463224"><div class="ttname"><a href="classamon_1_1_graph.html#a658ec90c39eb57958a286574cf463224">amon::Graph::bfs</a></div><div class="ttdeci">std::unordered_map&lt; int, int &gt; bfs(int src)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00205">graph.cpp:205</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_ad18818eecab5f005c6c3a12ca2461c52"><div class="ttname"><a href="classamon_1_1_graph.html#ad18818eecab5f005c6c3a12ca2461c52">amon::Graph::toDot</a></div><div class="ttdeci">std::string toDot(bool isDirected)</div><div class="ttdoc">{ Returns a .dot description of the graph. } </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00227">graph.cpp:227</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a7c7ef2759921bb87aa8c69c28ea62f8f"><div class="ttname"><a href="classamon_1_1_graph.html#a7c7ef2759921bb87aa8c69c28ea62f8f">amon::Graph::nodesQty</a></div><div class="ttdeci">int nodesQty() const </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00025">graph.cpp:25</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html_a02016704b31a4bf3a277fb4fcb8c1d72"><div class="ttname"><a href="classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72">amon::Graph::addDirectedEdge</a></div><div class="ttdeci">void addDirectedEdge(int A, int B, double w)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00056">graph.cpp:56</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a88ee59e7d320f210c4bb9eb1e4eff476"><div class="ttname"><a href="classamon_1_1_graph.html#a88ee59e7d320f210c4bb9eb1e4eff476">amon::Graph::nextNeighboor</a></div><div class="ttdeci">void nextNeighboor(std::list&lt; std::pair&lt; int, double &gt; &gt;::iterator &amp;iterator, int node)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00117">graph.cpp:117</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a8efa34317aa2fa6444357c352a28c121"><div class="ttname"><a href="classamon_1_1_graph.html#a8efa34317aa2fa6444357c352a28c121">amon::Graph::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">{ Clears the graph. } </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00377">graph.cpp:377</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_af3a842a93c90db66a7f301c685e51b3a"><div class="ttname"><a href="classamon_1_1_graph.html#af3a842a93c90db66a7f301c685e51b3a">amon::Graph::removeNode</a></div><div class="ttdeci">void removeNode(int index)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00064">graph.cpp:64</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_aa7f39dcf5b2fab62d0b9399bc759ff27"><div class="ttname"><a href="classamon_1_1_graph.html#aa7f39dcf5b2fab62d0b9399bc759ff27">amon::Graph::addNode</a></div><div class="ttdeci">int addNode()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00047">graph.cpp:47</a></div></div>
+<div class="ttc" id="progress__bar_8hpp_html"><div class="ttname"><a href="progress__bar_8hpp.html">progress_bar.hpp</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a2500d2f93404a3ce691396db4ca0ea92"><div class="ttname"><a href="classamon_1_1_graph.html#a2500d2f93404a3ce691396db4ca0ea92">amon::Graph::outDegree</a></div><div class="ttdeci">int outDegree(int x)</div><div class="ttdoc">{ Returns the outDegree of node x. } </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00130">graph.cpp:130</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a98b71efc14d469813b8d1c679ca22fa3"><div class="ttname"><a href="classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3">amon::Graph::addUndirectedEdge</a></div><div class="ttdeci">void addUndirectedEdge(int A, int B, double w)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00085">graph.cpp:85</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a705be004387c64a5ce5aa668b0c4e9d7"><div class="ttname"><a href="classamon_1_1_graph.html#a705be004387c64a5ce5aa668b0c4e9d7">amon::Graph::edgesQty</a></div><div class="ttdeci">int edgesQty() const </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00043">graph.cpp:43</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a6e9098ead3849a382e3a5d1949599947"><div class="ttname"><a href="classamon_1_1_graph.html#a6e9098ead3849a382e3a5d1949599947">amon::Graph::globalClusteringCoefficient</a></div><div class="ttdeci">double globalClusteringCoefficient()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00138">graph.cpp:138</a></div></div>
+<div class="ttc" id="graph_8cpp_html_a57e87b9f9e5206523c8da3a2d379008a"><div class="ttname"><a href="graph_8cpp.html#a57e87b9f9e5206523c8da3a2d379008a">BOOST_PYTHON_MODULE</a></div><div class="ttdeci">BOOST_PYTHON_MODULE(amon_graph)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00018">graph.cpp:18</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_acaeb02df5f8d9bd71cf4aae11e89532f"><div class="ttname"><a href="classamon_1_1_graph.html#acaeb02df5f8d9bd71cf4aae11e89532f">amon::Graph::neighboorsEnd</a></div><div class="ttdeci">std::list&lt; std::pair&lt; int, double &gt; &gt;::iterator neighboorsEnd(int node)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00109">graph.cpp:109</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_ac97e95d56f333fa63755458cc9443cc6"><div class="ttname"><a href="classamon_1_1_graph.html#ac97e95d56f333fa63755458cc9443cc6">amon::Graph::meanDegree</a></div><div class="ttdeci">double meanDegree()</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00134">graph.cpp:134</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a182d3611b27058fda589269589b62b41"><div class="ttname"><a href="classamon_1_1_graph.html#a182d3611b27058fda589269589b62b41">amon::Graph::neighboorsBegin</a></div><div class="ttdeci">std::list&lt; std::pair&lt; int, double &gt; &gt;::iterator neighboorsBegin(int node)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00095">graph.cpp:95</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a1bddebc6360d5154a86dbd75856b6a6c"><div class="ttname"><a href="classamon_1_1_graph.html#a1bddebc6360d5154a86dbd75856b6a6c">amon::Graph::EPS</a></div><div class="ttdeci">static const double EPS</div><div class="ttdef"><b>Definition:</b> <a href="graph_8hpp_source.html#l00023">graph.hpp:23</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a80813937a24ddca97dbdcaa4611cc1ab"><div class="ttname"><a href="classamon_1_1_graph.html#a80813937a24ddca97dbdcaa4611cc1ab">amon::Graph::mixingAssortativy</a></div><div class="ttdeci">long double mixingAssortativy()</div><div class="ttdoc">{ Returns the undirected Mixing Assortativity Coefficient of the graph. } </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00284">graph.cpp:284</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a17d2727539c869cb0a047d81b0236dad"><div class="ttname"><a href="classamon_1_1_graph.html#a17d2727539c869cb0a047d81b0236dad">amon::Graph::isDeleted</a></div><div class="ttdeci">bool isDeleted(int index)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00245">graph.cpp:245</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a658ec90c39eb57958a286574cf463224"><div class="ttname"><a href="classamon_1_1_graph.html#a658ec90c39eb57958a286574cf463224">amon::Graph::bfs</a></div><div class="ttdeci">std::unordered_map&lt; int, int &gt; bfs(int src)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00228">graph.cpp:228</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_ad18818eecab5f005c6c3a12ca2461c52"><div class="ttname"><a href="classamon_1_1_graph.html#ad18818eecab5f005c6c3a12ca2461c52">amon::Graph::toDot</a></div><div class="ttdeci">std::string toDot(bool isDirected)</div><div class="ttdoc">{ Returns a .dot description of the graph. } </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00250">graph.cpp:250</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_abbc6d9053073d33ade4d9d964dabf563"><div class="ttname"><a href="classamon_1_1_graph.html#abbc6d9053073d33ade4d9d964dabf563">amon::Graph::unweightedBetweennssCentrality</a></div><div class="ttdeci">std::vector&lt; double &gt; unweightedBetweennssCentrality()</div><div class="ttdoc">{ Returns a vector containing the unweighted betweeness centrality for each vector. } </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00343">graph.cpp:343</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a7c7ef2759921bb87aa8c69c28ea62f8f"><div class="ttname"><a href="classamon_1_1_graph.html#a7c7ef2759921bb87aa8c69c28ea62f8f">amon::Graph::nodesQty</a></div><div class="ttdeci">int nodesQty() const </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00039">graph.cpp:39</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a3fb78df14f92175270f5dec661fc37a2"><div class="ttname"><a href="classamon_1_1_graph.html#a3fb78df14f92175270f5dec661fc37a2">amon::Graph::loadFromEdgeFileUndirected</a></div><div class="ttdeci">void loadFromEdgeFileUndirected(std::string file)</div><div class="ttdoc">{ Loads a network from a file containing the edge information } </div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00386">graph.cpp:386</a></div></div>
+<div class="ttc" id="classamon_1_1_progress_bar_html"><div class="ttname"><a href="classamon_1_1_progress_bar.html">amon::ProgressBar</a></div><div class="ttdef"><b>Definition:</b> <a href="progress__bar_8hpp_source.html#l00008">progress_bar.hpp:8</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html_a02016704b31a4bf3a277fb4fcb8c1d72"><div class="ttname"><a href="classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72">amon::Graph::addDirectedEdge</a></div><div class="ttdeci">void addDirectedEdge(int A, int B, double w)</div><div class="ttdef"><b>Definition:</b> <a href="graph_8cpp_source.html#l00070">graph.cpp:70</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 7 2015 20:18:26 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 28 2015 10:07:44 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

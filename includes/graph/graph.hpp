@@ -3,12 +3,17 @@
 
 #include <vector>
 #include <string>
+#include <thread>
 #include <set>
 #include <queue>
 #include <utility>
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <fstream>
+#include <boost/python.hpp>
+
+using namespace boost::python;
 
 namespace amon {
 class Graph {
@@ -26,6 +31,13 @@ public:
 	 * @param n The number of initial nodes in the graph
 	 */
 	Graph(int n);
+
+	/**
+	 * @brief      { Loads a network from a file containing the edge information }
+	 *
+	 * @param[in]  file  { The file path to read from. }
+	 */
+	void loadFromEdgeFileUndirected(std::string file);
 
 	/**
 	 * Returns the number of nodes in the graph.
@@ -62,6 +74,13 @@ public:
 	void addDirectedEdge (int A, int B, double w);
 
 	/**
+	 * Adds a directed edge between vertices A and B with weight 1.
+	 * @param A The source of the edge
+	 * @param B The destination of the edge
+	 */
+	void addDirectedEdge (int A, int B);
+
+	/**
 	 *	Adds an undirected edge between vertices A and B with weight w.
 	 *	@param A One of the end-points of the edge
 	 * 	@param B The other endpoint
@@ -69,6 +88,13 @@ public:
 	 */
 	void addUndirectedEdge (int A, int B, double w);
 
+
+	/**
+	 *	Adds an undirected edge between vertices A and B with weight 1.
+	 *	@param A One of the end-points of the edge
+	 * 	@param B The other endpoint
+	 */
+	void addUndirectedEdge (int A, int B);
 
 	/**
 	 * @brief      { Returns the outDegree of node x. }
@@ -179,18 +205,32 @@ public:
 	 */
 	long double mixingAssortativy();
 
+	/**
+	 * @brief      { Returns a vector containing the unweighted betweeness centrality for each vector. }
+	 *
+	 * @return     { A vector containing the betweeness centrality. }
+	 */
+	std::vector<double> unweightedBetweennssCentrality() ;
+
+	/**
+	 * @brief      { Clears the graph. }
+	 */
+	void clear();
 
 private:
 	int nodesCount, edgesCount;
 	// Adjacency list and weights
 	std::vector< std::list <std::pair<int, double> > > adj;
-	std::vector <std::list<std::string> > edgeValues;
 	// validNotes[i] is true if node i is active
 	std::vector <bool> validNodes;
 	std::queue <int> availableIndexes;
 
 	void bridges(int p, int i, int&, 
 		std::vector<int>&, std::vector<int>&, int&);
+
+	unsigned int NUM_THREADS = std::thread::hardware_concurrency();
+
+	void betweennessUnweighted(int v, std::vector<double>& res);
 };
 }
 

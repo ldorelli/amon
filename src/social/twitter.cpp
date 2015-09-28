@@ -1,5 +1,5 @@
-#include <twitter.hpp>
-#include <progress_bar.hpp>
+#include <social/twitter.hpp>
+#include <util/progress_bar.hpp>
 #include <string>
 #include <iostream>
 #include <thread>
@@ -63,9 +63,8 @@ amon::TweetLoader::TweetLoader(std::string jsonFile, double p,
 	Json::Reader reader;
 	amon::ProgressBar bar(totc, 0.0001);
 
-	std::cerr << "Loading tweets network...\n";
-	std::cerr << "Using " << NUM_THREADS << " threads " << std::endl;
-
+	std::cerr << "Loading tweets network...[" << NUM_THREADS << " threads]\n";
+	
 	std::ios::sync_with_stdio(false);
 	int tot_twt = 0;
 
@@ -94,6 +93,6 @@ amon::TweetLoader::TweetLoader(std::string jsonFile, double p,
 		Q.pop();
 	}
 
-	std::cerr << "\nGot " << tweets.size() << " different tweets from " << tot_twt << std::endl;
-	std::cerr << "\nLoaded tweets from " << socialNetwork.nodesQty() << " users\n";
+	std::cerr << tweets.size() << " unique tweets from " << tot_twt << std::endl;
+	std::cerr << "Loaded tweets from " << socialNetwork.nodesQty() << " users\n";
 }

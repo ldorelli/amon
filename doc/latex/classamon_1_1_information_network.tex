@@ -17,13 +17,15 @@
 \begin{DoxyCompactList}\small\item\em \{ Constructor \} \end{DoxyCompactList}\item 
 std\-::vector$<$ std\-::pair$<$ int, \\*
 int $>$ $>$ \hyperlink{classamon_1_1_information_network_ae4b4110a07671dda3f0431d36a1d94a7}{information\-Depth} ()
-\begin{DoxyCompactList}\small\item\em \{ Returns a series of pairs (r, d). \} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \{ Returns a series of pairs (r, d). \} \end{DoxyCompactList}\item 
+std\-::vector$<$ double $>$ \hyperlink{classamon_1_1_information_network_ac134e23dd425ba9b2fdd3d4ab7206a7d}{loss\-Of\-Attention} ()
+\begin{DoxyCompactList}\small\item\em \{ Returns the attention loss index for every vertex on the network. \} \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 \{ Provides analysis on networks that represent information spread from people to people. \} 
 
-Definition at line 13 of file information\-\_\-spread.\-hpp.
+Definition at line 12 of file information\-\_\-spread.\-hpp.
 
 
 
@@ -48,7 +50,7 @@ Initializes the class with given network. Nodes should be users and connections 
 \end{DoxyParams}
 
 
-Definition at line 10 of file information\-\_\-spread.\-cpp.
+Definition at line 9 of file information\-\_\-spread.\-cpp.
 
 
 
@@ -64,14 +66,32 @@ Definition at line 10 of file information\-\_\-spread.\-cpp.
 
 \{ Returns a series of pairs (r, d). \} 
 
-Returns a series of pairs (r, d), where r is the rate out degree of the i-\/th node and d is the depth of reach of this user in the observed network.
+Returns a series of pairs (r, d), where r is the reachability (the number of reachable nodes from) of the i-\/th node and d is the depth of reach of this user in the observed network.
 
 \begin{DoxyReturn}{Returns}
 \{ A vector containing the (r, d) pairs. \} 
 \end{DoxyReturn}
 
 
-Definition at line 15 of file information\-\_\-spread.\-cpp.
+Definition at line 40 of file information\-\_\-spread.\-cpp.
+
+\hypertarget{classamon_1_1_information_network_ac134e23dd425ba9b2fdd3d4ab7206a7d}{\index{amon\-::\-Information\-Network@{amon\-::\-Information\-Network}!loss\-Of\-Attention@{loss\-Of\-Attention}}
+\index{loss\-Of\-Attention@{loss\-Of\-Attention}!amon::InformationNetwork@{amon\-::\-Information\-Network}}
+\subsubsection[{loss\-Of\-Attention}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ double $>$ amon\-::\-Information\-Network\-::loss\-Of\-Attention (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classamon_1_1_information_network_ac134e23dd425ba9b2fdd3d4ab7206a7d}
+
+
+\{ Returns the attention loss index for every vertex on the network. \} 
+
+\begin{DoxyReturn}{Returns}
+\{ A std\-::vector with the attention loss. \} 
+\end{DoxyReturn}
+
+
+Definition at line 13 of file information\-\_\-spread.\-cpp.
 
 
 

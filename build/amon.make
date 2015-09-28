@@ -16,13 +16,13 @@ ifeq ($(config),debug_native)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/native/Debug/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -43,13 +43,13 @@ ifeq ($(config),debug_win32)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/win32/Debug/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -70,13 +70,13 @@ ifeq ($(config),debug_win64)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/win64/Debug/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -97,13 +97,13 @@ ifeq ($(config),debug_macos)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/macos/Debug/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -124,13 +124,13 @@ ifeq ($(config),debug_linux86)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/linux86/Debug/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -151,13 +151,13 @@ ifeq ($(config),debug_linux64)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/linux64/Debug/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -178,13 +178,13 @@ ifeq ($(config),release_native)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/native/Release/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -205,13 +205,13 @@ ifeq ($(config),release_win32)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/win32/Release/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -232,13 +232,13 @@ ifeq ($(config),release_win64)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/win64/Release/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -259,13 +259,13 @@ ifeq ($(config),release_macos)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/macos/Release/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -286,13 +286,13 @@ ifeq ($(config),release_linux86)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/linux86/Release/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -313,13 +313,13 @@ ifeq ($(config),release_linux64)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/linux64/Release/amon
   DEFINES +=
-  INCLUDES += -I../includes/csys -I../includes/gpu -I../includes/social -I../includes/graph -I../includes/util -I../includes/util/json
+  INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -Wall -g -O2 -pthread
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -340,6 +340,7 @@ OBJECTS := \
 	$(OBJDIR)/network_models.o \
 	$(OBJDIR)/graph.o \
 	$(OBJDIR)/twitter.o \
+	$(OBJDIR)/Trie.o \
 	$(OBJDIR)/fenwick.o \
 	$(OBJDIR)/json.o \
 	$(OBJDIR)/progress_bar.o \
@@ -413,6 +414,9 @@ $(OBJDIR)/graph.o: ../src/graph/graph.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/twitter.o: ../src/social/twitter.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Trie.o: ../src/util/Trie.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/fenwick.o: ../src/util/fenwick.cpp

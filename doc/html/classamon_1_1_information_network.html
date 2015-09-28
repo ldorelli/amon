@@ -111,11 +111,14 @@ Public Member Functions</h2></td></tr>
 int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_information_network.html#ae4b4110a07671dda3f0431d36a1d94a7">informationDepth</a> ()</td></tr>
 <tr class="memdesc:ae4b4110a07671dda3f0431d36a1d94a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ Returns a series of pairs (r, d). }  <a href="#ae4b4110a07671dda3f0431d36a1d94a7">More...</a><br/></td></tr>
 <tr class="separator:ae4b4110a07671dda3f0431d36a1d94a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac134e23dd425ba9b2fdd3d4ab7206a7d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classamon_1_1_information_network.html#ac134e23dd425ba9b2fdd3d4ab7206a7d">lossOfAttention</a> ()</td></tr>
+<tr class="memdesc:ac134e23dd425ba9b2fdd3d4ab7206a7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ Returns the attention loss index for every vertex on the network. }  <a href="#ac134e23dd425ba9b2fdd3d4ab7206a7d">More...</a><br/></td></tr>
+<tr class="separator:ac134e23dd425ba9b2fdd3d4ab7206a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>{ Provides analysis on networks that represent information spread from people to people. } </p>
 
-<p>Definition at line <a class="el" href="information__spread_8hpp_source.html#l00013">13</a> of file <a class="el" href="information__spread_8hpp_source.html">information_spread.hpp</a>.</p>
+<p>Definition at line <a class="el" href="information__spread_8hpp_source.html#l00012">12</a> of file <a class="el" href="information__spread_8hpp_source.html">information_spread.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac1ac48f7de78b78667fe432ea98f17b8"></a>
 <div class="memitem">
@@ -140,7 +143,7 @@ int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="information__spread_8cpp_source.html#l00010">10</a> of file <a class="el" href="information__spread_8cpp_source.html">information_spread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="information__spread_8cpp_source.html#l00009">9</a> of file <a class="el" href="information__spread_8cpp_source.html">information_spread.cpp</a>.</p>
 
 </div>
 </div>
@@ -159,10 +162,30 @@ int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </div><div class="memdoc">
 
 <p>{ Returns a series of pairs (r, d). } </p>
-<p>Returns a series of pairs (r, d), where r is the rate out degree of the i-th node and d is the depth of reach of this user in the observed network.</p>
+<p>Returns a series of pairs (r, d), where r is the reachability (the number of reachable nodes from) of the i-th node and d is the depth of reach of this user in the observed network.</p>
 <dl class="section return"><dt>Returns</dt><dd>{ A vector containing the (r, d) pairs. } </dd></dl>
 
-<p>Definition at line <a class="el" href="information__spread_8cpp_source.html#l00015">15</a> of file <a class="el" href="information__spread_8cpp_source.html">information_spread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="information__spread_8cpp_source.html#l00040">40</a> of file <a class="el" href="information__spread_8cpp_source.html">information_spread.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac134e23dd425ba9b2fdd3d4ab7206a7d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; amon::InformationNetwork::lossOfAttention </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>{ Returns the attention loss index for every vertex on the network. } </p>
+<dl class="section return"><dt>Returns</dt><dd>{ A std::vector with the attention loss. } </dd></dl>
+
+<p>Definition at line <a class="el" href="information__spread_8cpp_source.html#l00013">13</a> of file <a class="el" href="information__spread_8cpp_source.html">information_spread.cpp</a>.</p>
 
 </div>
 </div>
@@ -173,7 +196,7 @@ int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 7 2015 20:18:26 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 28 2015 10:07:44 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

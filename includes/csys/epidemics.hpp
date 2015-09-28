@@ -1,7 +1,7 @@
 #ifndef __EPIDEMICS_HPP__
 #define __EPIDEMICS_HPP__
 
-#include <graph.hpp>
+#include <graph/graph.hpp>
 #include <vector>
 #include <random> 
 

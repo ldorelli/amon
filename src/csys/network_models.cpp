@@ -1,5 +1,5 @@
-#include <network_models.hpp>
-#include <fenwick.hpp>
+#include <csys/network_models.hpp>
+#include <util/fenwick.hpp>
 #include <iostream>
 
 amon::NetworkGenerator::NetworkGenerator() {

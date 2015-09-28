@@ -2,7 +2,7 @@ var searchData=
 [
   ['c_5fstr',['c_str',['../class_json_1_1_static_string.html#ab86fc6a3183adf12fdba4b370acf1754',1,'Json::StaticString']]],
   ['char',['Char',['../class_json_1_1_reader.html#a3eec9118f3e9a672ba8348c3a79d0f45',1,'Json::Reader']]],
-  ['clear',['clear',['../class_json_1_1_value.html#a501a4d67e6c875255c2ecc03ccd2019b',1,'Json::Value']]],
+  ['clear',['clear',['../classamon_1_1_graph.html#a8efa34317aa2fa6444357c352a28c121',1,'amon::Graph::clear()'],['../class_json_1_1_value.html#a501a4d67e6c875255c2ecc03ccd2019b',1,'Json::Value::clear()']]],
   ['commentafter',['commentAfter',['../namespace_json.html#a4fc417c23905b2ae9e2c47d197a45351ac5784ca53b12250888ddb642b06aebef',1,'Json']]],
   ['commentafteronsameline',['commentAfterOnSameLine',['../namespace_json.html#a4fc417c23905b2ae9e2c47d197a45351a008a230a0586de54f30b76afe70fdcfa',1,'Json']]],
   ['commentbefore',['commentBefore',['../namespace_json.html#a4fc417c23905b2ae9e2c47d197a45351a52f1733775460517b2ea6bedf4906d52',1,'Json']]],

@@ -1,4 +1,4 @@
-#include <fenwick.hpp>
+#include <util/fenwick.hpp>
 #include <iostream>
 
 amon::FenwickTree::FenwickTree(int n) {

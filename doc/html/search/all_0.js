@@ -1,9 +1,9 @@
 var searchData=
 [
   ['add',['add',['../classamon_1_1_fenwick_tree.html#a690ed7f993820c730a04482bb9c330d7',1,'amon::FenwickTree']]],
-  ['adddirectededge',['addDirectedEdge',['../classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72',1,'amon::Graph']]],
+  ['adddirectededge',['addDirectedEdge',['../classamon_1_1_graph.html#a02016704b31a4bf3a277fb4fcb8c1d72',1,'amon::Graph::addDirectedEdge(int A, int B, double w)'],['../classamon_1_1_graph.html#ae7e1e36c734c6085ecc4e733e7428b97',1,'amon::Graph::addDirectedEdge(int A, int B)']]],
   ['addnode',['addNode',['../classamon_1_1_graph.html#aa7f39dcf5b2fab62d0b9399bc759ff27',1,'amon::Graph']]],
-  ['addundirectededge',['addUndirectedEdge',['../classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3',1,'amon::Graph']]],
+  ['addundirectededge',['addUndirectedEdge',['../classamon_1_1_graph.html#a98b71efc14d469813b8d1c679ca22fa3',1,'amon::Graph::addUndirectedEdge(int A, int B, double w)'],['../classamon_1_1_graph.html#a5b9260a41af2a7c15acd0cba2976c0c3',1,'amon::Graph::addUndirectedEdge(int A, int B)']]],
   ['alignas',['ALIGNAS',['../json_8cpp.html#a08a0024ebd1cc16ccc4a208e1e817f6e',1,'json.cpp']]],
   ['all',['all',['../class_json_1_1_features.html#a63894da6e2c100b38741fa933f3d33ae',1,'Json::Features']]],
   ['allocate',['allocate',['../class_json_1_1_batch_allocator.html#a4909756c2d33bd0f07662e88e4f850dd',1,'Json::BatchAllocator']]],

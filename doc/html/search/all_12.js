@@ -8,7 +8,6 @@ var searchData=
   ['sismodel',['SISModel',['../classamon_1_1_s_i_s_model.html',1,'amon']]],
   ['size',['size',['../class_json_1_1_value.html#a4ca8ee6c48a34ca6c2f131956bab5e05',1,'Json::Value']]],
   ['size_5ft',['size_t',['../class_json_1_1_value_iterator_base.html#a9d3a3c7ce5cdefe23cb486239cf07bb5',1,'Json::ValueIteratorBase::size_t()'],['../class_json_1_1_value_const_iterator.html#a8685219d214dbd2b763357ae94fb0f27',1,'Json::ValueConstIterator::size_t()'],['../class_json_1_1_value_iterator.html#a308b8932ffc83eaa9d12dadd5c11a7dd',1,'Json::ValueIterator::size_t()']]],
-  ['social_5fnetworks_2ed',['social_networks.d',['../social__networks_8d.html',1,'']]],
   ['staticstring',['StaticString',['../class_json_1_1_static_string.html',1,'Json']]],
   ['staticstring',['StaticString',['../class_json_1_1_static_string.html#afb6baf1ec078ce76f0b0f9b39d19437f',1,'Json::StaticString']]],
   ['step',['step',['../classamon_1_1_s_i_s_model.html#af5618b91dfd41f363c651723a9a93362',1,'amon::SISModel']]],
@@ -16,9 +15,9 @@ var searchData=
   ['strictroot_5f',['strictRoot_',['../class_json_1_1_features.html#a1162c37a1458adc32582b585b552f9c3',1,'Json::Features']]],
   ['stringvalue',['stringValue',['../namespace_json.html#a7d654b75c16a57007925868e38212b4ea804ef857affea2d415843c73f261c258',1,'Json']]],
   ['structurederror',['StructuredError',['../struct_json_1_1_reader_1_1_structured_error.html',1,'Json::Reader']]],
-  ['styledstreamwriter',['StyledStreamWriter',['../class_json_1_1_styled_stream_writer.html#ae87567a08de865b6dc84d7218a3001df',1,'Json::StyledStreamWriter']]],
   ['styledstreamwriter',['StyledStreamWriter',['../class_json_1_1_styled_stream_writer.html',1,'Json']]],
-  ['styledwriter',['StyledWriter',['../class_json_1_1_styled_writer.html',1,'Json']]],
+  ['styledstreamwriter',['StyledStreamWriter',['../class_json_1_1_styled_stream_writer.html#ae87567a08de865b6dc84d7218a3001df',1,'Json::StyledStreamWriter']]],
   ['styledwriter',['StyledWriter',['../class_json_1_1_styled_writer.html#a1f1b5f922a6a0ef0e56c6dd2f6170192',1,'Json::StyledWriter']]],
+  ['styledwriter',['StyledWriter',['../class_json_1_1_styled_writer.html',1,'Json']]],
   ['swap',['swap',['../class_json_1_1_value.html#aab841120d78e296e1bc06a373345e822',1,'Json::Value']]]
 ];

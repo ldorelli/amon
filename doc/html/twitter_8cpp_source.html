@@ -91,8 +91,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">twitter.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="twitter_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="twitter_8hpp.html">twitter.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="progress__bar_8hpp.html">progress_bar.hpp</a>&gt;</span></div>
+<a href="twitter_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="twitter_8hpp.html">social/twitter.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="progress__bar_8hpp.html">util/progress_bar.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
@@ -156,43 +156,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="class_json_1_1_reader.html">Json::Reader</a> reader;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classamon_1_1_progress_bar.html">amon::ProgressBar</a> bar(totc, 0.0001);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;Loading tweets network...\n&quot;</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;Using &quot;</span> &lt;&lt; NUM_THREADS &lt;&lt; <span class="stringliteral">&quot; threads &quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::ios::sync_with_stdio(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">int</span> tot_twt = 0;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">while</span> (getline(in, line)) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        tot_twt++;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span> (line.size() == 0) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        Q.push(line);       </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span> (Q.size() == NUM_THREADS) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="comment">// Spawns a thread to poll lines</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            std::vector&lt;std::thread&gt; v;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">while</span> (!Q.empty()) {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                v.push_back(std::thread(&amp;amon::TweetLoader::loadRetweetNetwork, <span class="keyword">this</span>, Q.front()));</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                Q.pop();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; t : v) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                t.join();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        bar += line.size();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">if</span> (bar.<a class="code" href="classamon_1_1_progress_bar.html#aad3a864a2d40756b2720c7725ad23599">progress</a>() &gt;= p) <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">while</span> (!Q.empty()) {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        loadRetweetNetwork(Q.front());</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        Q.pop();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;\nGot &quot;</span> &lt;&lt; tweets.size() &lt;&lt; <span class="stringliteral">&quot; different tweets from &quot;</span> &lt;&lt; tot_twt &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;\nLoaded tweets from &quot;</span> &lt;&lt; socialNetwork.nodesQty() &lt;&lt; <span class="stringliteral">&quot; users\n&quot;</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;Loading tweets network...[&quot;</span> &lt;&lt; NUM_THREADS &lt;&lt; <span class="stringliteral">&quot; threads]\n&quot;</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::ios::sync_with_stdio(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">int</span> tot_twt = 0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">while</span> (getline(in, line)) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        tot_twt++;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">if</span> (line.size() == 0) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        Q.push(line);       </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">if</span> (Q.size() == NUM_THREADS) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="comment">// Spawns a thread to poll lines</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            std::vector&lt;std::thread&gt; v;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">while</span> (!Q.empty()) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                v.push_back(std::thread(&amp;amon::TweetLoader::loadRetweetNetwork, <span class="keyword">this</span>, Q.front()));</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                Q.pop();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; t : v) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                t.join();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        bar += line.size();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> (bar.<a class="code" href="classamon_1_1_progress_bar.html#aad3a864a2d40756b2720c7725ad23599">progress</a>() &gt;= p) <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">while</span> (!Q.empty()) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        loadRetweetNetwork(Q.front());</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        Q.pop();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    std::cerr &lt;&lt; tweets.size() &lt;&lt; <span class="stringliteral">&quot; unique tweets from &quot;</span> &lt;&lt; tot_twt &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;Loaded tweets from &quot;</span> &lt;&lt; socialNetwork.nodesQty() &lt;&lt; <span class="stringliteral">&quot; users\n&quot;</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
 <div class="ttc" id="classamon_1_1_tweet_loader_html_a292bc02ccb78e803ef5b1f84d713ea57"><div class="ttname"><a href="classamon_1_1_tweet_loader.html#a292bc02ccb78e803ef5b1f84d713ea57">amon::TweetLoader::getSocialNetwork</a></div><div class="ttdeci">amon::Graph getSocialNetwork()</div><div class="ttdoc">{ Returns the loaded network. } </div><div class="ttdef"><b>Definition:</b> <a href="twitter_8cpp_source.html#l00008">twitter.cpp:8</a></div></div>
 <div class="ttc" id="class_json_1_1_value_html_a03ee3d5df576640c93ba683f140828bd"><div class="ttname"><a href="class_json_1_1_value.html#a03ee3d5df576640c93ba683f140828bd">Json::Value::asString</a></div><div class="ttdeci">std::string asString() const </div><div class="ttdef"><b>Definition:</b> <a href="json_8cpp_source.html#l02000">json.cpp:2000</a></div></div>
-<div class="ttc" id="classamon_1_1_graph_html"><div class="ttname"><a href="classamon_1_1_graph.html">amon::Graph</a></div><div class="ttdef"><b>Definition:</b> <a href="graph_8hpp_source.html#l00014">graph.hpp:14</a></div></div>
+<div class="ttc" id="classamon_1_1_graph_html"><div class="ttname"><a href="classamon_1_1_graph.html">amon::Graph</a></div><div class="ttdef"><b>Definition:</b> <a href="graph_8hpp_source.html#l00019">graph.hpp:19</a></div></div>
 <div class="ttc" id="progress__bar_8hpp_html"><div class="ttname"><a href="progress__bar_8hpp.html">progress_bar.hpp</a></div></div>
 <div class="ttc" id="classamon_1_1_tweet_loader_html_a5448a36953241e1d2d9b0c5d8b2712ff"><div class="ttname"><a href="classamon_1_1_tweet_loader.html#a5448a36953241e1d2d9b0c5d8b2712ff">amon::TweetLoader::TweetLoader</a></div><div class="ttdeci">TweetLoader(std::string jsonFile, double p, NetworkType type)</div><div class="ttdoc">{ Constructor } </div><div class="ttdef"><b>Definition:</b> <a href="twitter_8cpp_source.html#l00051">twitter.cpp:51</a></div></div>
 <div class="ttc" id="classamon_1_1_progress_bar_html_aad3a864a2d40756b2720c7725ad23599"><div class="ttname"><a href="classamon_1_1_progress_bar.html#aad3a864a2d40756b2720c7725ad23599">amon::ProgressBar::progress</a></div><div class="ttdeci">double progress()</div><div class="ttdoc">{ Returns the current progress of the task. } </div><div class="ttdef"><b>Definition:</b> <a href="progress__bar_8cpp_source.html#l00024">progress_bar.cpp:24</a></div></div>
@@ -205,7 +204,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 7 2015 20:18:26 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 28 2015 10:07:44 for Amon by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
