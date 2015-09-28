@@ -62,6 +62,7 @@ solution "Amonet"
 		language  "C++"
 		location  "build/"
 		files  {
+			"src/amon_python.cpp",
 			"src/graph/**.cpp",
 			"src/csys/**.cpp",
 			"src/social/**.cpp",
