@@ -1019,7 +1019,16 @@ obj/native/Debug/amon/amon_python.o: ../src/amon_python.cpp \
  ../includes/boost/python/return_opaque_pointer.hpp \
  ../includes/boost/python/slice.hpp \
  ../includes/boost/python/stl_iterator.hpp \
- ../includes/boost/python/object/stl_iterator_core.hpp
+ ../includes/boost/python/object/stl_iterator_core.hpp \
+ ../includes/boost/python/suite/indexing/vector_indexing_suite.hpp \
+ ../includes/boost/python/suite/indexing/indexing_suite.hpp \
+ ../includes/boost/python/suite/indexing/detail/indexing_suite_detail.hpp \
+ ../includes/boost/scoped_ptr.hpp \
+ ../includes/boost/smart_ptr/scoped_ptr.hpp \
+ ../includes/boost/detail/binary_search.hpp \
+ ../includes/boost/python/suite/indexing/container_utils.hpp \
+ ../includes/boost/foreach.hpp ../includes/boost/foreach_fwd.hpp \
+ ../includes/boost/python/suite/indexing/map_indexing_suite.hpp
 
 ../includes/graph/graph.hpp:
 
@@ -3274,3 +3283,23 @@ obj/native/Debug/amon/amon_python.o: ../src/amon_python.cpp \
 ../includes/boost/python/stl_iterator.hpp:
 
 ../includes/boost/python/object/stl_iterator_core.hpp:
+
+../includes/boost/python/suite/indexing/vector_indexing_suite.hpp:
+
+../includes/boost/python/suite/indexing/indexing_suite.hpp:
+
+../includes/boost/python/suite/indexing/detail/indexing_suite_detail.hpp:
+
+../includes/boost/scoped_ptr.hpp:
+
+../includes/boost/smart_ptr/scoped_ptr.hpp:
+
+../includes/boost/detail/binary_search.hpp:
+
+../includes/boost/python/suite/indexing/container_utils.hpp:
+
+../includes/boost/foreach.hpp:
+
+../includes/boost/foreach_fwd.hpp:
+
+../includes/boost/python/suite/indexing/map_indexing_suite.hpp:

@@ -11,16 +11,10 @@
 #include <util/progress_bar.hpp>
 #include <stack>
 #include <utility>
+#include <util/pyutil.hpp>
 
 const double amon::Graph::EPS = 1e-7;
 
-
-BOOST_PYTHON_MODULE(amon_graph)
-{
-    class_<amon::Graph>("Graph", init<>())
-        .def("load_undirected", &amon::Graph::loadFromEdgeFileUndirected)
-    ;
-}
 
 amon::Graph::Graph() {
 	edgesCount = 0;
@@ -404,4 +398,26 @@ void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
 		std::cerr << "Read " << p.first << " to  " << p.second << std::endl;
 		addUndirectedEdge(p.first, p.second);
 	}
+}
+
+boost::python::list amon::Graph::adjacency_py(int index) {
+	boost::python::list res;
+	if (index < 0 or index > nodesCount or !validNodes[index]) throw "Index out of range";
+	for (auto & p : adj[index]) {
+		res.append(boost::python::make_tuple(p.first, p.second));
+	}
+	return res;
+}
+
+
+std::string amon::Graph::toDot_py (bool isDirected, boost::python::list inc) {
+	return toDot(isDirected, toStdVector<bool>(inc));
+}
+
+boost::python::dict amon::Graph::bfs_py(int src) {
+	return toPythonDict(bfs(src));
+}
+
+boost::python::list amon::Graph::unweightedBetweennssCentrality_py() {
+	return toPythonList(unweightedBetweennssCentrality());
 }

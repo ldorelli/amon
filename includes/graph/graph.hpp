@@ -13,13 +13,17 @@
 #include <fstream>
 #include <boost/python.hpp>
 
-using namespace boost::python;
+
 
 namespace amon {
 class Graph {
 
 public:
-	
+
+	typedef std::pair<int, double> Edge;
+	typedef std::unordered_map<int, int> BfsResult;
+	typedef std::vector<Edge> AdjacencyList;
+
 	static const double EPS;
 	/**
 	 * Empty Constructor
@@ -63,7 +67,6 @@ public:
 	 *	nothing will happen.
 	 */
 	 void removeNode(int index);
-
 
 	/**
 	 * Adds a directed edge between vertices A and B with weight w.
@@ -117,21 +120,20 @@ public:
 	 */
 	 double globalClusteringCoefficient();
 
-
 	/**
 	 * Returns an iterator to the begining of the adjacency list of 
 	 * a node. 
 	 * @param node The node to get neighboors from
 	 * @return An iterator to the beggining of the node list.
 	 */
-	std::list<std::pair<int, double> >::iterator 
+	std::list<Edge>::iterator 
 		neighboorsBegin(int node);
 
 	/**
 	 * Returns a const_iterator to the end of the adjacency list of node.
 	 * @param node The node to get the iterator from	 
 	 */
-	std::list<std::pair<int, double> >::iterator 
+	std::list<Edge>::iterator 
 		neighboorsEnd(int node);
 
 	/**
@@ -162,12 +164,14 @@ public:
 	 */
 	std::unordered_map<int, int> bfs (int src);
 
+	
+
 	/**
 	 * Advances the adjacency list iterator to the next neighboor. 
 	 * @param iterator The iterator to advance
 	 * @param node The node related to the iterator 
 	 */
-	void nextNeighboor (std::list<std::pair<int, double> >::iterator 
+	void nextNeighboor (std::list<Edge>::iterator 
 		& iterator, int node);
 
 
@@ -217,10 +221,19 @@ public:
 	 */
 	void clear();
 
+
+	/**
+	 *    PYTHON HELPER METHODS
+	 */
+	boost::python::dict bfs_py(int); 
+	boost::python::list adjacency_py(int);
+	boost::python::list unweightedBetweennssCentrality_py();
+	std::string toDot_py(bool, boost::python::list);
+
 private:
 	int nodesCount, edgesCount;
 	// Adjacency list and weights
-	std::vector< std::list <std::pair<int, double> > > adj;
+	std::vector< std::list <Edge> > adj;
 	// validNotes[i] is true if node i is active
 	std::vector <bool> validNodes;
 	std::queue <int> availableIndexes;
