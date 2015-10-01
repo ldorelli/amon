@@ -4,6 +4,11 @@
 #include <iostream>
 #include <thread>
 
+amon::TweetLoader::TweetLoader() {}
+
+// The copy constructor
+amon::TweetLoader::TweetLoader(const amon::TweetLoader& other) {
+}
 
 amon::Graph amon::TweetLoader::getSocialNetwork() {
 	return socialNetwork;
@@ -31,7 +36,7 @@ void amon::TweetLoader::loadRetweetNetwork (std::string json) {
 
 	std::string user = v["user"].asString(); 
 
-	qtMutex.lock();
+	qMutex.lock();
 	
 	if (tweets.count(strip_text) == 0) tweets[strip_text] = tweets.size();
 
@@ -44,12 +49,11 @@ void amon::TweetLoader::loadRetweetNetwork (std::string json) {
 	} 
 	
 	socialNetwork.addDirectedEdge(users[rt_user], users[user], tweets[strip_text]);
-	qtMutex.unlock(); 
+	qMutex.unlock(); 
 }
 
 
-amon::TweetLoader::TweetLoader(std::string jsonFile, double p, 
-	amon::TweetLoader::NetworkType type) {
+void amon::TweetLoader::genRetweetNetwork(std::string jsonFile, double p) {
 
 	std::string line;
 
@@ -93,6 +97,6 @@ amon::TweetLoader::TweetLoader(std::string jsonFile, double p,
 		Q.pop();
 	}
 
-	std::cerr << tweets.size() << " unique tweets from " << tot_twt << std::endl;
+	std::cerr << std::endl << tweets.size() << " unique tweets from " << tot_twt << std::endl;
 	std::cerr << "Loaded tweets from " << socialNetwork.nodesQty() << " users\n";
 }

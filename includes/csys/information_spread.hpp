@@ -4,6 +4,7 @@
 #include <vector>
 #include <graph/graph.hpp>
 #include <thread>
+#include <boost/python.hpp>
 
 namespace amon {
 /**
@@ -37,6 +38,10 @@ public:
 	 * @return     { A std::vector with the attention loss. }
 	 */
 	std::vector<double> lossOfAttention();
+
+	// Python equivalents
+	boost::python::list lossOfAttention_py();
+	boost::python::list informationDepth_py();	
 
 private:
 	amon::Graph g;

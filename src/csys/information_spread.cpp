@@ -5,6 +5,7 @@
 #include <util/progress_bar.hpp>
 #include <iostream>
 #include <unordered_map>
+#include <util/pyutil.hpp>
 
 amon::InformationNetwork::InformationNetwork (amon::Graph g) {
 	this->g = g;
@@ -55,16 +56,13 @@ std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() 
 			while(!Q.empty()) {
 				auto fut = std::async(std::launch::async, [this, i]() {
 					std::unordered_map <int, int> v = this->g.bfs(i);
-					int d1 = 0;
 					int depth = 0;
 					for (auto p : v) {
 						int d = p.second;
 						depth = std::max(depth, d);
-						if (d == 1) d1 += 1;
 					}
 					int d2 = v.size();
-					// p.set_value(std::make_pair(1.0, 1));
-					return std::make_pair(d1, d2);
+					return std::make_pair(d2, depth);
 				});
 				futures.push_back(std::move(fut));
 				Q.pop();
@@ -74,4 +72,21 @@ std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() 
 		}
 	}
 	return res;
+}
+
+
+boost::python::list amon::InformationNetwork::informationDepth_py() {
+	auto v = informationDepth();
+	boost::python::list res, l1, l2;
+	for (auto x : v) {
+		l1.append(x.first);
+		l2.append(x.second);
+	}
+	res.append(l1);
+	res.append(l2);
+	return res;
+}
+
+boost::python::list amon::InformationNetwork::lossOfAttention_py() {
+	return toPythonList(lossOfAttention());
 }

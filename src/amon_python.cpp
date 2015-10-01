@@ -2,6 +2,9 @@
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
+#include <csys/network_models.hpp>
+#include <social/twitter.hpp>
+#include <csys/information_spread.hpp>
 
 using namespace boost::python;
 
@@ -39,5 +42,21 @@ BOOST_PYTHON_MODULE(amon)
         .def("as_dot", to_dot1)
         .def("as_dot_selected", to_dot2)
         .def("is_deleted", &amon::Graph::isDeleted)
+    ;
+
+    class_<amon::NetworkGenerator> ("NetworkGen", init<>())
+    	.def(init<int>())
+    	.def("randomnet", &amon::NetworkGenerator::undirectedRandomNetwork)
+    	.def("drandomnet", &amon::NetworkGenerator::directedRandomNetwork)
+    ;
+
+    class_<amon::TweetLoader> ("TweetLoader", init<>())
+    	.def("load_retweet_network", &amon::TweetLoader::genRetweetNetwork)
+    	.def("get_social_network", &amon::TweetLoader::getSocialNetwork)
+    ;
+
+    class_<amon::InformationNetwork>("InformationNetwork", init<amon::Graph>())
+    	.def("attention_loss", &amon::InformationNetwork::lossOfAttention_py)
+    	.def("information_depth", &amon::InformationNetwork::informationDepth_py)
     ;
 }

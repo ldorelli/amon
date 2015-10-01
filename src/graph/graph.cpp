@@ -395,7 +395,6 @@ void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
 		addNode();
 	}
 	for (auto p : l) {
-		std::cerr << "Read " << p.first << " to  " << p.second << std::endl;
 		addUndirectedEdge(p.first, p.second);
 	}
 }

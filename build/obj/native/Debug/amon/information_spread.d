@@ -1021,7 +1021,7 @@ obj/native/Debug/amon/information_spread.o: \
  ../includes/boost/python/slice.hpp \
  ../includes/boost/python/stl_iterator.hpp \
  ../includes/boost/python/object/stl_iterator_core.hpp \
- ../includes/util/progress_bar.hpp
+ ../includes/util/progress_bar.hpp ../includes/util/pyutil.hpp
 
 ../includes/csys/information_spread.hpp:
 
@@ -3280,3 +3280,5 @@ obj/native/Debug/amon/information_spread.o: \
 ../includes/boost/python/object/stl_iterator_core.hpp:
 
 ../includes/util/progress_bar.hpp:
+
+../includes/util/pyutil.hpp:

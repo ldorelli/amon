@@ -19,10 +19,8 @@ namespace amon {
 class TweetLoader {
 public:
 
-	enum NetworkType {
-		FOLLOWING_NETWORK, HASHTAG_NETWORK
-	};
-
+	TweetLoader();
+	TweetLoader(const TweetLoader& other);
 
 	/**
 	 * @brief      { Constructor }
@@ -30,7 +28,7 @@ public:
 	 * @param[in]  jsonFile  { Path to the file containing json tweets by line. }
 	 * @param[in]  p { The percentage of the input file to load. }
 	 */
-	TweetLoader(std::string jsonFile, double p, NetworkType type);
+	void genRetweetNetwork(std::string jsonFile, double p);
 
 	/**
 	 * @brief      { Returns the loaded network. }
@@ -43,14 +41,13 @@ public:
 private:	
 	amon::Graph socialNetwork;
 	std::queue <std::string> Q;
+	std::mutex qMutex;
 
 	// Users in the input tweets file
  	std::unordered_map<std::string, int> tweets;
  	std::unordered_map<std::string, int> users;
- 	std::mutex qtMutex;
 
  	void loadRetweetNetwork (std::string json);
-
 
  	const unsigned short MAX_CHARS = 200;
  	const unsigned int NUM_THREADS = std::thread::hardware_concurrency();
