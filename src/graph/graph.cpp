@@ -12,7 +12,6 @@
 #include <stack>
 #include <utility>
 #include <util/pyutil.hpp>
-
 const double amon::Graph::EPS = 1e-7;
 
 
@@ -25,7 +24,7 @@ amon::Graph::Graph() {
 amon::Graph::Graph(int n) {
 	edgesCount = nodesCount = 0;
 	for (int i = 0; i < n; ++i) {
-		addNode();
+		addNode(i);
 	}
 }
 
@@ -38,33 +37,24 @@ int amon::Graph::edgesQty() const {
 	return edgesCount;	
 }
 
-int amon::Graph::addNode () {
-	int idx;
-	if (availableIndexes.size()) {
-		idx = availableIndexes.front();
-		availableIndexes.pop();
-		validNodes[idx] = true;
-		adj[idx].clear();
-	} else {
-		idx = adj.size();
-		adj.push_back(std::list<std::pair<int, double> >());
-		validNodes.push_back(true);
-	}
+void amon::Graph::addNode(int key) {
+	if (keys.count(key)) throw "Key already exists";
+	int idx = adj.size();
+	keys[key] = idx;
+	adj.push_back(std::vector<std::pair<int, double> >());
+	revKey.push_back(key);
 	nodesCount++;
-	return idx;
 }
 
-
-void amon::Graph::removeNode (int index) {
-	if (index > (int) adj.size() or index < 0) return;
-	adj[index].clear();
-	validNodes[index] = false;
+void amon::Graph::translateNode(int &node) {
+	if (!keys.count(node)) throw "Invalid node";
+	node = keys[node];
 }
 
 void amon::Graph::addDirectedEdge (int a, int b, double w) {
-	if (a < 0 or a > nodesCount or !validNodes[a]) return;
-	if (b < 0 or b > nodesCount or !validNodes[b]) return;
-	adj[a].push_back(std::make_pair(b, w));
+	if (!keys.count(a)) addNode(a);
+	if (!keys.count(b)) addNode(b);
+	adj[keys[a]].push_back(std::make_pair(keys[b], w));
 	this->edgesCount++;
 }
 
@@ -77,51 +67,49 @@ void amon::Graph::addUndirectedEdge(int A, int B) {
 }
 
 void amon::Graph::addUndirectedEdge(int a, int b, double w) {
-
-	if (a < 0 or a > nodesCount or !validNodes[a]) return;
-	if (b < 0 or b > nodesCount or !validNodes[b]) return;
-	adj[a].push_back( std::make_pair (b, w));
-	adj[b].push_back( std::make_pair(a, w));
-	this->edgesCount++;
+	addDirectedEdge(a, b, w);
+	addDirectedEdge(b, a, w);
 }
 
-std::list<std::pair<int, double> >::iterator
+std::vector<std::pair<int, double> >::iterator
+	amon::Graph::adjBegin (int node) {
+		return neighboorsBegin(node);
+}
+
+
+std::vector<std::pair<int, double> >::iterator
+	amon::Graph::adjEnd (int node) {
+		return neighboorsEnd(node);
+}
+
+std::vector<std::pair<int, double> >::iterator
 	amon::Graph::neighboorsBegin (int node) {
-	
-	if (node < 0 or node > nodesCount or !validNodes[node]) {
-		throw "Invalid node index";
-	}
+	translateNode(node);
 	auto it = adj[node].begin();
-	while (it != adj[node].end() and !validNodes[it->first]) {
-		it = adj[node].erase(it);
-	}
 	return it;
 }
 
 
-std::list<std::pair<int, double> >::iterator
+std::vector<std::pair<int, double> >::iterator
 	amon::Graph::neighboorsEnd (int node) {
-	
-	if (node < 0 or node > nodesCount or !validNodes[node]) {
-		throw "Invalid node index";
-	}
+	translateNode(node);
 	return adj[node].end();
 }
 
+void amon::Graph::adjNext (
+	std::vector<std::pair<int, double> >::iterator &it, int node) {
+	return nextNeighboor(it, node);
+}
+
 void amon::Graph::nextNeighboor (
-	std::list<std::pair<int, double> >::iterator &it, int node) {
-	
+	std::vector<std::pair<int, double> >::iterator &it, int node) {
+	translateNode(node);
 	if (it == adj[node].end()) return;	
-	
-	int edge = it->first;
-	if (!validNodes[edge]) {
-		it = adj[node].erase(it);
-	} else {
-		it++;
-	}
+	it++;
 }
 
 int amon::Graph::outDegree(int x) {
+	translateNode(x);
 	return adj[x].size();
 }
 
@@ -134,7 +122,6 @@ double amon::Graph::globalClusteringCoefficient() {
 	std::vector < std::pair<int, int> > nodes;
 
 	for (int i = 0; i < (int)adj.size(); ++i) {
-		if (!validNodes[i]) continue;
 		nodes.push_back( std::make_pair(i, L.size()) );
 		L.push_back(std::set<int>());
 		for (auto e : adj[i]) {
@@ -196,7 +183,7 @@ int amon::Graph::bridges () {
 	std::vector<int> dfsnum(adj.size(), 0);
 	std::vector<int> dfslow(adj.size(), 0);
 	for (int i = 0; i < (int)adj.size(); ++i) {
-		if (validNodes[i] and dfsnum[i] == 0) {
+		if (dfsnum[i] == 0) {
 			bridges(i, -1, num, dfsnum, dfslow, ans);
 		}
 	}
@@ -206,9 +193,7 @@ int amon::Graph::bridges () {
 double  amon::Graph::meanDegree (double percent) {
 	std::vector <double> degs;
 	for (int i = 0; i < (int)adj.size(); ++i) {
-		if (validNodes[i]) {
 			degs.push_back(adj[i].size());
-		}
 	}
 	sort(degs.begin(), degs.end(), std::greater<double>());
 	int qt = percent * nodesCount;
@@ -220,36 +205,33 @@ double  amon::Graph::meanDegree (double percent) {
 }
 
 std::unordered_map<int, int> amon::Graph::bfs (int src) {
+	translateNode(src);
 	std::queue<int> q;
-	std::unordered_map<int, int> ans;
-	ans[src] = 0;
+	std::unordered_map<int, int> dist, ans;
+	dist[src] = 0;
 	q.push(src);
 	while (!q.empty()) {
 		int n = q.front(); q.pop();
 		for (auto& e : adj[n]) {
 			int v = e.first;
-			if (ans.count(v) != 0) continue;
-			ans[v] = ans[n] + 1;
+			if (dist.count(v) != 0) continue;
+			dist[v] = dist[n] + 1;
 			q.push(v);
 		}
 	}
+	for (auto x : dist) ans[revKey[x.first]] = x.second;
 	return ans;
-}
-
-bool amon::Graph::isDeleted (int index) {
-	if (index > (int) adj.size()) return false;
-	return !validNodes[index];
 }
 
 std::string amon::Graph::toDot (bool isDirected) {
 	
 	std::stringstream ff;
-
 	ff << ((isDirected) ? ("digraph g {\n") : ("graph g{\n"));
+
 	for (int i = 0; i < (int) adj.size(); ++i) {
 		for (auto& v : adj[i]) {
 			int to = v.first;
-			ff << i << ((isDirected) ? " -> " : " -- ") << to << " [ weight=\"" <<
+			ff << revKey[i] << ((isDirected) ? " -> " : " -- ") << revKey[to] << " [ weight=\"" <<
 				std::setprecision(4) << v.second << "\"]" << std::endl;
 		}
 	}
@@ -257,11 +239,10 @@ std::string amon::Graph::toDot (bool isDirected) {
 	return ff.str();
 }
 
+// TODO: Fix this method
 std::string amon::Graph::toDot (bool isDirected, std::vector<bool> inc) {
 	std::stringstream ff;
-
 	ff << ((isDirected) ? ("digraph g {\n") : ("graph g{\n"));
-
 	for (int i = 0; i < (int) adj.size(); ++i) {
 		if (!inc[i]) continue;
 		for (auto& v : adj[i]) {
@@ -334,7 +315,7 @@ void amon::Graph::betweennessUnweighted(int x, std::vector<double>& res) {
 	}
 }
 
-std::vector<double> amon::Graph::unweightedBetweennssCentrality () {
+std::unordered_map<int, double> amon::Graph::unweightedBetweennssCentrality () {
 	std::vector < std::vector <double> > res_t (NUM_THREADS, 
 		std::vector<double> (nodesCount, 0.0));
 	std::vector <double> res (nodesCount, 0.0);
@@ -344,7 +325,6 @@ std::vector<double> amon::Graph::unweightedBetweennssCentrality () {
 	std::cerr << "Calculating betweenness centrality...[" << NUM_THREADS << " threads]\n";
 
 	for (int i = 0; i < nodesCount; ++i) {
-		if (!validNodes[i]) continue;
 		Q.push(i);
 		if (Q.size() == NUM_THREADS || i == nodesCount - 1) {
 			std::vector<std::thread> v;
@@ -365,16 +345,14 @@ std::vector<double> amon::Graph::unweightedBetweennssCentrality () {
 		}
 	}
 	for (auto& v : res) v /= ((nodesCount-1)*(nodesCount-2));
-	return res;
+	std::unordered_map<int, double> ans;
+	for (int i = 0; i < res.size(); ++i) ans[revKey[i]] = res[i]; 
+	return ans;
 }
 
 void amon::Graph::clear() {
 	edgesCount = nodesCount = 0;
 	adj.clear();
-	validNodes.clear();
-	while(availableIndexes.size()) {
-		availableIndexes.pop();
-	}
 }
 
 void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
@@ -384,24 +362,26 @@ void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
 		throw "Error opening file " + file;
 	}
 	int a, b;
-	int m = 0;
 	clear();
-	std::list < std::pair<int, int> > l;
+	std::vector < std::pair<int, int> > l;
 	while (f >> a >> b) {
-		m = std::max(m, std::max(a + 1, b + 1));
-		l.push_back(std::make_pair(a, b));
+		addUndirectedEdge(a, b);
 	}
-	for (int i = 0; i < m; ++i) {
-		addNode();
+}
+
+amon::Graph amon::Graph::transpose() {
+	amon::Graph res(nodesCount);
+	for (int i = 0; i < nodesCount; ++i) {
+		for (auto it : adj[i]) {
+			res.addDirectedEdge(it.first, i, it.second);
+		}
 	}
-	for (auto p : l) {
-		addUndirectedEdge(p.first, p.second);
-	}
+	return res;
 }
 
 boost::python::list amon::Graph::adjacency_py(int index) {
 	boost::python::list res;
-	if (index < 0 or index > nodesCount or !validNodes[index]) throw "Index out of range";
+	if (index < 0 or index > nodesCount) throw "Index out of range";
 	for (auto & p : adj[index]) {
 		res.append(boost::python::make_tuple(p.first, p.second));
 	}
@@ -417,6 +397,6 @@ boost::python::dict amon::Graph::bfs_py(int src) {
 	return toPythonDict(bfs(src));
 }
 
-boost::python::list amon::Graph::unweightedBetweennssCentrality_py() {
-	return toPythonList(unweightedBetweennssCentrality());
+boost::python::dict amon::Graph::unweightedBetweennssCentrality_py() {
+	return toPythonDict(unweightedBetweennssCentrality());
 }

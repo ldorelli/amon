@@ -5,6 +5,8 @@
 #include <csys/network_models.hpp>
 #include <social/twitter.hpp>
 #include <csys/information_spread.hpp>
+#include <csys/cascades.hpp>
+#include <string>
 
 using namespace boost::python;
 
@@ -25,7 +27,7 @@ BOOST_PYTHON_MODULE(amon)
         .def("load_undirected", &amon::Graph::loadFromEdgeFileUndirected)
         .def("nodes_qty", &amon::Graph::nodesQty)
         .def("add_node", &amon::Graph::addNode)
-        .def("remove_node", &amon::Graph::removeNode)
+        // .def("remove_node", &amon::Graph::removeNode)
         .def("add_dedge", add_dedge_1)
         .def("add_dedge", add_dedge_2)
         .def("add_edge", add_edge_1)
@@ -41,7 +43,7 @@ BOOST_PYTHON_MODULE(amon)
         .def("mix_assortativity", &amon::Graph::mixingAssortativy)
         .def("as_dot", to_dot1)
         .def("as_dot_selected", to_dot2)
-        .def("is_deleted", &amon::Graph::isDeleted)
+        .def("transpose", &amon::Graph::transpose)
     ;
 
     class_<amon::NetworkGenerator> ("NetworkGen", init<>())
@@ -58,5 +60,12 @@ BOOST_PYTHON_MODULE(amon)
     class_<amon::InformationNetwork>("InformationNetwork", init<amon::Graph>())
     	.def("attention_loss", &amon::InformationNetwork::lossOfAttention_py)
     	.def("information_depth", &amon::InformationNetwork::informationDepth_py)
+    ;
+
+    class_<amon::CascadeModel> ("CascadeModel", init<amon::Graph, double, double, std::string>())
+        .def("step", &amon::CascadeModel::step)
+        .def("early_adopters", &amon::CascadeModel::getEarlyAdopters_py)
+        .def("innovators", &amon::CascadeModel::getInnovators_py)
+        .def("cascades", &amon::CascadeModel::getCascades)
     ;
 }

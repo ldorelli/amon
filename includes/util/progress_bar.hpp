@@ -7,6 +7,9 @@ namespace amon {
 
 class ProgressBar {
 public:
+
+	ProgressBar() {}
+	
 	/**
 	 * @brief      { Initializes a new progress bar. }
 	 *

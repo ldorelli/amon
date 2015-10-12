@@ -12,7 +12,7 @@ endif
 
 ifeq ($(config),debug_native)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/native/Debug
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/native/Debug/amonet
   DEFINES +=
@@ -22,10 +22,10 @@ ifeq ($(config),debug_native)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/native/Debug/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/native/Debug/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -39,7 +39,7 @@ endif
 
 ifeq ($(config),debug_win32)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/win32/Debug
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/win32/Debug/amonet
   DEFINES +=
@@ -49,10 +49,10 @@ ifeq ($(config),debug_win32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/win32/Debug/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/win32/Debug/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -66,7 +66,7 @@ endif
 
 ifeq ($(config),debug_win64)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/win64/Debug
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/win64/Debug/amonet
   DEFINES +=
@@ -76,10 +76,10 @@ ifeq ($(config),debug_win64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/win64/Debug/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/win64/Debug/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -93,7 +93,7 @@ endif
 
 ifeq ($(config),debug_macos)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/macos/Debug
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/macos/Debug/amonet
   DEFINES +=
@@ -103,10 +103,10 @@ ifeq ($(config),debug_macos)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/macos/Debug/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/macos/Debug/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -120,7 +120,7 @@ endif
 
 ifeq ($(config),debug_linux86)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/linux86/Debug
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/linux86/Debug/amonet
   DEFINES +=
@@ -130,10 +130,10 @@ ifeq ($(config),debug_linux86)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/linux86/Debug/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/linux86/Debug/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -147,7 +147,7 @@ endif
 
 ifeq ($(config),debug_linux64)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/linux64/Debug
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/linux64/Debug/amonet
   DEFINES +=
@@ -157,10 +157,10 @@ ifeq ($(config),debug_linux64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/linux64/Debug/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/linux64/Debug/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -174,7 +174,7 @@ endif
 
 ifeq ($(config),release_native)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/native/Release
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/native/Release/amonet
   DEFINES +=
@@ -184,10 +184,10 @@ ifeq ($(config),release_native)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/native/Release/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/native/Release/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -201,7 +201,7 @@ endif
 
 ifeq ($(config),release_win32)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/win32/Release
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/win32/Release/amonet
   DEFINES +=
@@ -211,10 +211,10 @@ ifeq ($(config),release_win32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/win32/Release/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/win32/Release/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -228,7 +228,7 @@ endif
 
 ifeq ($(config),release_win64)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/win64/Release
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/win64/Release/amonet
   DEFINES +=
@@ -238,10 +238,10 @@ ifeq ($(config),release_win64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/win64/Release/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/win64/Release/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -255,7 +255,7 @@ endif
 
 ifeq ($(config),release_macos)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/macos/Release
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/macos/Release/amonet
   DEFINES +=
@@ -265,10 +265,10 @@ ifeq ($(config),release_macos)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/macos/Release/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/macos/Release/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -282,7 +282,7 @@ endif
 
 ifeq ($(config),release_linux86)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/linux86/Release
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/linux86/Release/amonet
   DEFINES +=
@@ -292,10 +292,10 @@ ifeq ($(config),release_linux86)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/linux86/Release/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/linux86/Release/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -309,7 +309,7 @@ endif
 
 ifeq ($(config),release_linux64)
   RESCOMP = windres
-  TARGETDIR = .
+  TARGETDIR = bin/linux64/Release
   TARGET = $(TARGETDIR)/amonet
   OBJDIR = obj/linux64/Release/amonet
   DEFINES +=
@@ -319,10 +319,10 @@ ifeq ($(config),release_linux64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += libamon.so -lpthread -lpython2.7
-  LDDEPS += libamon.so
+  LIBS += bin/linux64/Release/libamon.so -lpthread -lpython2.7
+  LDDEPS += bin/linux64/Release/libamon.so
   ALL_LDFLAGS += $(LDFLAGS) -s -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -349,7 +349,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
   SHELLTYPE := posix
 endif
 
-$(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
+$(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES)
 	@echo Linking amonet
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)

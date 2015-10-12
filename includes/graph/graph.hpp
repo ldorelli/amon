@@ -56,17 +56,19 @@ public:
 	int edgesQty() const;
 
 	/**
-	 * Adds a node to the graph.
-	 * @return The index of the newly created node.
+	 * @brief      { Adds a node with given integer key. }
+	 *
+	 * @param[in]  key   { The key of the node. }
 	 */
-	int addNode();
+	void addNode(int key);
 
 	/**
+	 *  Not supported.
 	 *	Removes a node from the graph/
 	 *	@param index Index of the node to be removed. If the node is not present
 	 *	nothing will happen.
 	 */
-	 void removeNode(int index);
+	 // void removeNode(int index);
 
 	/**
 	 * Adds a directed edge between vertices A and B with weight w.
@@ -126,15 +128,28 @@ public:
 	 * @param node The node to get neighboors from
 	 * @return An iterator to the beggining of the node list.
 	 */
-	std::list<Edge>::iterator 
+	std::vector<Edge>::iterator 
 		neighboorsBegin(int node);
+	std::vector<Edge>::iterator adjBegin(int node);;
 
 	/**
 	 * Returns a const_iterator to the end of the adjacency list of node.
 	 * @param node The node to get the iterator from	 
 	 */
-	std::list<Edge>::iterator 
+	std::vector<Edge>::iterator 
 		neighboorsEnd(int node);
+	std::vector<Edge>::iterator adjEnd(int node);
+
+	/**
+	 * Advances the adjacency list iterator to the next neighboor. 
+	 * @param iterator The iterator to advance
+	 * @param node The node related to the iterator 
+	 */
+	void nextNeighboor (std::vector<Edge>::iterator 
+		& iterator, int node);
+
+	void adjNext (std::vector<Edge>::iterator& iterator, int node);
+	
 
 	/**
 	 * Count the number of bridges on the graph.
@@ -164,23 +179,14 @@ public:
 	 */
 	std::unordered_map<int, int> bfs (int src);
 
-	
 
 	/**
-	 * Advances the adjacency list iterator to the next neighboor. 
-	 * @param iterator The iterator to advance
-	 * @param node The node related to the iterator 
-	 */
-	void nextNeighboor (std::list<Edge>::iterator 
-		& iterator, int node);
-
-
-	/**
+	 * Canceled
 	 * Tests if node is deleted
 	 * @param index Index of the node to test
 	 * @return True if given node is deleted.
 	 */
-	bool isDeleted(int index);
+	// bool isDeleted(int index);
 
 
 	/**
@@ -212,31 +218,42 @@ public:
 	/**
 	 * @brief      { Returns a vector containing the unweighted betweeness centrality for each vector. }
 	 *
-	 * @return     { A vector containing the betweeness centrality. }
+	 * @return     { An unordered map containing the betweeness centrality values. }
 	 */
-	std::vector<double> unweightedBetweennssCentrality() ;
+	std::unordered_map<int, double> unweightedBetweennssCentrality() ;
 
 	/**
 	 * @brief      { Clears the graph. }
 	 */
 	void clear();
 
+	/**
+	 * @brief      { Returns the transpose graph. }
+	 *
+	 * @return     { Returns the transpose graph. }
+	 */
+	amon::Graph transpose();
+
+
+	
 
 	/**
 	 *    PYTHON HELPER METHODS
-	 */
+	 */	
 	boost::python::dict bfs_py(int); 
 	boost::python::list adjacency_py(int);
-	boost::python::list unweightedBetweennssCentrality_py();
+	boost::python::dict unweightedBetweennssCentrality_py();
 	std::string toDot_py(bool, boost::python::list);
 
 private:
+
+	void translateNode(int &node);
+
 	int nodesCount, edgesCount;
 	// Adjacency list and weights
-	std::vector< std::list <Edge> > adj;
-	// validNotes[i] is true if node i is active
-	std::vector <bool> validNodes;
-	std::queue <int> availableIndexes;
+	std::vector< std::vector <Edge> > adj;
+	std::vector<int> revKey;
+	std::unordered_map<int, int> keys;
 
 	void bridges(int p, int i, int&, 
 		std::vector<int>&, std::vector<int>&, int&);

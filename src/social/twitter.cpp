@@ -41,11 +41,15 @@ void amon::TweetLoader::loadRetweetNetwork (std::string json) {
 	if (tweets.count(strip_text) == 0) tweets[strip_text] = tweets.size();
 
 	if(!users.count(user)) {
-		users[user] = socialNetwork.addNode();
+		int i = users.size();
+		users[user] = i;
+		socialNetwork.addNode(i);
 	} 
 
 	if (!users.count(rt_user)) {
-		users[rt_user] = socialNetwork.addNode();
+		int i = users.size();
+		users[rt_user] = i;
+		socialNetwork.addNode(i);
 	} 
 	
 	socialNetwork.addDirectedEdge(users[rt_user], users[user], tweets[strip_text]);

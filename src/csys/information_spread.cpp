@@ -21,7 +21,6 @@ std::vector<double> amon::InformationNetwork::lossOfAttention() {
 	amon::ProgressBar bar(g.nodesQty(), 0.001);
 
 	for (int i = 0; i < g.nodesQty(); ++i) {
-		if (g.isDeleted(i)) continue;
 		res = 0.0;
 		tot = 0.0;
 		for (auto e = g.neighboorsBegin(i); e != g.neighboorsEnd(i); g.nextNeighboor(e, i)) {
@@ -45,14 +44,11 @@ std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() 
 	std::cerr << "Calculating information depth...[" << NUM_THREADS << " threads]\n";
 	
 	for (int i = 0; i < g.nodesQty(); ++i) {
-		if (!g.isDeleted(i)) {
 			Q.push(i);
-		}
 
 		if (Q.size() == NUM_THREADS or i == g.nodesQty() - 1) {
 
 			std::vector<std::future<std::pair<int, int> > > futures;
-	
 			while(!Q.empty()) {
 				auto fut = std::async(std::launch::async, [this, i]() {
 					std::unordered_map <int, int> v = this->g.bfs(i);

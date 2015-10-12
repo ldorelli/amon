@@ -14,7 +14,7 @@ ifeq ($(config),debug_native)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/native/Debug/amon
+  OBJDIR = obj/native/Debug
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -25,7 +25,7 @@ ifeq ($(config),debug_native)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -41,7 +41,7 @@ ifeq ($(config),debug_win32)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/win32/Debug/amon
+  OBJDIR = obj/win32/Debug
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -52,7 +52,7 @@ ifeq ($(config),debug_win32)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -68,7 +68,7 @@ ifeq ($(config),debug_win64)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/win64/Debug/amon
+  OBJDIR = obj/win64/Debug
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -79,7 +79,7 @@ ifeq ($(config),debug_win64)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -95,7 +95,7 @@ ifeq ($(config),debug_macos)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/macos/Debug/amon
+  OBJDIR = obj/macos/Debug
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -106,7 +106,7 @@ ifeq ($(config),debug_macos)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -122,7 +122,7 @@ ifeq ($(config),debug_linux86)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/linux86/Debug/amon
+  OBJDIR = obj/linux86/Debug
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -133,7 +133,7 @@ ifeq ($(config),debug_linux86)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -149,7 +149,7 @@ ifeq ($(config),debug_linux64)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/linux64/Debug/amon
+  OBJDIR = obj/linux64/Debug
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -160,7 +160,7 @@ ifeq ($(config),debug_linux64)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -176,7 +176,7 @@ ifeq ($(config),release_native)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/native/Release/amon
+  OBJDIR = obj/native/Release
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -187,7 +187,7 @@ ifeq ($(config),release_native)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -203,7 +203,7 @@ ifeq ($(config),release_win32)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/win32/Release/amon
+  OBJDIR = obj/win32/Release
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -214,7 +214,7 @@ ifeq ($(config),release_win32)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -230,7 +230,7 @@ ifeq ($(config),release_win64)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/win64/Release/amon
+  OBJDIR = obj/win64/Release
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -241,7 +241,7 @@ ifeq ($(config),release_win64)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -257,7 +257,7 @@ ifeq ($(config),release_macos)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/macos/Release/amon
+  OBJDIR = obj/macos/Release
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -268,7 +268,7 @@ ifeq ($(config),release_macos)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -284,7 +284,7 @@ ifeq ($(config),release_linux86)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/linux86/Release/amon
+  OBJDIR = obj/linux86/Release
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -295,7 +295,7 @@ ifeq ($(config),release_linux86)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -311,7 +311,7 @@ ifeq ($(config),release_linux64)
   RESCOMP = windres
   TARGETDIR = .
   TARGET = $(TARGETDIR)/libamon.so
-  OBJDIR = obj/linux64/Release/amon
+  OBJDIR = obj/linux64/Release
   DEFINES +=
   INCLUDES += -I../includes -I/usr/include/python2.7
   FORCE_INCLUDE +=
@@ -322,7 +322,7 @@ ifeq ($(config),release_linux64)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
-  LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -336,10 +336,12 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/amon_python.o \
+	$(OBJDIR)/cascades.o \
 	$(OBJDIR)/epidemics.o \
 	$(OBJDIR)/information_spread.o \
 	$(OBJDIR)/network_models.o \
 	$(OBJDIR)/graph.o \
+	$(OBJDIR)/social_networks.o \
 	$(OBJDIR)/twitter.o \
 	$(OBJDIR)/Trie.o \
 	$(OBJDIR)/fenwick.o \
@@ -358,7 +360,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
   SHELLTYPE := posix
 endif
 
-$(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
+$(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES)
 	@echo Linking amon
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
@@ -405,6 +407,9 @@ endif
 $(OBJDIR)/amon_python.o: ../src/amon_python.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cascades.o: ../src/csys/cascades.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/epidemics.o: ../src/csys/epidemics.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -415,6 +420,9 @@ $(OBJDIR)/network_models.o: ../src/csys/network_models.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/graph.o: ../src/graph/graph.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/social_networks.o: ../src/social/social_networks.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/twitter.o: ../src/social/twitter.cpp
