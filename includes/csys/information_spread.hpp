@@ -4,6 +4,7 @@
 #include <vector>
 #include <graph/graph.hpp>
 #include <thread>
+#include <unordered_map>
 #include <boost/python.hpp>
 
 namespace amon {
@@ -30,7 +31,7 @@ public:
 	 *
 	 * @return     { A vector containing the (r, d) pairs. }
 	 */
-	std::vector< std::pair<int, int> > informationDepth();
+	std::unordered_map<int, std::pair<int, int> > informationDepth();
 
 	/**
 	 * @brief      { Returns the attention loss index for every vertex on the network. }
@@ -41,7 +42,7 @@ public:
 
 	// Python equivalents
 	boost::python::list lossOfAttention_py();
-	boost::python::list informationDepth_py();	
+	boost::python::dict informationDepth_py();	
 
 private:
 	amon::Graph g;

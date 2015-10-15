@@ -379,6 +379,16 @@ amon::Graph amon::Graph::transpose() {
 	return res;
 }
 
+std::vector<int> amon::Graph::nodeKeys() {
+	std::vector<int> res;
+	for (auto x : keys) res.push_back(x.first);
+	return res;
+}
+
+boost::python::list amon::Graph::nodeKeys_py() {
+	return toPythonList(nodeKeys());
+}
+
 boost::python::list amon::Graph::adjacency_py(int index) {
 	boost::python::list res;
 	if (index < 0 or index > nodesCount) throw "Index out of range";
@@ -400,3 +410,4 @@ boost::python::dict amon::Graph::bfs_py(int src) {
 boost::python::dict amon::Graph::unweightedBetweennssCentrality_py() {
 	return toPythonDict(unweightedBetweennssCentrality());
 }
+

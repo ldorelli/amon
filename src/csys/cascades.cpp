@@ -13,6 +13,7 @@ amon::CascadeModel::CascadeModel(amon::Graph g, double f, double adoptionThresho
 	this->g = g.transpose();
 	for (int i = 0; i < g.nodesQty(); ++i) {
 		states.push_back(false);
+		depth.push_back(g.nodesQty() + 1);
 		thresholds.push_back(adoptionThreshold);
 		if (innovatorModel == "degree") {
 			susceptibleNodes.push(std::make_pair(g.outDegree(i), i));	
@@ -24,9 +25,19 @@ amon::CascadeModel::CascadeModel(amon::Graph g, double f, double adoptionThresho
 	for (int i = 0; i < tot; ++i) {
 		int x = susceptibleNodes.top().second;
 		states[x] = true;
+		depth[x] = 0;
 		innovators.insert(x);
 		susceptibleNodes.pop();
 	}
+}
+
+int amon::CascadeModel::reachFromInnovators() {
+	int res = 0;
+	for (auto x : depth) {
+		if (x != g.nodesQty() + 1) 
+			res = std::max(res, x);
+	}
+	return res;
 }
 
 bool amon::CascadeModel::step() {
@@ -53,6 +64,7 @@ bool amon::CascadeModel::step() {
 		if (ratio > thresholds[x]) {
 			states[x] = true;
 			for (auto v : par) {
+				depth[x] = std::min(depth[x], depth[v] + 1);
 				cascades.addDirectedEdge(v, x);
 			}
 			if (inno == num) earlyAdopters.insert(x);
@@ -68,6 +80,7 @@ bool amon::CascadeModel::step() {
 
 
 amon::Graph amon::CascadeModel::getCascades() {
+
 	return cascades;
 }
 

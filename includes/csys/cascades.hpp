@@ -36,6 +36,13 @@ public:
 	 */
 	bool step ();
 
+	/**
+	 * @brief      { Returns the maximal distance from an active node to the inovators. }
+	 *
+	 * @return     { The maximal distance from an active node to innovators. }
+	 */
+	int reachFromInnovators();
+
 	amon::Graph getCascades();
 	std::unordered_set<int> getInnovators();
 	std::unordered_set<int> getEarlyAdopters();
@@ -44,6 +51,7 @@ public:
 	boost::python::list getEarlyAdopters_py();	
 
 private:
+	std::vector<int> depth;
 	amon::ProgressBar bar;
 	std::vector <double> thresholds;
 	std::vector <bool> states;

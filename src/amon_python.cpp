@@ -44,6 +44,7 @@ BOOST_PYTHON_MODULE(amon)
         .def("as_dot", to_dot1)
         .def("as_dot_selected", to_dot2)
         .def("transpose", &amon::Graph::transpose)
+        .def("node_keys", &amon::Graph::nodeKeys_py)
     ;
 
     class_<amon::NetworkGenerator> ("NetworkGen", init<>())
@@ -67,5 +68,6 @@ BOOST_PYTHON_MODULE(amon)
         .def("early_adopters", &amon::CascadeModel::getEarlyAdopters_py)
         .def("innovators", &amon::CascadeModel::getInnovators_py)
         .def("cascades", &amon::CascadeModel::getCascades)
+        .def("max_reach", &amon::CascadeModel::reachFromInnovators)
     ;
 }

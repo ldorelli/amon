@@ -235,11 +235,17 @@ public:
 	amon::Graph transpose();
 
 
-	
+	/**
+	 * @brief      { Returns an std::vector with the node keys. }
+	 *
+	 * @return     { std::vector containing all node keys in order. }
+	 */
+	std::vector<int> nodeKeys();
 
 	/**
 	 *    PYTHON HELPER METHODS
 	 */	
+	boost::python::list nodeKeys_py();
 	boost::python::dict bfs_py(int); 
 	boost::python::list adjacency_py(int);
 	boost::python::dict unweightedBetweennssCentrality_py();
