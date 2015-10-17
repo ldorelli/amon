@@ -17,35 +17,50 @@ amon::Graph amon::TweetLoader::getSocialNetwork() {
 void amon::TweetLoader::loadRetweetNetwork (std::string json) {
 	Json::Value v;
 	Json::Reader reader;
-	reader.parse(json, v);
 
+	try {
+		reader.parse(json, v);
+	} catch (...) {
+		return;
+	}
+	
 	std::string rt_user;
-
 	char usr[MAX_CHARS];
 
-	std::string text = v["text"].asString();
+	std::string text;
+	try {
+		 text = v["text"].asString();
+	} catch (...) {
+		return;
+	}
+
 	std::string strip_text;
 
-	int p1 = text.find("RT @:");
-	sscanf(text.c_str() + p1 + 5, "%[^:]", usr);
+	int p1 = text.find("RT @");
+	if (p1 == std::string::npos) return;
+
+	sscanf(text.c_str() + p1 + 4, "%[^:\0]", usr);
 	rt_user = usr;
 	// Get the tweet
-	for (int i = p1 + 5 + rt_user.size() + 2; i < (int) text.size(); ++i) {
-		strip_text += text[i]; 
-	}
+	// for (int i = p1 + 5 + rt_user.size() + 2; i < (int) text.size(); ++i) {
+	// 	strip_text += text[i]; 
+	// }
 
 	std::string user = v["user"].asString(); 
 
 	qMutex.lock();
-	
-	if (tweets.count(strip_text) == 0) tweets[strip_text] = tweets.size();
+	// if (tweets.count(strip_text) == 0) tweets[strip_text] = tweets.size();
 
 	if(!users.count(user)) {
-		users[user] = socialNetwork.addNode();
+		int i = users.size();
+		users[user] = i;
+		socialNetwork.addNode(i);
 	} 
 
 	if (!users.count(rt_user)) {
-		users[rt_user] = socialNetwork.addNode();
+		int i = users.size();
+		users[rt_user] = i;
+		socialNetwork.addNode(i);
 	} 
 	
 	socialNetwork.addDirectedEdge(users[rt_user], users[user], tweets[strip_text]);

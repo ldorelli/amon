@@ -21,7 +21,6 @@ std::vector<double> amon::InformationNetwork::lossOfAttention() {
 	amon::ProgressBar bar(g.nodesQty(), 0.001);
 
 	for (int i = 0; i < g.nodesQty(); ++i) {
-		if (g.isDeleted(i)) continue;
 		res = 0.0;
 		tot = 0.0;
 		for (auto e = g.neighboorsBegin(i); e != g.neighboorsEnd(i); g.nextNeighboor(e, i)) {
@@ -38,24 +37,24 @@ std::vector<double> amon::InformationNetwork::lossOfAttention() {
 	return vres;
 }
 
-std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() {
-	std::vector <std::pair<int, int> > res;
+std::unordered_map<int, std::pair<int, int> > amon::InformationNetwork::informationDepth() {
+	std::unordered_map <int, std::pair<int, int> > res;
 	std::queue<int> Q;
 	amon::ProgressBar bar(g.nodesQty(), 0.001);
 	std::cerr << "Calculating information depth...[" << NUM_THREADS << " threads]\n";
 	
-	for (int i = 0; i < g.nodesQty(); ++i) {
-		if (!g.isDeleted(i)) {
-			Q.push(i);
-		}
-
-		if (Q.size() == NUM_THREADS or i == g.nodesQty() - 1) {
-
+	auto K = g.nodeKeys();
+	int n = 0;
+	for (int x : K) {
+		Q.push(x);
+		++n;
+		if (Q.size() == NUM_THREADS or n == g.nodesQty()) {
+			std::vector<int> idx;
 			std::vector<std::future<std::pair<int, int> > > futures;
-	
 			while(!Q.empty()) {
-				auto fut = std::async(std::launch::async, [this, i]() {
-					std::unordered_map <int, int> v = this->g.bfs(i);
+				int cn = Q.front();
+				auto fut = std::async(std::launch::async, [this, cn]() {
+					std::unordered_map <int, int> v = this->g.bfs(cn);
 					int depth = 0;
 					for (auto p : v) {
 						int d = p.second;
@@ -65,9 +64,12 @@ std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() 
 					return std::make_pair(d2, depth);
 				});
 				futures.push_back(std::move(fut));
+				idx.push_back(cn);
 				Q.pop();
 			}
-			for (auto &f : futures) res.push_back(f.get());			
+			for (int k = 0; k < futures.size(); ++k) {
+				res[idx[k]] = futures[k].get();			
+			}
 			bar += NUM_THREADS;
 		}
 	}
@@ -75,15 +77,15 @@ std::vector< std::pair<int, int> > amon::InformationNetwork::informationDepth() 
 }
 
 
-boost::python::list amon::InformationNetwork::informationDepth_py() {
+boost::python::dict amon::InformationNetwork::informationDepth_py() {
 	auto v = informationDepth();
-	boost::python::list res, l1, l2;
+	boost::python::dict res;
 	for (auto x : v) {
-		l1.append(x.first);
-		l2.append(x.second);
+		boost::python::dict c;
+		c["size"] = x.second.first;
+		c["depth"] = x.second.second;
+		res[x.first] = c;
 	}
-	res.append(l1);
-	res.append(l2);
 	return res;
 }
 

@@ -3,6 +3,8 @@
 -- premake5.lua
 solution "Amonet"
 	configurations { "Debug", "Release" }
+	
+	configuration {}
 	location "build"
 
 	filter "configurations:Debug"
@@ -61,6 +63,7 @@ solution "Amonet"
 		kind "SharedLib"
 		language  "C++"
 		location  "build/"
+		targetdir "build/"
 		files  {
 			"src/amon_python.cpp",
 			"src/graph/**.cpp",
@@ -69,13 +72,3 @@ solution "Amonet"
 			"src/util/**.cpp",
 		}
 		links { "pthread", "boost_python-py27", "boost_system", "python2.7" }
-
-	project "amonet"
-		kind "ConsoleApp"
-		location  "build/"
-		language  "C++"
-		files  {
-			"src/amon/**.cpp",
-		}
-		links { "pthread",  "python2.7" , "amon" } 
-

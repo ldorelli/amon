@@ -30,6 +30,23 @@ public:
 	 */
 	void genRetweetNetwork(std::string jsonFile, double p);
 
+
+	/**
+	 * @brief      { Generates a network based on mentions. Saves hashtags with timestamps per node 
+	 * 					for later cascade-generations. }
+	 *
+	 * @param[in]  jsonFile  { Path to the file containing json tweets by line. }
+	 * @param[in]  p { The percentage of the input file to load. }
+	 */
+	void loadCompleteNetwork(std::string jsonFile, double p);
+
+	/**
+	 * @brief      { Returns the number of hashtags in the dataset. }
+	 *
+	 * @return     { The number of hashtags in the dataset. }
+	 */
+	int getNumberOfHashtags();
+
 	/**
 	 * @brief      { Returns the loaded network. }
 	 *             
@@ -44,8 +61,11 @@ private:
 	std::mutex qMutex;
 
 	// Users in the input tweets file
+	std::unordered_map<std::string, int> hashtags;
  	std::unordered_map<std::string, int> tweets;
  	std::unordered_map<std::string, int> users;
+ 	// Associates user ->  (hashtag, earliest time) 
+ 	std::unordered_map<int, std::unordered_map<int, int> > timestamps;
 
  	void loadRetweetNetwork (std::string json);
 

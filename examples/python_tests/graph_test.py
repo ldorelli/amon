@@ -3,7 +3,7 @@ import amon
 g = amon.Graph(5)
 
 # Adds an extra node
-g.add_node() 
+g.add_node(5) 
 g.add_edge(0, 1)
 g.add_edge(0, 3)
 g.add_edge(0, 5)
