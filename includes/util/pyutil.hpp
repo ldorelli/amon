@@ -2,6 +2,9 @@
 #define __PYUTIL_HPP__
 
 #include <boost/python.hpp>
+#include <unordered_set>
+#include <unordered_map>
+#include <vector>
 
 template <class K, class V>
 boost::python::dict toPythonDict(std::unordered_map<K, V> map) {
@@ -25,7 +28,18 @@ std::vector<V> toStdVector(boost::python::list& v) {
 	boost::python::ssize_t n = boost::python::len(v);
 	for (boost::python::ssize_t i = 0;i < n; ++i) {
 		boost::python::object elem = v[i];
-		res.push_back(elem);
+		res.push_back(boost::python::extract<V>(elem));
+	}
+	return res;
+}
+
+template <class V>
+std::unordered_set<V> toStdSet(boost::python::list& v) {
+	std::unordered_set<V> res;
+	boost::python::ssize_t n = boost::python::len(v);
+	for (boost::python::ssize_t i = 0;i < n; ++i) {
+		boost::python::object elem = v[i];
+		res.insert(boost::python::extract<V>(elem) );
 	}
 	return res;
 }

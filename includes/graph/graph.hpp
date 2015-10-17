@@ -9,10 +9,11 @@
 #include <utility>
 #include <list>
 #include <map>
+#include <set>
 #include <unordered_map>
 #include <fstream>
 #include <boost/python.hpp>
-
+#include <unordered_set>
 
 
 namespace amon {
@@ -217,18 +218,44 @@ public:
 	std::vector<double> unweightedBetweennssCentrality() ;
 
 	/**
+	 * @brief      { Returns the local clustering coefficient of a node. }
+	 *
+	 * @param[in]  idx   { The node index. }
+	 *
+	 * @return     { The local clustering coefficient of the node. }
+	 */
+	double localClustering(int idx);
+
+	/**
 	 * @brief      { Clears the graph. }
 	 */
 	void clear();
 
+	/**
+	 * @brief      { Calculates the component for each node. Considers the network undirected. }
+	 *
+	 * @return     { A hashmap from the indexes to the component number. }
+	 */
+	std::unordered_map<int, int> connectedComponents();
+
+	/**
+	 * @brief      { Returns a subgraph with only selected nodes. }
+	 *
+	 * @param[in]  keep  { The nodes to keep. }
+	 *
+	 * @return     { A new graph containing te subgraph. }
+	 */
+	amon::Graph filter(std::unordered_set<int> keep);
 
 	/**
 	 *    PYTHON HELPER METHODS
 	 */
+	boost::python::dict connectedComponents_py();
 	boost::python::dict bfs_py(int); 
 	boost::python::list adjacency_py(int);
 	boost::python::list unweightedBetweennssCentrality_py();
 	std::string toDot_py(bool, boost::python::list);
+	amon::Graph filter_py(boost::python::list);
 
 private:
 	int nodesCount, edgesCount;
@@ -237,6 +264,8 @@ private:
 	// validNotes[i] is true if node i is active
 	std::vector <bool> validNodes;
 	std::queue <int> availableIndexes;
+
+	void ccDfs(int cur, int depth, int from, int last, long long int& trips, long long int& triangles);
 
 	void bridges(int p, int i, int&, 
 		std::vector<int>&, std::vector<int>&, int&);

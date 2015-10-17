@@ -342,6 +342,7 @@ OBJECTS := \
 	$(OBJDIR)/graph.o \
 	$(OBJDIR)/twitter.o \
 	$(OBJDIR)/Trie.o \
+	$(OBJDIR)/disjoint_sets.o \
 	$(OBJDIR)/fenwick.o \
 	$(OBJDIR)/json.o \
 	$(OBJDIR)/progress_bar.o \
@@ -421,6 +422,9 @@ $(OBJDIR)/twitter.o: ../src/social/twitter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Trie.o: ../src/util/Trie.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/disjoint_sets.o: ../src/util/disjoint_sets.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/fenwick.o: ../src/util/fenwick.cpp

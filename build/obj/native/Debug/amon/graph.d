@@ -1020,7 +1020,8 @@ obj/native/Debug/amon/graph.o: ../src/graph/graph.cpp \
  ../includes/boost/python/slice.hpp \
  ../includes/boost/python/stl_iterator.hpp \
  ../includes/boost/python/object/stl_iterator_core.hpp \
- ../includes/util/progress_bar.hpp ../includes/util/pyutil.hpp
+ ../includes/util/progress_bar.hpp ../includes/util/pyutil.hpp \
+ ../includes/util/disjoint_sets.hpp
 
 ../includes/graph/graph.hpp:
 
@@ -3279,3 +3280,5 @@ obj/native/Debug/amon/graph.o: ../src/graph/graph.cpp \
 ../includes/util/progress_bar.hpp:
 
 ../includes/util/pyutil.hpp:
+
+../includes/util/disjoint_sets.hpp:

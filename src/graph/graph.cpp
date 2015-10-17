@@ -12,6 +12,8 @@
 #include <stack>
 #include <utility>
 #include <util/pyutil.hpp>
+#include <sstream>
+#include <util/disjoint_sets.hpp>
 
 const double amon::Graph::EPS = 1e-7;
 
@@ -77,7 +79,6 @@ void amon::Graph::addUndirectedEdge(int A, int B) {
 }
 
 void amon::Graph::addUndirectedEdge(int a, int b, double w) {
-
 	if (a < 0 or a > nodesCount or !validNodes[a]) return;
 	if (b < 0 or b > nodesCount or !validNodes[b]) return;
 	adj[a].push_back( std::make_pair (b, w));
@@ -129,42 +130,30 @@ double amon::Graph::meanDegree () {
 	return (double) edgesCount/nodesCount;
 }
 
+void amon::Graph::ccDfs(int c, int d, int f, int l, long long int& trp, long long int& trl) {
+	if (d == 2) {
+		trp++;
+		for (auto  x :  adj[c]) {
+			if (x.first == f) trl++;	
+		}
+		return;
+	}
+	for (auto x = neighboorsBegin(c); x != neighboorsEnd(c); nextNeighboor(x, c)) {
+		int v = x->first;
+		if (v != l)  ccDfs(v, d + 1, f, c, trp, trl);
+	}
+}
+
+
 double amon::Graph::globalClusteringCoefficient() {
-	std::vector < std::set<int> > L;
-	std::vector < std::pair<int, int> > nodes;
-
-	for (int i = 0; i < (int)adj.size(); ++i) {
+	long long int trips = 0, triangles = 0;
+	for (int i = 0; i < nodesCount; ++i) {
 		if (!validNodes[i]) continue;
-		nodes.push_back( std::make_pair(i, L.size()) );
-		L.push_back(std::set<int>());
-		for (auto e : adj[i]) {
-			L[i].insert(e.first);
-		}
+		ccDfs(i, 0, i, -1, trips, triangles);
 	}
-
-	double triangles = 0.0, triplets = 0.0;
-	for (int i = 0; i < (int)nodes.size(); ++i) {
-		for (int j = i+1; j < (int)nodes.size(); ++j) {
-			int ii = nodes[i].second;
-			int jj = nodes[j].second;
-			// They do not connect to each other
-			if (!L[ii].count(jj) or !L[jj].count(ii)) continue;
-			// Size of union -> triplets
-			int sz = L[ii].size() + L[jj].size();
-			std::vector <int> I(sz), U(sz);
-			int usz = std::set_union(L[ii].begin(), L[ii].end(),
-				L[jj].begin(), L[jj].end(), U.begin()) - U.begin();
-			int isz = std::set_intersection(L[ii].begin(), L[ii].end(),
-				L[jj].begin(), L[jj].end(), I.begin()) - I.begin();
-			triangles += isz;
-			triplets += usz - 2;
-		}
-	}
-	triangles /= 3.0;
-	triplets -= triangles*3.0;
-	triplets /= 2.0;
-	triplets += triangles;
-	return triangles/triplets;
+	double T1 = (double)triangles/6.0;
+	double T2 = (double)trips/2.0;
+	return 3.0*T1/T2;
 }
 
 
@@ -226,8 +215,8 @@ std::unordered_map<int, int> amon::Graph::bfs (int src) {
 	q.push(src);
 	while (!q.empty()) {
 		int n = q.front(); q.pop();
-		for (auto& e : adj[n]) {
-			int v = e.first;
+		for (auto x = neighboorsBegin(n); x != neighboorsEnd(n); nextNeighboor(x, n)) {
+			int v = x->first;
 			if (ans.count(v) != 0) continue;
 			ans[v] = ans[n] + 1;
 			q.push(v);
@@ -249,6 +238,8 @@ std::string amon::Graph::toDot (bool isDirected) {
 	for (int i = 0; i < (int) adj.size(); ++i) {
 		for (auto& v : adj[i]) {
 			int to = v.first;
+			if (to == i) continue;
+			if (!isDirected and to < i) continue;
 			ff << i << ((isDirected) ? " -> " : " -- ") << to << " [ weight=\"" <<
 				std::setprecision(4) << v.second << "\"]" << std::endl;
 		}
@@ -386,10 +377,14 @@ void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
 	int a, b;
 	int m = 0;
 	clear();
-	std::list < std::pair<int, int> > l;
-	while (f >> a >> b) {
-		m = std::max(m, std::max(a + 1, b + 1));
-		l.push_back(std::make_pair(a, b));
+	std::set < std::pair<int, int> > l;
+	
+	std::string s;
+	while (std::getline(f, s)) {
+		std::stringstream ss(s);
+		ss >> a >> b;
+		m = std::max(m, std::max(a, b));
+		l.insert(std::make_pair( std::min(a - 1, b - 1), std::max(a -1, b - 1) ) );
 	}
 	for (int i = 0; i < m; ++i) {
 		addNode();
@@ -397,6 +392,61 @@ void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
 	for (auto p : l) {
 		addUndirectedEdge(p.first, p.second);
 	}
+}
+
+std::unordered_map<int, int> amon::Graph::connectedComponents() {
+	std::unordered_map<int, int> res;
+	amon::DisjointSet ds(nodesCount);
+	for (int i = 0; i < nodesCount; ++i) {
+		if (!validNodes[i]) continue;
+		for (auto x = neighboorsBegin(i); x != neighboorsEnd(i); nextNeighboor(x, i)) {
+			ds.join(i, x->first);
+		}
+	}
+	for (int i = 0; i < nodesCount; ++i) {
+		if (!validNodes[i]) continue;
+		res[i] = ds.find(i);
+	}
+	return res;
+}
+
+
+amon::Graph amon::Graph::filter(std::unordered_set<int> keep) {
+	amon::Graph res;
+	std::unordered_map<int, int> idxs;
+	for (auto x : keep) {
+		if (x > nodesCount or x < 0) throw "Invalid node index.\n";
+		idxs[x] = res.addNode();
+	}
+	for (auto x : keep) {
+		for (auto it = neighboorsBegin(x); it != neighboorsEnd(x); nextNeighboor(it, x)) {
+			int y = it->first;
+			if (keep.count(y)) res.addDirectedEdge(idxs[x], idxs[y]);
+		}
+	}
+	return res;
+}
+
+double amon::Graph::localClustering(int i) {
+	double res = 0.0;
+	if (!validNodes[i]) throw "Invalid node";
+	double n = adj[i].size();
+	std::set<int> v;
+	for (auto it = neighboorsBegin(i); it != neighboorsEnd(i); nextNeighboor(it, i)) {
+		v.insert(it->first);
+	}
+	for (auto it = neighboorsBegin(i); it != neighboorsEnd(i); nextNeighboor(it, i)) {
+		int a = it->first;
+		for (auto it2 = neighboorsBegin(a); it2 != neighboorsEnd(a); nextNeighboor(it2, a)) {
+			if (v.count(it2->first)) res+=1.0;
+		}
+	}
+	if (n == 1) return 0.0;
+	return 2.0*res/(n*(n-1));
+}
+
+boost::python::dict amon::Graph::connectedComponents_py() {
+	return toPythonDict(connectedComponents());
 }
 
 boost::python::list amon::Graph::adjacency_py(int index) {
@@ -420,3 +470,8 @@ boost::python::dict amon::Graph::bfs_py(int src) {
 boost::python::list amon::Graph::unweightedBetweennssCentrality_py() {
 	return toPythonList(unweightedBetweennssCentrality());
 }
+
+amon::Graph amon::Graph::filter_py(boost::python::list l) {
+	return filter(toStdSet <int> (l));
+}
+

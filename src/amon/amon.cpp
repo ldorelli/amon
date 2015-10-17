@@ -17,6 +17,7 @@ int main (int argv, char* argc[]) {
 
 	Graph g; 
 	g.loadFromEdgeFileUndirected(argc[1]);
+	auto d = g.connectedComponents();
 	// Json::Value root;
 	// NetworkGenerator generator;
 	// amon::Graph g = generator.undirectedSimpleErdosRenyi(5000, 0.018);
