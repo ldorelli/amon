@@ -1,5 +1,3 @@
-
-
 -- premake5.lua
 solution "Amonet"
 	configurations { "Debug", "Release" }

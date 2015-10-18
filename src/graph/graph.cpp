@@ -1,4 +1,3 @@
-
 #include <graph/graph.hpp>
 #include <iostream>
 #include <set>
@@ -50,7 +49,7 @@ void amon::Graph::addNode(int key) {
 }
 
 void amon::Graph::translateNode(int &node) {
-	if (!keys.count(node)) throw "Invalid node";
+	if (!keys.count(node)) 	throw "Invalid node";
 	node = keys[node];
 }
 
@@ -128,8 +127,8 @@ void amon::Graph::ccDfs(int c, int d, int f, int l, long long int& trp, long lon
 		}
 		return;
 	}
-	for (auto x = neighboorsBegin(c); x != neighboorsEnd(c); nextNeighboor(x, c)) {
-		int v = x->first;
+	for (auto& x : adj[c]) {
+		int v = x.first;
 		if (v != l)  ccDfs(v, d + 1, f, c, trp, trl);
 	}
 }
@@ -138,7 +137,6 @@ void amon::Graph::ccDfs(int c, int d, int f, int l, long long int& trp, long lon
 double amon::Graph::globalClusteringCoefficient() {
 	long long int trips = 0, triangles = 0;
 	for (int i = 0; i < nodesCount; ++i) {
-		if (!validNodes[i]) continue;
 		ccDfs(i, 0, i, -1, trips, triangles);
 	}
 	double T1 = (double)triangles/6.0;
@@ -358,10 +356,14 @@ void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
 	int a, b;
 	clear();
 	std::string s;
+	std::set< std::pair<int,int> > ES;
 	while (std::getline(f, s)) {
 		std::stringstream ss(s);
 		ss >> a >> b;
+		if (a == b) continue;
+		if (ES.count(std::make_pair(a, b)) or ES.count(std::make_pair(b, a))) continue;
 		addUndirectedEdge(a, b);
+		ES.insert(std::make_pair(a, b));
 	}
 }
 
@@ -389,13 +391,11 @@ std::unordered_map<int, int> amon::Graph::connectedComponents() {
 	std::unordered_map<int, int> res;
 	amon::DisjointSet ds(nodesCount);
 	for (int i = 0; i < nodesCount; ++i) {
-		if (!validNodes[i]) continue;
-		for (auto x = neighboorsBegin(i); x != neighboorsEnd(i); nextNeighboor(x, i)) {
-			ds.join(i, x->first);
+		for (auto &x : adj[i]) {
+			ds.join(i, x.first);
 		}
 	}
 	for (int i = 0; i < nodesCount; ++i) {
-		if (!validNodes[i]) continue;
 		res[i] = ds.find(i);
 	}
 	return res;
@@ -404,36 +404,31 @@ std::unordered_map<int, int> amon::Graph::connectedComponents() {
 
 amon::Graph amon::Graph::filter(std::unordered_set<int> keep) {
 	amon::Graph res;
-	std::unordered_map<int, int> idxs;
 	for (auto x : keep) {
-		if (x > nodesCount or x < 0) throw "Invalid node index.\n";
-		idxs[x] = res.addNode();
-	}
-	for (auto x : keep) {
-		for (auto it = neighboorsBegin(x); it != neighboorsEnd(x); nextNeighboor(it, x)) {
-			int y = it->first;
-			if (keep.count(y)) res.addDirectedEdge(idxs[x], idxs[y]);
+		for (auto& it : adj[x]) {
+			int y = it.first;
+			if (keep.count(y)) res.addDirectedEdge(x, y);
 		}
 	}
 	return res;
 }
 
 double amon::Graph::localClustering(int i) {
-	double res = 0.0;
-	if (!validNodes[i]) throw "Invalid node";
-	double n = adj[i].size();
+	translateNode(i);
+	int res = 0.0;
+	int n = adj[i].size();
 	std::set<int> v;
-	for (auto it = neighboorsBegin(i); it != neighboorsEnd(i); nextNeighboor(it, i)) {
-		v.insert(it->first);
+	for (auto& it : adj[i]) {
+		v.insert(it.first);
 	}
-	for (auto it = neighboorsBegin(i); it != neighboorsEnd(i); nextNeighboor(it, i)) {
-		int a = it->first;
-		for (auto it2 = neighboorsBegin(a); it2 != neighboorsEnd(a); nextNeighboor(it2, a)) {
-			if (v.count(it2->first)) res+=1.0;
+	for (auto a : v) {
+		for (auto& it2 : adj[a]) {
+			if (v.count(it2.first)) res++;
 		}
 	}
 	if (n == 1) return 0.0;
-	return 2.0*res/(n*(n-1));
+	if (res > n*(n-1)) std::cout << res << " - " << n*(n-1) << std::endl;
+	return (double)res/(double)(n*(n-1));
 }
 
 boost::python::dict amon::Graph::connectedComponents_py() {
@@ -442,6 +437,7 @@ boost::python::dict amon::Graph::connectedComponents_py() {
 
 boost::python::list amon::Graph::adjacency_py(int index) {
 	boost::python::list res;
+	translateNode(index);
 	if (index < 0 or index > nodesCount) throw "Index out of range";
 	for (auto & p : adj[index]) {
 		res.append(boost::python::make_tuple(p.first, p.second));
@@ -461,6 +457,7 @@ boost::python::dict amon::Graph::bfs_py(int src) {
 
 amon::Graph amon::Graph::filter_py(boost::python::list l) {
 	return filter(toStdSet <int> (l));
+}
 
 boost::python::dict amon::Graph::unweightedBetweennssCentrality_py() {
 	return toPythonDict(unweightedBetweennssCentrality());

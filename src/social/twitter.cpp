@@ -39,17 +39,16 @@ void amon::TweetLoader::loadRetweetNetwork (std::string json) {
 	int p1 = text.find("RT @");
 	if (p1 == std::string::npos) return;
 
-	sscanf(text.c_str() + p1 + 4, "%[^:\0]", usr);
+	sscanf(text.c_str() + p1 + 4, "%[^:]", usr);
 	rt_user = usr;
 	// Get the tweet
-	// for (int i = p1 + 5 + rt_user.size() + 2; i < (int) text.size(); ++i) {
-	// 	strip_text += text[i]; 
-	// }
+	for (int i = p1 + 5 + rt_user.size() + 2; i < (int) text.size(); ++i) {
+	 	strip_text += text[i]; 
+	}
 
 	std::string user = v["user"].asString(); 
-
 	qMutex.lock();
-	// if (tweets.count(strip_text) == 0) tweets[strip_text] = tweets.size();
+	if (tweets.count(strip_text) == 0) tweets[strip_text] = tweets.size();
 
 	if(!users.count(user)) {
 		int i = users.size();
