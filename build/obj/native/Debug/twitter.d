@@ -1020,7 +1020,8 @@ obj/native/Debug/twitter.o: ../src/social/twitter.cpp \
  ../includes/boost/python/slice.hpp \
  ../includes/boost/python/stl_iterator.hpp \
  ../includes/boost/python/object/stl_iterator_core.hpp \
- ../includes/util/json/json.hpp ../includes/util/progress_bar.hpp
+ ../includes/util/json/json.hpp ../includes/util/progress_bar.hpp \
+ ../includes/util/pyutil.hpp
 
 ../includes/social/twitter.hpp:
 
@@ -3281,3 +3282,5 @@ obj/native/Debug/twitter.o: ../src/social/twitter.cpp \
 ../includes/util/json/json.hpp:
 
 ../includes/util/progress_bar.hpp:
+
+../includes/util/pyutil.hpp:

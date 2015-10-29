@@ -415,19 +415,21 @@ amon::Graph amon::Graph::filter(std::unordered_set<int> keep) {
 
 double amon::Graph::localClustering(int i) {
 	translateNode(i);
-	int res = 0.0;
-	int n = adj[i].size();
 	std::set<int> v;
+	std::set<std::pair<int, int> > v2;
 	for (auto& it : adj[i]) {
 		v.insert(it.first);
 	}
+	int n = v.size();
 	for (auto a : v) {
 		for (auto& it2 : adj[a]) {
-			if (v.count(it2.first)) res++;
+			if (it2.first == a) continue;
+			if (v.count(it2.first)) 
+				v2.insert(std::make_pair(a, it2.first));
 		}
 	}
-	if (n == 1) return 0.0;
-	if (res > n*(n-1)) std::cout << res << " - " << n*(n-1) << std::endl;
+	int res = v2.size();
+	if (n*(n-1) == 0) return 0.0;
 	return (double)res/(double)(n*(n-1));
 }
 

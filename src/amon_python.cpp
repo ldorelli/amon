@@ -26,6 +26,7 @@ BOOST_PYTHON_MODULE(amon)
     	.def(init<int>())
         .def("load_undirected", &amon::Graph::loadFromEdgeFileUndirected)
         .def("nodes_qty", &amon::Graph::nodesQty)
+        .def("edges_qty", &amon::Graph::edgesQty)
         .def("add_node", &amon::Graph::addNode)
         // .def("remove_node", &amon::Graph::removeNode)
         .def("add_dedge", add_dedge_1)
@@ -57,8 +58,16 @@ BOOST_PYTHON_MODULE(amon)
     ;
 
     class_<amon::TweetLoader> ("TweetLoader", init<>())
-    	.def("load_retweet_network", &amon::TweetLoader::genRetweetNetwork)
+    	.def("load", &amon::TweetLoader::load)
     	.def("get_social_network", &amon::TweetLoader::getSocialNetwork)
+        .def("get_hashtags", &amon::TweetLoader::getHashtags_py)
+        .def("get_hashtag_activations", &amon::TweetLoader::getHashtagActivations_py)
+        .def("get_activations_size", &amon::TweetLoader::getActvationsSize)
+    ;
+
+    enum_<amon::TweetLoader::NetworkType>("TweetNetType")
+        .value("retweet", amon::TweetLoader::Retweet)
+        .value("mention", amon::TweetLoader::Mention)
     ;
 
     class_<amon::InformationNetwork>("InformationNetwork", init<amon::Graph>())
@@ -67,10 +76,14 @@ BOOST_PYTHON_MODULE(amon)
     ;
 
     class_<amon::CascadeModel> ("CascadeModel", init<amon::Graph, double, double, std::string>())
+        .def(init<amon::Graph>())
         .def("step", &amon::CascadeModel::step)
         .def("early_adopters", &amon::CascadeModel::getEarlyAdopters_py)
         .def("innovators", &amon::CascadeModel::getInnovators_py)
         .def("cascades", &amon::CascadeModel::getCascades)
         .def("max_reach", &amon::CascadeModel::reachFromInnovators)
+        .def("run_from_record", &amon::CascadeModel::runFromRecord_py)
+        .def("get_estimated_thresholds", &amon::CascadeModel::getEstimatedThreshold_py)
+        .def("get_reach", &amon::CascadeModel::reachFromInnovators)
     ;
 }

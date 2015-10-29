@@ -1020,7 +1020,7 @@ obj/native/Debug/cascades.o: ../src/csys/cascades.cpp \
  ../includes/boost/python/slice.hpp \
  ../includes/boost/python/stl_iterator.hpp \
  ../includes/boost/python/object/stl_iterator_core.hpp \
- ../includes/util/progress_bar.hpp
+ ../includes/util/progress_bar.hpp ../includes/util/pyutil.hpp
 
 ../includes/csys/cascades.hpp:
 
@@ -3279,3 +3279,5 @@ obj/native/Debug/cascades.o: ../src/csys/cascades.cpp \
 ../includes/boost/python/object/stl_iterator_core.hpp:
 
 ../includes/util/progress_bar.hpp:
+
+../includes/util/pyutil.hpp:
