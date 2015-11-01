@@ -45,11 +45,11 @@ void amon::TweetLoader::loadMentionNetwork (std::string json, int t) {
 			users[m.asString()] = i;
 			
 		} 
-		if (!retweet) {
-			socialNetwork.addDirectedEdge(users[user], users[m.asString()]);	
-		} else {
+		// if (!retweet) {
+		// 	socialNetwork.addDirectedEdge(users[user], users[m.asString()]);	
+		// } else {
 			socialNetwork.addDirectedEdge(users[m.asString()], users[user]);	
-		}
+		// }
 		
 	}
 	qMutex.unlock();
