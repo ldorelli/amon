@@ -447,6 +447,37 @@ boost::python::list amon::Graph::adjacency_py(int index) {
 	return res;
 }
 
+std::unordered_map<int, double> amon::Graph::eigenvectorCentrality(int numIter) {
+	std::unordered_map<int, long double> res[2];
+	amon::ProgressBar bar(nodesQty() * numIter, 0.001);
+	int c = 0;
+	std::cerr << "Calculating eigenvector centrality...[" << NUM_THREADS << " threads]\n";
+	for (int i = 0; i < nodesCount; ++i) res[c][i] = 1/(double)nodesCount;
+	for (int t = 0; t < numIter; ++t) {
+		res[!c].clear();
+		double ss = 0.0;
+		for (int i = 0; i < nodesCount; ++i) {
+			for (auto &p : this->adj[i]) {
+				res[!c][i] += res[c][p.first];
+			}	
+			ss += res[!c][i];
+			bar +=  1;
+		}
+		c = !c;	
+		for (auto& p : res[c]) p.second /= ss;
+	}
+	std::unordered_map<int, double> ans;
+	for (auto &p : res[c]) {
+		ans[revKey[p.first]] = p.second;
+	}
+	std::cerr << "Done\n";
+	return ans;
+}
+
+boost::python::dict amon::Graph::eigenvectorCentrality_py(int numIter) {
+	return toPythonDict(eigenvectorCentrality(numIter));
+}
+
 
 std::string amon::Graph::toDot_py (bool isDirected, boost::python::list inc) {
 	return toDot(isDirected, toStdVector<bool>(inc));

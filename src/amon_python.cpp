@@ -49,6 +49,7 @@ BOOST_PYTHON_MODULE(amon)
         .def("local_clustering", &amon::Graph::localClustering)
         .def("transpose", &amon::Graph::transpose)
         .def("node_keys", &amon::Graph::nodeKeys_py)
+        .def("eigenvector_centrality", &amon::Graph::eigenvectorCentrality_py)
     ;
 
     class_<amon::NetworkGenerator> ("NetworkGen", init<>())

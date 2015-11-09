@@ -45,6 +45,15 @@ public:
 	void loadFromEdgeFileUndirected(std::string file);
 
 	/**
+	 * @brief      { Loads a directed network from a file. }
+	 *
+	 * @param[in]  file  { The file path to read from. }
+	 */
+	void loadFromEdgeFileDirected(std::string file);
+
+	
+
+	/**
 	 * Returns the number of nodes in the graph.
 	 * @return The number of nodes in the graph.
 	 */
@@ -245,6 +254,24 @@ public:
 	std::unordered_map<int, int> connectedComponents();
 
 	/**
+	 * @brief      { Returns a map with the eigenvector centralities for the nodes. }
+	 *
+	 * @param[in] numIter { Number of iterations. }
+	 * @return     { The eigenvector centrality of the nodes, as a pair (key, value). }
+	 */
+	std::unordered_map<int, double> eigenvectorCentrality(int numIter);
+
+
+	/**
+	 * @brief      { Calculates the average number of steps a random walker will stay in each node. }
+	 *
+	 * @param[in]  start  { Starting node. }
+	 *
+	 * @return     { An unordered map with probabilities. }
+	 */
+	std::unordered_map<int, int> averageRandomWalkSteps(int start);
+
+	/**
 	 * @brief      { Returns a subgraph with only selected nodes. }
 	 *
 	 * @param[in]  keep  { The nodes to keep. }
@@ -266,7 +293,9 @@ public:
 	 * @return     { std::vector containing all node keys in order. }
 	 */
 	std::vector<int> nodeKeys();
-	
+
+
+	boost::python::dict eigenvectorCentrality_py(int);
 	boost::python::dict connectedComponents_py();
 
 	/**
