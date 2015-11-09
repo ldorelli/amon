@@ -22,7 +22,7 @@ ifeq ($(config),debug_native)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -49,7 +49,7 @@ ifeq ($(config),debug_win32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -76,7 +76,7 @@ ifeq ($(config),debug_win64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -103,7 +103,7 @@ ifeq ($(config),debug_macos)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -130,7 +130,7 @@ ifeq ($(config),debug_linux86)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -157,7 +157,7 @@ ifeq ($(config),debug_linux64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -184,7 +184,7 @@ ifeq ($(config),release_native)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -211,7 +211,7 @@ ifeq ($(config),release_win32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -238,7 +238,7 @@ ifeq ($(config),release_win64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -265,7 +265,7 @@ ifeq ($(config),release_macos)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -292,7 +292,7 @@ ifeq ($(config),release_linux86)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -319,7 +319,7 @@ ifeq ($(config),release_linux64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++1y -fPIC -g -O2 -pthread
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7
+  LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)

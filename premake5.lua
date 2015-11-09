@@ -69,4 +69,4 @@ solution "Amonet"
 			"src/social/**.cpp",
 			"src/util/**.cpp",
 		}
-		links { "pthread", "boost_python-py27", "boost_system", "python2.7" }
+		links { "pthread", "boost_python-py27", "boost_system", "python2.7", "gmp", "gmpxx" }

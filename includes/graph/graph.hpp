@@ -119,6 +119,17 @@ public:
 	 * @return     { The outDegree of the node. }
 	 */
 	int outDegree (int x);
+
+
+	/**
+	 * @brief      { Returns the in degree of a node x. }
+	 *
+	 * @param[in]  x     { The index of the node. }
+	 *
+	 * @return     { The indegree of the node. }
+	 */
+	int inDegree(int x);
+
 	/**
 	 *	Calculates the mean degree of the graph
 	 *  @return The mean degree of the graph
@@ -259,17 +270,28 @@ public:
 	 * @param[in] numIter { Number of iterations. }
 	 * @return     { The eigenvector centrality of the nodes, as a pair (key, value). }
 	 */
-	std::unordered_map<int, double> eigenvectorCentrality(int numIter);
+	std::unordered_map<int, long double> eigenvectorCentrality(int numIter);
 
+
+	/**
+	 * @brief      { Computer the page rank for a directed graph. }
+	 *
+	 * @param[in]  maxIter  { The max number of iterations. }
+	 * @param[in]  alpha    { The dampling factor. }
+	 *
+	 * @return     { description_of_the_return_value }
+	 */
+	std::unordered_map<int, int> pageRank(int maxIter, double alpha);
 
 	/**
 	 * @brief      { Calculates the average number of steps a random walker will stay in each node. }
 	 *
 	 * @param[in]  start  { Starting node. }
+	 * @param[in]  steps  { Number of steps to be performed. }
 	 *
 	 * @return     { An unordered map with probabilities. }
 	 */
-	std::unordered_map<int, int> averageRandomWalkSteps(int start);
+	std::unordered_map<int, double> averageRandomWalkSteps(int start, int steps);
 
 	/**
 	 * @brief      { Returns a subgraph with only selected nodes. }
@@ -297,6 +319,8 @@ public:
 
 	boost::python::dict eigenvectorCentrality_py(int);
 	boost::python::dict connectedComponents_py();
+	boost::python::dict averageRandomWalkSteps_py(int start, int steps);
+
 
 	/**
 	 *    PYTHON HELPER METHODS
@@ -315,6 +339,7 @@ private:
 	int nodesCount, edgesCount;
 	// Adjacency list and weights
 	std::vector< std::vector <Edge> > adj;
+	std::vector<int> indegree;
 	std::vector<int> revKey;
 	std::unordered_map<int, int> keys;
 

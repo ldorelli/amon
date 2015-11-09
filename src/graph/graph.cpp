@@ -13,6 +13,8 @@
 #include <util/pyutil.hpp>
 #include <sstream>
 #include <util/disjoint_sets.hpp>
+#include <random>
+#include <gmpxx.h>
 
 const double amon::Graph::EPS = 1e-7;
 
@@ -45,6 +47,7 @@ void amon::Graph::addNode(int key) {
 	keys[key] = idx;
 	adj.push_back(std::vector<std::pair<int, double> >());
 	revKey.push_back(key);
+	indegree.push_back(0);
 	nodesCount++;
 }
 
@@ -56,7 +59,10 @@ void amon::Graph::translateNode(int &node) {
 void amon::Graph::addDirectedEdge (int a, int b, double w) {
 	if (!keys.count(a)) addNode(a);
 	if (!keys.count(b)) addNode(b);
-	adj[keys[a]].push_back(std::make_pair(keys[b], w));
+	translateNode(a);
+	translateNode(b);
+	indegree[b]++;
+	adj[a].push_back(std::make_pair(b, w));
 	this->edgesCount++;
 }
 
@@ -113,6 +119,11 @@ void amon::Graph::nextNeighboor (
 int amon::Graph::outDegree(int x) {
 	translateNode(x);
 	return adj[x].size();
+}
+
+int amon::Graph::inDegree(int x) {
+	translateNode(x);
+	return indegree[x];
 }
 
 double amon::Graph::meanDegree () {
@@ -347,6 +358,27 @@ void amon::Graph::clear() {
 	adj.clear();
 }
 
+void amon::Graph::loadFromEdgeFileDirected(std::string file) {
+	std::ios::sync_with_stdio(false);
+	std::fstream f (file, std::ios::in);
+	if (!f) {
+		throw "Error opening file " + file;
+	}
+	int a, b;
+	clear();
+	std::string s;
+	std::set< std::pair<int,int> > ES;
+	while (std::getline(f, s)) {
+		std::stringstream ss(s);
+		ss >> a >> b;
+		// if (a == b) continue;
+		// if (ES.count(std::make_pair(a, b)) or ES.count(std::make_pair(b, a))) continue;
+		addDirectedEdge(a, b);
+		// ES.insert(std::make_pair(a, b));
+	}
+}
+
+
 void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
 	std::ios::sync_with_stdio(false);
 	std::fstream f (file, std::ios::in);
@@ -442,20 +474,20 @@ boost::python::list amon::Graph::adjacency_py(int index) {
 	translateNode(index);
 	if (index < 0 or index > nodesCount) throw "Index out of range";
 	for (auto & p : adj[index]) {
-		res.append(boost::python::make_tuple(p.first, p.second));
+		res.append(boost::python::make_tuple(revKey[p.first], p.second));
 	}
 	return res;
 }
 
-std::unordered_map<int, double> amon::Graph::eigenvectorCentrality(int numIter) {
-	std::unordered_map<int, long double> res[2];
+std::unordered_map<int, long double> amon::Graph::eigenvectorCentrality(int numIter) {
+	std::vector<long double> res[2];
 	amon::ProgressBar bar(nodesQty() * numIter, 0.001);
 	int c = 0;
 	std::cerr << "Calculating eigenvector centrality...[" << NUM_THREADS << " threads]\n";
-	for (int i = 0; i < nodesCount; ++i) res[c][i] = 1/(double)nodesCount;
+	for (int i = 0; i < nodesCount; ++i) res[c].push_back(1.0/(double)nodesCount), res[!c].push_back(0.0);
 	for (int t = 0; t < numIter; ++t) {
-		res[!c].clear();
-		double ss = 0.0;
+		std::fill(res[!c].begin(), res[!c].end(), 0);
+		long double ss = 0.0;
 		for (int i = 0; i < nodesCount; ++i) {
 			for (auto &p : this->adj[i]) {
 				res[!c][i] += res[c][p.first];
@@ -464,15 +496,39 @@ std::unordered_map<int, double> amon::Graph::eigenvectorCentrality(int numIter) 
 			bar +=  1;
 		}
 		c = !c;	
-		for (auto& p : res[c]) p.second /= ss;
+		for (auto& p : res[c]) p /= ss;
 	}
-	std::unordered_map<int, double> ans;
-	for (auto &p : res[c]) {
-		ans[revKey[p.first]] = p.second;
+
+	std::unordered_map<int, long double> ans;
+	for (int i = 0; i < res[c].size(); ++i) {
+		ans[revKey[i]] = res[c][i];
 	}
 	std::cerr << "Done\n";
 	return ans;
 }
+
+std::unordered_map<int, double> amon::Graph::averageRandomWalkSteps(int start, int steps) {
+	translateNode(start);
+	std::vector <int> count (nodesCount);
+	std::unordered_map <int, double> res;
+	std::random_device rd;
+    std::mt19937 gen(rd());
+    int curr = start;
+    count[start]++;
+    for (int t = 0; t < steps; ++t) {
+    	std::uniform_int_distribution<> dis(0, adj[curr].size()-1);
+    	int next = adj[curr][dis(gen)].first;
+    	count[next]++;
+    }
+    for (int i = 0; i < nodesCount; ++i)
+    	res[revKey[i]] = (double) count[i]/steps;
+   	return res;
+}
+
+boost::python::dict amon::Graph::averageRandomWalkSteps_py(int start, int steps) {
+	return toPythonDict(averageRandomWalkSteps(start, steps));
+}
+
 
 boost::python::dict amon::Graph::eigenvectorCentrality_py(int numIter) {
 	return toPythonDict(eigenvectorCentrality(numIter));
