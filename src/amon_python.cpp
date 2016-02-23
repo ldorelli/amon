@@ -21,6 +21,8 @@ BOOST_PYTHON_MODULE(amon)
 	int (amon::Graph::*bridges) () = &amon::Graph::bridges;
 	std::string (amon::Graph::*to_dot1) (bool) = &amon::Graph::toDot;
 	std::string (amon::Graph::*to_dot2) (bool, boost::python::list) = &amon::Graph::toDot_py;
+    boost::python::dict (amon::Graph::*bfs_py1) (boost::python::list) = &amon::Graph::bfs_py;
+    boost::python::dict (amon::Graph::*bfs_py2) (int) = &amon::Graph::bfs_py;
 
     class_<amon::Graph>("Graph", init<>())
     	.def(init<int>())
@@ -42,7 +44,8 @@ BOOST_PYTHON_MODULE(amon)
         .def("average_degree", mean_deg_1)
         .def("average_degree_p", mean_deg_2)
         .def("bridges", bridges)
-        .def("bfs", &amon::Graph::bfs_py)
+        .def("bfs", bfs_py1)
+        .def("bfs", bfs_py2)
         .def("betweenness_unw", &amon::Graph::unweightedBetweennssCentrality_py)
         .def("mix_assortativity", &amon::Graph::mixingAssortativy)
         .def("as_dot", to_dot1)
@@ -53,6 +56,11 @@ BOOST_PYTHON_MODULE(amon)
         .def("transpose", &amon::Graph::transpose)
         .def("node_keys", &amon::Graph::nodeKeys_py)
         .def("eigenvector_centrality", &amon::Graph::eigenvectorCentrality_py)
+        .def("node_key", &amon::Graph::getNodeKey)
+        .def("node_index", &amon::Graph::getNodeIndex)
+        .def("depth", &amon::Graph::getDepth)
+        .def("cascade_centrality", &amon::Graph::cascadeInfluence_py)
+        .def("dag_paths", &amon::Graph::DAGPaths_py)
     ;
 
     class_<amon::NetworkGenerator> ("NetworkGen", init<>())
@@ -81,12 +89,12 @@ BOOST_PYTHON_MODULE(amon)
 
     class_<amon::CascadeModel> ("CascadeModel", init<amon::Graph, double, double, std::string>())
         .def(init<amon::Graph>())
+        .def("run_from_record_paths", &amon::CascadeModel::runFromRecordWIthPaths_py)
         .def("step", &amon::CascadeModel::step)
         .def("early_adopters", &amon::CascadeModel::getEarlyAdopters_py)
         .def("innovators", &amon::CascadeModel::getInnovators_py)
         .def("cascades", &amon::CascadeModel::getCascades)
         .def("max_reach", &amon::CascadeModel::reachFromInnovators)
-        .def("run_from_record", &amon::CascadeModel::runFromRecord_py)
         .def("get_estimated_thresholds", &amon::CascadeModel::getEstimatedThreshold_py)
         .def("get_reach", &amon::CascadeModel::reachFromInnovators)
     ;

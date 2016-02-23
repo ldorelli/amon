@@ -50,7 +50,7 @@ bool amon::CascadeModel::step() {
 	std::random_device rd;
 	std::default_random_engine generator (rd());
 	std::uniform_real_distribution<double> unif(0.0, 1.0);
-
+	bool ret = true;
 	while (!susceptibleNodes.empty()) {
 		int x = susceptibleNodes.top().second;
 		susceptibleNodes.pop();
@@ -66,19 +66,20 @@ bool amon::CascadeModel::step() {
 		}
 		if (den == 0) continue;
 		double ratio = (double)num/den;
-		if (ratio > thresholds[x]) {
+		if (ratio * thresholds[x] > unif(generator)) {
 			states[x] = true;
 			for (auto v : par) {
 				depth[x] = std::min(depth[x], depth[v] + 1);
 				cascades.addDirectedEdge(v, x);
 			}
 			if (inno == num) earlyAdopters.insert(x);
-			for (auto x : putBack) {
-				susceptibleNodes.push(std::make_pair(unif(generator), x));
-			}
+			
 			bar += 1;
-			return false;
+			ret = false;
 		} else putBack.push_back(x);
+	}
+	for (auto x : putBack) {
+		susceptibleNodes.push(std::make_pair(unif(generator), x));
 	}
 	return true;
 }
@@ -116,41 +117,40 @@ boost::python::dict amon::CascadeModel::getEstimatedThreshold_py() {
 	return toPythonDict(estimatedThreshold);
 }
 
-void amon::CascadeModel::runFromRecord(std::vector<int> record) {
-	states = std::vector<bool> (g.nodesQty(), false);
-	depth = std::vector<int> (g.nodesQty(), g.nodesQty() + 1);
-	for (auto x : record) {
-		// Already affected
-		if (states[x]) continue;
-		// Number of innovators influencing, number of influencing
-		int infi, inf, tot;
-		inf = infi = tot = 0;
-		for (auto it = g.adjBegin(x); it != g.adjEnd(x); g.adjNext(it, x)) {
-			int p = it->first;
-			if (states[p]) {
-				depth[x] = std::min(depth[x], depth[p] + 1);
-				inf++;
-				if (innovators.count(p)) infi++;
-				cascades.addDirectedEdge(p, x);
-			}
-			++tot;
-		}
-		if (inf == 0) {
-			innovators.insert(x);
-			depth[x] = 0;
-		} else if (infi == inf) {
-			earlyAdopters.insert(x);
-		}
-		// A 0.0 threshold means there's just not enough information
-		if (tot) {
-			if (inf) {
-				estimatedThreshold[x] = (double) inf/tot;
-			} else estimatedThreshold[x] = 1.0;
-		} else estimatedThreshold[x] = 0.0;
-		states[x] = true;
+bool amon::CascadeModel::findCascadePath(int node, int depth) {
+	if (depth == 0) return false;
+	for (auto it = g.adjBegin(node); it != g.adjEnd(node); g.adjNext(it, node)) {
+		int v = it->first;
+		if (states[v] or findCascadePath(v, depth - 1)) {
+			states[v] = true;
+			states[node] = true;
+			cascades.addDirectedEdge(g.getNodeKey(v), g.getNodeKey(node));
+			return true;
+		} 
 	}
+	return false;
 }
 
-void amon::CascadeModel::runFromRecord_py(boost::python::list l) {
-	runFromRecord(toStdVector<int>(l));
+void amon::CascadeModel::runFromRecordWithPaths(std::vector<int> record, int maxSteps) {
+	int n = g.nodesQty();
+	states = std::vector<bool> (n, false);	
+	
+	cascades = amon::Graph();
+
+	for (auto x : record) {
+		
+		cascades.addNode(x);
+		x = g.getNodeIndex(x);
+		if (states[x]) {
+			continue;
+		}
+		states[x] = true;
+		findCascadePath(x, maxSteps);
+	}
+
+	states.resize(0);
+}
+
+void amon::CascadeModel::runFromRecordWIthPaths_py(boost::python::list l, int depth) {
+	runFromRecordWithPaths(toStdVector<int>(l), depth);
 }

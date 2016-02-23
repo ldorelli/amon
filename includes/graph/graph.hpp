@@ -146,11 +146,11 @@ public:
 	/**
 	 * Returns an iterator to the begining of the adjacency list of 
 	 * a node. 
-	 * @param node The node to get neighboors from
+	 * @param node The node to get neighbors from
 	 * @return An iterator to the beggining of the node list.
 	 */
 	std::vector<Edge>::iterator 
-		neighboorsBegin(int node);
+		neighborsBegin(int node);
 	std::vector<Edge>::iterator adjBegin(int node);;
 
 	/**
@@ -158,7 +158,7 @@ public:
 	 * @param node The node to get the iterator from	 
 	 */
 	std::vector<Edge>::iterator 
-		neighboorsEnd(int node);
+		neighborsEnd(int node);
 	std::vector<Edge>::iterator adjEnd(int node);
 
 	/**
@@ -199,6 +199,13 @@ public:
 	 *  @return An unordered_map containing the distances to nodes rechable from the source.
 	 */
 	std::unordered_map<int, int> bfs (int src);
+
+	/**
+	 *	Breadth-First search to find minimum paths.
+	 * 	@param srcs The source nodes.
+	 *  @return An unordered_map containing the distances to nodes rechable from the source.
+	 */
+	std::unordered_map<int, int> bfs (std::vector<int> srcs);
 
 
 	/**
@@ -252,10 +259,19 @@ public:
 	 */
 	double localClustering(int idx);
 
+
+	/**
+	 * @brief 		{ Calculates the depth of the graph. Only for DAGS. }
+	 * 
+	 * @return  	{ The maximum depth. }
+	 */
+	 int getDepth(void);
+
 	/**
 	 * @brief      { Clears the graph. }
 	 */
 	void clear();
+
 
 	/**
 	 * @brief      { Calculates the component for each node. Considers the network undirected. }
@@ -310,6 +326,15 @@ public:
 	amon::Graph transpose();
 
 	/**
+	 * @brief      { Tests if a key exists in the graph. }
+	 *
+	 * @param[in]  key   { The id. }
+	 *
+	 * @return     { True if the key exists. }
+	 */
+	bool hasKey (int key);
+
+	/**
 	 * @brief      { Returns an std::vector with the node keys. }
 	 *
 	 * @return     { std::vector containing all node keys in order. }
@@ -317,25 +342,65 @@ public:
 	std::vector<int> nodeKeys();
 
 
+	/**
+	 * @brief 		{ Return the proportion of bi-directional links. }
+	 * @param 		{ The induced cascade. }
+	 * 
+	 * @return     { The proportion of bi-directional links on the network. }
+	 */
+	double	biDirectionalIndex (amon::Graph& g);
+
+	/**
+	 * @brief      { Returns the degree-centrality on the original network of the
+	 * 				vertex with highest Dg on the cascade. }
+	 *
+	 * @param[in]  cascade  { The cascade as a subgraph of g. }
+	 *
+	 * @return     { The degree centrality in the cascade and the graph. }
+	 */
+	std::pair <double, double> cascadeInfluence (amon::Graph cascade);
+
+
+	/**
+	 * @brief      { Calculates the average tie strenght of the network by sampling. }
+	 *
+	 * @param[in]  <unnamed>  { parameter_description }
+	 * @param[in]  <unnamed>  { parameter_description }
+	 *
+	 * @return     { A map of [key, value] containing all tie strenghts  }
+	 */
+	double averageTieStrenght ();
+
+
+	/**
+	 * @brief      { Returns the number of paths in a dag to a given vertex. }
+	 *
+	 * @return     { The number of paths ending in every vertex of the dag. The number may be rounded. }
+	 */
+	std::unordered_map <int, long double>  DAGPaths (); 
+
+
 	boost::python::dict eigenvectorCentrality_py(int);
+	boost::python::dict DAGPaths_py();
 	boost::python::dict connectedComponents_py();
 	boost::python::dict averageRandomWalkSteps_py(int start, int steps);
-
-
 	/**
 	 *    PYTHON HELPER METHODS
 	 */	
 	boost::python::list nodeKeys_py();
 	boost::python::dict bfs_py(int); 
+	boost::python::dict bfs_py(boost::python::list);
 	boost::python::list adjacency_py(int);
 	boost::python::dict unweightedBetweennssCentrality_py();
+	boost::python::tuple cascadeInfluence_py(amon::Graph g);
 	std::string toDot_py(bool, boost::python::list);
 	amon::Graph filter_py(boost::python::list);
+	
+	int getNodeKey(int index);
+	int getNodeIndex(int key);
 
 private:
-
-	void translateNode(int &node);
-
+	
 	int nodesCount, edgesCount;
 	// Adjacency list and weights
 	std::vector< std::vector <Edge> > adj;
@@ -343,14 +408,22 @@ private:
 	std::vector<int> revKey;
 	std::unordered_map<int, int> keys;
 
-	void ccDfs(int cur, int depth, int from, int last, long long int& trips, long long int& triangles);
+	long double dagPathsDfs (amon::Graph& g, int p, 
+		std::vector<bool> &vis, std::vector<long double>& P);
 
-	void bridges(int p, int i, int&, 
+	void translateNode (int &node);
+ 
+	void ccDfs (int cur, int depth, int from, int last, 
+		long long int& trips, long long int& triangles);
+	
+	void bridges (int p, int i, int&, 
 		std::vector<int>&, std::vector<int>&, int&);
-
+	
 	unsigned int NUM_THREADS = std::thread::hardware_concurrency();
 
-	void betweennessUnweighted(int v, std::vector<double>& res);
+	void betweennessUnweighted (int v, std::vector<double>& res);
+
+	int dfsDepth (int, std::vector<int>&);
 };
 }
 

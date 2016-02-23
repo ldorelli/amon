@@ -45,39 +45,36 @@ public:
 	bool step ();
 
 	/**
-	 * This method runds a cascading proccess with known data.
-	 * The THRESHOLD parameter is then estimated from the data for every vertex.
-	 * The vectors innovators and earlyAdopters are generated.
-	 * The cascading graph is also generated.
-	 *  
-	 * @brief      { Simulates the spreading procccess knowing the affected nodes and orders. }
-	 *
-	 * @param[in]  record  { A vector containing ordered observations of the spreading proccess. }
-	 */
-	void runFromRecord(std::vector<int> record);
-
-	/**
 	 * @brief      { Returns the maximal distance from an active node to the inovators. }
 	 *
 	 * @return     { The maximal distance from an active node to innovators. }
 	 */
 	int reachFromInnovators();
 
+	/**
+	 * @brief      { Returns the network representing the cascade process. }
+	 *             
+	 * @return     { An amon::graph containing the cascade. }
+	 */
 	amon::Graph getCascades();
-	
+
+	void runFromRecordWithPaths(std::vector<int> record, int maxSteps);
 
 	std::unordered_set<int> getInnovators();
-	
 	std::unordered_set<int> getEarlyAdopters();
-	
 	std::unordered_map<int, double> getEstimatedThreshold();
 
 	boost::python::dict getEstimatedThreshold_py();
 	boost::python::list getInnovators_py();
-	boost::python::list getEarlyAdopters_py();	
-	void runFromRecord_py(boost::python::list);
+	boost::python::list getEarlyAdopters_py();
+	void runFromRecordWIthPaths_py(boost::python::list l, int depth);
 
 private:
+	
+	bool findCascadePath(int node, int depth);
+
+	double pathProbability;
+
 	std::vector<int> depth;
 	amon::ProgressBar bar;
 	std::vector <double> thresholds;
