@@ -2,7 +2,7 @@
 #include <iostream>
 #include <set>
 #include <algorithm>
-#include <iomanip>    
+#include <iomanip>
 #include <queue>
 #include <sstream>
 #include <thread>
@@ -24,7 +24,6 @@ amon::Graph::Graph() {
 	nodesCount = 0;
 }
 
-
 amon::Graph::Graph(int n) {
 	edgesCount = nodesCount = 0;
 	for (int i = 0; i < n; ++i) {
@@ -32,17 +31,20 @@ amon::Graph::Graph(int n) {
 	}
 }
 
-
 int amon::Graph::nodesQty() const {
 	return nodesCount;
 }
 
 int amon::Graph::edgesQty() const {
-	return edgesCount;	
+	return edgesCount;
+}
+
+bool amon::Graph::hasKey (int key) {
+	return keys.count (key);
 }
 
 void amon::Graph::addNode(int key) {
-	if (keys.count(key)) throw "Key already exists";
+	if (keys.count(key)) return;
 	int idx = adj.size();
 	keys[key] = idx;
 	adj.push_back(std::vector<std::pair<int, double> >());
@@ -57,10 +59,17 @@ void amon::Graph::translateNode(int &node) {
 }
 
 void amon::Graph::addDirectedEdge (int a, int b, double w) {
-	if (!keys.count(a)) addNode(a);
-	if (!keys.count(b)) addNode(b);
+	if (!keys.count(a)) {
+		addNode(a);
+	}
+
+	if (!keys.count(b)) {
+		addNode(b);
+	}
+
 	translateNode(a);
 	translateNode(b);
+
 	indegree[b]++;
 	adj[a].push_back(std::make_pair(b, w));
 	this->edgesCount++;
@@ -81,26 +90,24 @@ void amon::Graph::addUndirectedEdge(int a, int b, double w) {
 
 std::vector<std::pair<int, double> >::iterator
 	amon::Graph::adjBegin (int node) {
-		return neighboorsBegin(node);
+		return neighborsBegin(node);
 }
 
 
 std::vector<std::pair<int, double> >::iterator
 	amon::Graph::adjEnd (int node) {
-		return neighboorsEnd(node);
+		return neighborsEnd(node);
 }
 
 std::vector<std::pair<int, double> >::iterator
-	amon::Graph::neighboorsBegin (int node) {
-	translateNode(node);
+	amon::Graph::neighborsBegin (int node) {
 	auto it = adj[node].begin();
 	return it;
 }
 
 
 std::vector<std::pair<int, double> >::iterator
-	amon::Graph::neighboorsEnd (int node) {
-	translateNode(node);
+	amon::Graph::neighborsEnd (int node) {
 	return adj[node].end();
 }
 
@@ -111,8 +118,7 @@ void amon::Graph::adjNext (
 
 void amon::Graph::nextNeighboor (
 	std::vector<std::pair<int, double> >::iterator &it, int node) {
-	translateNode(node);
-	if (it == adj[node].end()) return;	
+	if (it == adj[node].end()) return;
 	it++;
 }
 
@@ -130,11 +136,19 @@ double amon::Graph::meanDegree () {
 	return (double) edgesCount/nodesCount;
 }
 
+int amon::Graph::getNodeKey(int index) {
+	return revKey[index];
+}
+
+int amon::Graph::getNodeIndex(int key) {
+	return keys[key];
+}
+
 void amon::Graph::ccDfs(int c, int d, int f, int l, long long int& trp, long long int& trl) {
 	if (d == 2) {
 		trp++;
 		for (auto  x :  adj[c]) {
-			if (x.first == f) trl++;	
+			if (x.first == f) trl++;
 		}
 		return;
 	}
@@ -156,18 +170,18 @@ double amon::Graph::globalClusteringCoefficient() {
 }
 
 
-void amon::Graph::bridges(int p, int l, int& num, 
+void amon::Graph::bridges(int p, int l, int& num,
 	std::vector<int>& dfsnum, std::vector<int>& dfslow, int& ans) {
 
 	dfsnum[p] = dfslow[p] = num++;
-	
+
 	for (auto& e : adj[p]) {
 		int v = e.first;
 		if (v == l) continue;
-	
+
 		if (dfsnum[v] == 0) {
-	
-			bridges(v, p, num, dfsnum, dfslow, ans);	
+
+			bridges(v, p, num, dfsnum, dfslow, ans);
 			if (dfslow[v] > dfsnum[p]) {
 				++ans;
 			}
@@ -205,6 +219,31 @@ double  amon::Graph::meanDegree (double percent) {
 	return res/qt;
 }
 
+std::unordered_map<int, int> amon::Graph::bfs (std::vector<int> src) {
+
+	std::queue<int> q;
+	std::unordered_map<int, int> dist, ans;
+
+
+	for (auto x : src) {
+		translateNode(x);
+		dist[x] = 0;
+		q.push(x);
+	}
+
+	while (!q.empty()) {
+		int n = q.front(); q.pop();
+		for (auto& e : adj[n]) {
+			int v = e.first;
+			if (dist.count(v) != 0) continue;
+			dist[v] = dist[n] + 1;
+			q.push(v);
+		}
+	}
+	for (auto x : dist) ans[revKey[x.first]] = x.second;
+	return ans;
+}
+
 std::unordered_map<int, int> amon::Graph::bfs (int src) {
 	translateNode(src);
 	std::queue<int> q;
@@ -225,9 +264,13 @@ std::unordered_map<int, int> amon::Graph::bfs (int src) {
 }
 
 std::string amon::Graph::toDot (bool isDirected) {
-	
+
 	std::stringstream ff;
 	ff << ((isDirected) ? ("digraph g {\n") : ("graph g{\n"));
+
+	for (auto x : keys) {
+		ff << x.first << ";\n";
+	}
 
 	for (int i = 0; i < (int) adj.size(); ++i) {
 		for (auto& v : adj[i]) {
@@ -288,7 +331,7 @@ void amon::Graph::betweennessUnweighted(int x, std::vector<double>& res) {
 	std::vector < std::vector<int> > P (nodesCount);
 	std::queue <int> Q;
 
-	Q.push(x);	
+	Q.push(x);
 	sigma[x] = 1.0;
 	dist[x] = 0;
 	while (!Q.empty()) {
@@ -319,7 +362,7 @@ void amon::Graph::betweennessUnweighted(int x, std::vector<double>& res) {
 }
 
 std::unordered_map<int, double> amon::Graph::unweightedBetweennssCentrality () {
-	std::vector < std::vector <double> > res_t (NUM_THREADS, 
+	std::vector < std::vector <double> > res_t (NUM_THREADS,
 		std::vector<double> (nodesCount, 0.0));
 	std::vector <double> res (nodesCount, 0.0);
 	std::queue<int> Q;
@@ -335,7 +378,7 @@ std::unordered_map<int, double> amon::Graph::unweightedBetweennssCentrality () {
 				int p = Q.front();
 				Q.pop();
 				v.push_back(
-					std::thread(&amon::Graph::betweennessUnweighted, this, p, 
+					std::thread(&amon::Graph::betweennessUnweighted, this, p,
 						std::ref(res_t[p%NUM_THREADS])));
 			}
 			for (auto& t : v) t.join();
@@ -349,7 +392,31 @@ std::unordered_map<int, double> amon::Graph::unweightedBetweennssCentrality () {
 	}
 	for (auto& v : res) v /= ((nodesCount-1)*(nodesCount-2));
 	std::unordered_map<int, double> ans;
-	for (int i = 0; i < res.size(); ++i) ans[revKey[i]] = res[i]; 
+	for (int i = 0; i < res.size(); ++i) ans[revKey[i]] = res[i];
+	return ans;
+}
+
+
+int amon::Graph::dfsDepth (int x, std::vector<int>& vis) {
+	int res = 0;
+	for (auto &it : adj[x]) {
+		int y = it.first;
+		if (vis[y] == -1) {
+			res = std::max (res, dfsDepth(y, vis));
+		} else res = std::max ( res, vis[y] );
+	}
+	return vis[x] = res + 1;
+}
+
+
+int amon::Graph::getDepth() {
+	int ans = 0;
+	std::vector <int> vis (nodesCount, -1);
+	for (int i = 0; i < nodesCount; ++i) {
+		if (vis[i] == -1) {
+			ans = std::max (ans, dfsDepth(i, vis));
+		}
+	}
 	return ans;
 }
 
@@ -371,10 +438,12 @@ void amon::Graph::loadFromEdgeFileDirected(std::string file) {
 	while (std::getline(f, s)) {
 		std::stringstream ss(s);
 		ss >> a >> b;
-		// if (a == b) continue;
-		// if (ES.count(std::make_pair(a, b)) or ES.count(std::make_pair(b, a))) continue;
+		if (a == b) continue;
+		if ( ES.count(std::make_pair(a, b)) ) {
+			continue;
+		}
 		addDirectedEdge(a, b);
-		// ES.insert(std::make_pair(a, b));
+		ES.insert( std::make_pair(a, b) );
 	}
 }
 
@@ -400,12 +469,16 @@ void amon::Graph::loadFromEdgeFileUndirected(std::string file) {
 }
 
 amon::Graph amon::Graph::transpose() {
-	amon::Graph res(nodesCount);
+	amon::Graph res;
+	for (int i = 0; i < nodesCount; ++i) {
+		res.addNode (revKey[i]);
+	}
 	for (int i = 0; i < nodesCount; ++i) {
 		for (auto it : adj[i]) {
-			res.addDirectedEdge(it.first, i, it.second);
+			res.addDirectedEdge(revKey[it.first], revKey[i], it.second);
 		}
 	}
+
 	return res;
 }
 
@@ -456,7 +529,7 @@ double amon::Graph::localClustering(int i) {
 	for (auto a : v) {
 		for (auto& it2 : adj[a]) {
 			if (it2.first == a) continue;
-			if (v.count(it2.first)) 
+			if (v.count(it2.first))
 				v2.insert(std::make_pair(a, it2.first));
 		}
 	}
@@ -491,11 +564,11 @@ std::unordered_map<int, long double> amon::Graph::eigenvectorCentrality(int numI
 		for (int i = 0; i < nodesCount; ++i) {
 			for (auto &p : this->adj[i]) {
 				res[!c][i] += res[c][p.first];
-			}	
+			}
 			ss += res[!c][i];
 			bar +=  1;
 		}
-		c = !c;	
+		c = !c;
 		for (auto& p : res[c]) p /= ss;
 	}
 
@@ -509,6 +582,7 @@ std::unordered_map<int, long double> amon::Graph::eigenvectorCentrality(int numI
 
 std::unordered_map<int, double> amon::Graph::averageRandomWalkSteps(int start, int steps) {
 	translateNode(start);
+
 	std::vector <int> count (nodesCount);
 	std::unordered_map <int, double> res;
 	std::random_device rd;
@@ -516,14 +590,81 @@ std::unordered_map<int, double> amon::Graph::averageRandomWalkSteps(int start, i
     int curr = start;
     count[start]++;
     for (int t = 0; t < steps; ++t) {
-    	std::uniform_int_distribution<> dis(0, adj[curr].size()-1);
-    	int next = adj[curr][dis(gen)].first;
+    	int next;
+    	if (adj[curr].size() != 0) {
+    		std::uniform_int_distribution<> dis(0, adj[curr].size()-1);
+    		next = adj[curr][dis(gen)].first;
+    	} else {
+    		std::uniform_int_distribution<> dis(0, nodesCount-1);
+    		next = dis(gen);
+    	}
     	count[next]++;
     }
     for (int i = 0; i < nodesCount; ++i)
     	res[revKey[i]] = (double) count[i]/steps;
    	return res;
 }
+
+std::pair <double, double> amon::Graph::cascadeInfluence (amon::Graph cascade) {
+
+	std::pair <double, double> ans (0.0, 0.0);
+
+	for (auto x : cascade.nodeKeys()) {
+		if (keys.count(x) == 0) continue;
+		double d_x = (double) outDegree (x)/edgesCount;
+		double c_x = (double) cascade.outDegree (x)/cascade.edgesQty();
+		auto p = std::make_pair (d_x, c_x);
+		if (p > ans) {
+			ans = p;
+		}
+	}
+	return ans;
+}
+
+long double amon::Graph::dagPathsDfs (amon::Graph& g,
+	int p, std::vector<bool> &vis, std::vector<long double>& P) {
+	vis[p] = true;
+	P[p] = (g.outDegree(g.getNodeKey(p)) == 0) ? 1.0 : 0.0;
+	for (auto it = g.adjBegin(p); it != g.adjEnd(p); g.nextNeighboor(it, p)) {
+		int w = it->first;
+		if (!vis[p]) {
+			dagPathsDfs (g, p, vis, P);
+		}
+		P[p] += P[w];
+	}
+	return P[p];
+}
+
+std::unordered_map <int, long double>  amon::Graph::DAGPaths () {
+
+	amon::Graph g = transpose();
+
+	std::unordered_map <int, long double> res;
+	std::vector <bool> vis (nodesCount, false);
+	std::vector <long double> ans (nodesCount);
+
+	for (int i = 0; i < g.nodesQty(); ++i) {
+		if (vis[i] == false) {
+			dagPathsDfs (g, i, vis, ans);
+		}
+	}
+
+	for (int i = 0; i < g.nodesQty(); ++i) {
+		res[g.getNodeKey(i)] = ans[i];
+	}
+
+	return res;
+}
+
+boost::python::dict amon::Graph::DAGPaths_py () {
+	return toPythonDict (DAGPaths());
+}
+
+boost::python::tuple amon::Graph::cascadeInfluence_py (amon::Graph g) {
+	auto x = cascadeInfluence (g);
+	return boost::python::make_tuple (x.first, x.second);
+}
+
 
 boost::python::dict amon::Graph::averageRandomWalkSteps_py(int start, int steps) {
 	return toPythonDict(averageRandomWalkSteps(start, steps));
@@ -543,6 +684,10 @@ boost::python::dict amon::Graph::bfs_py(int src) {
 	return toPythonDict(bfs(src));
 }
 
+boost::python::dict amon::Graph::bfs_py(boost::python::list srcs) {
+	return toPythonDict( bfs ( toStdVector<int> (srcs) ) );
+}
+
 
 amon::Graph amon::Graph::filter_py(boost::python::list l) {
 	return filter(toStdSet <int> (l));
@@ -551,4 +696,3 @@ amon::Graph amon::Graph::filter_py(boost::python::list l) {
 boost::python::dict amon::Graph::unweightedBetweennssCentrality_py() {
 	return toPythonDict(unweightedBetweennssCentrality());
 }
-
