@@ -16,7 +16,7 @@ ifeq ($(config),debug_native)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/native/Debug
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -24,7 +24,7 @@ ifeq ($(config),debug_native)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -43,7 +43,7 @@ ifeq ($(config),debug_win32)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/win32/Debug
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -51,7 +51,7 @@ ifeq ($(config),debug_win32)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -70,7 +70,7 @@ ifeq ($(config),debug_win64)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/win64/Debug
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -78,7 +78,7 @@ ifeq ($(config),debug_win64)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -97,7 +97,7 @@ ifeq ($(config),debug_macos)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/macos/Debug
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -105,7 +105,7 @@ ifeq ($(config),debug_macos)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -124,7 +124,7 @@ ifeq ($(config),debug_linux86)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/linux86/Debug
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -132,7 +132,7 @@ ifeq ($(config),debug_linux86)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -151,7 +151,7 @@ ifeq ($(config),debug_linux64)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/linux64/Debug
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Og -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -159,7 +159,7 @@ ifeq ($(config),debug_linux64)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -178,7 +178,7 @@ ifeq ($(config),release_native)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/native/Release
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -186,7 +186,7 @@ ifeq ($(config),release_native)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -205,7 +205,7 @@ ifeq ($(config),release_win32)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/win32/Release
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -213,7 +213,7 @@ ifeq ($(config),release_win32)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -232,7 +232,7 @@ ifeq ($(config),release_win64)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/win64/Release
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -240,7 +240,7 @@ ifeq ($(config),release_win64)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -259,7 +259,7 @@ ifeq ($(config),release_macos)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/macos/Release
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -267,7 +267,7 @@ ifeq ($(config),release_macos)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -286,7 +286,7 @@ ifeq ($(config),release_linux86)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/linux86/Release
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -294,7 +294,7 @@ ifeq ($(config),release_linux86)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -313,7 +313,7 @@ ifeq ($(config),release_linux64)
   TARGET = $(TARGETDIR)/libamon.so
   OBJDIR = obj/linux64/Release
   DEFINES +=
-  INCLUDES += -I../includes -I/usr/include/python2.7
+  INCLUDES += -I../includes -I../includes/python2.7
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -Wl,--no-as-needed -std=c++0x -fPIC -g -O2 -pthread
@@ -321,7 +321,7 @@ ifeq ($(config),release_linux64)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += -lpthread -lboost_python-py27 -lboost_system -lpython2.7 -lgmp -lgmpxx
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread -g
+  ALL_LDFLAGS += $(LDFLAGS) -s -shared -pthread
   LINKCMD = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
