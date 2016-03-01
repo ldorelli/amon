@@ -30,7 +30,7 @@ solution "Amonet"
        -- Because yes
         buildoptions { "-Wl,--no-as-needed" }
 		-- C++ 11
-		buildoptions { "-std=c++1y" }
+		buildoptions { "-std=c++0x" }
 		-- Needed on 64-bit platforms to be able
         -- to link static libraries to shared libraries.
         buildoptions { "-fPIC" }
