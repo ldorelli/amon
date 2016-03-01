@@ -14,14 +14,14 @@ amon::CascadeModel::CascadeModel(amon::Graph g, double f, double adoptionThresho
 	std::random_device rd;
 	std::default_random_engine generator (rd());
 	std::uniform_real_distribution<double> unif(0.0, 1.0);
-	// We actually use the transpose graph 
+	// We actually use the transpose graph
 	this->g = g.transpose();
 	for (int i = 0; i < g.nodesQty(); ++i) {
 		states.push_back(false);
 		depth.push_back(g.nodesQty() + 1);
 		thresholds.push_back(adoptionThreshold);
 		if (innovatorModel == "degree") {
-			susceptibleNodes.push(std::make_pair(g.outDegree(i), i));	
+			susceptibleNodes.push(std::make_pair(g.outDegree(i), i));
 		} else {
 			susceptibleNodes.push(std::make_pair(unif(generator), i));
 		}
@@ -39,7 +39,7 @@ amon::CascadeModel::CascadeModel(amon::Graph g, double f, double adoptionThresho
 int amon::CascadeModel::reachFromInnovators() {
 	int res = 0;
 	for (auto x : depth) {
-		if (x != g.nodesQty() + 1) 
+		if (x != g.nodesQty() + 1)
 			res = std::max(res, x);
 	}
 	return res;
@@ -73,7 +73,7 @@ bool amon::CascadeModel::step() {
 				cascades.addDirectedEdge(v, x);
 			}
 			if (inno == num) earlyAdopters.insert(x);
-			
+
 			bar += 1;
 			ret = false;
 		} else putBack.push_back(x);
@@ -117,35 +117,37 @@ boost::python::dict amon::CascadeModel::getEstimatedThreshold_py() {
 	return toPythonDict(estimatedThreshold);
 }
 
-bool amon::CascadeModel::findCascadePath(int node, int depth) {
+bool amon::CascadeModel::findCascadePath(int start, int node, int depth) {
 	if (depth == 0) return false;
+	bool ret = false;
 	for (auto it = g.adjBegin(node); it != g.adjEnd(node); g.adjNext(it, node)) {
 		int v = it->first;
-		if (states[v] or findCascadePath(v, depth - 1)) {
+		if (v == start) continue;
+		if (states[v] or findCascadePath(start, v, depth - 1)) {
 			states[v] = true;
 			states[node] = true;
 			cascades.addDirectedEdge(g.getNodeKey(v), g.getNodeKey(node));
-			return true;
-		} 
+			ret = true;
+		}
 	}
-	return false;
+	return ret;
 }
 
 void amon::CascadeModel::runFromRecordWithPaths(std::vector<int> record, int maxSteps) {
 	int n = g.nodesQty();
-	states = std::vector<bool> (n, false);	
-	
+	states = std::vector<bool> (n, false);
+
 	cascades = amon::Graph();
 
 	for (auto x : record) {
-		
+
 		cascades.addNode(x);
 		x = g.getNodeIndex(x);
 		if (states[x]) {
 			continue;
 		}
 		states[x] = true;
-		findCascadePath(x, maxSteps);
+		findCascadePath(x, x, maxSteps);
 	}
 
 	states.resize(0);

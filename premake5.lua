@@ -14,7 +14,7 @@ solution "Amonet"
 	filter {}
 
 	-- all include dirs
-	includedirs { "includes/", "/usr/include/python2.7/" }
+	includedirs { "includes/" , "includes/python2.7/" }
 
 	 platforms {
 	 	"native",
@@ -42,19 +42,6 @@ solution "Amonet"
         buildoptions { "-pthread" }
         -- Link pthread
 		linkoptions { "-pthread" }        
-		-- gdb
-		linkoptions { "-g" }      
-
-	
-	-- -- independent, ai lib
-	-- project "ai"
-	-- 	kind "SharedLib"
-	-- 	language  "C++"
-	-- 	location  "build/ai"
-	-- 	files  {
-	-- 		"src/ai/src/**.cpp",
-	-- 		"src/ai/header/**.hpp"
-	-- 	}
 
 	-- graph lib
 	project "amon"

@@ -618,13 +618,14 @@ std::pair <double, double> amon::Graph::cascadeInfluence (amon::Graph cascade) {
 			ans = p;
 		}
 	}
+
 	return ans;
 }
 
 long double amon::Graph::dagPathsDfs (amon::Graph& g,
 	int p, std::vector<bool> &vis, std::vector<long double>& P) {
 	vis[p] = true;
-	P[p] = (g.outDegree(g.getNodeKey(p)) == 0) ? 1.0 : 0.0;
+	P[p] = 0.0;
 	for (auto it = g.adjBegin(p); it != g.adjEnd(p); g.nextNeighboor(it, p)) {
 		int w = it->first;
 		if (!vis[p]) {
@@ -632,6 +633,7 @@ long double amon::Graph::dagPathsDfs (amon::Graph& g,
 		}
 		P[p] += P[w];
 	}
+	if (P[p] == 0.0) P[p] = 1.0;
 	return P[p];
 }
 

@@ -37,7 +37,7 @@ void amon::SISModel::step() {
 
 	for (int i = 0; i < g.nodesQty(); ++i) {
 		if (states[currState][i] == 1) {
-			for (auto e = g.neighboorsBegin(i); e != g.neighboorsEnd(i); g.nextNeighboor(e, i)) {
+			for (auto e = g.adjBegin(i); e != g.adjEnd(i); g.adjNext(e, i)) {
 				int v = e->first;
 				if (states[currState][v]) continue;
 				double p = sample(gen);

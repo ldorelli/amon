@@ -23,10 +23,10 @@ std::vector<double> amon::InformationNetwork::lossOfAttention() {
 	for (int i = 0; i < g.nodesQty(); ++i) {
 		res = 0.0;
 		tot = 0.0;
-		for (auto e = g.neighboorsBegin(i); e != g.neighboorsEnd(i); g.nextNeighboor(e, i)) {
+		for (auto e = g.neighborsBegin(i); e != g.neighborsEnd(i); g.nextNeighboor(e, i)) {
 			int v = e->first;
 			int subject = e->second;
-			for (auto f = g.neighboorsBegin(v); f != g.neighboorsEnd(v); g.nextNeighboor(f, v)) {
+			for (auto f = g.neighborsBegin(v); f != g.neighborsEnd(v); g.nextNeighboor(f, v)) {
 				if (subject == f->second) res += 1.0;
 				tot += 1.0;
 			}

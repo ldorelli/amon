@@ -11,7 +11,7 @@
 using namespace boost::python;
 
 BOOST_PYTHON_MODULE(amon)
-{	
+{
 	void (amon::Graph::*add_dedge_1) (int, int, double) = &amon::Graph::addDirectedEdge;
 	void (amon::Graph::*add_dedge_2) (int, int) = &amon::Graph::addDirectedEdge;
 	void (amon::Graph::*add_edge_1) (int, int, double) = &amon::Graph::addUndirectedEdge;
@@ -28,7 +28,7 @@ BOOST_PYTHON_MODULE(amon)
     	.def(init<int>())
         .def("random_walk", &amon::Graph::averageRandomWalkSteps_py)
         .def("load_undirected", &amon::Graph::loadFromEdgeFileUndirected)
-        .def("load_directed", &amon::Graph::loadFromEdgeFileDirected)   
+        .def("load_directed", &amon::Graph::loadFromEdgeFileDirected)
         .def("nodes_qty", &amon::Graph::nodesQty)
         .def("edges_qty", &amon::Graph::edgesQty)
         .def("add_node", &amon::Graph::addNode)
