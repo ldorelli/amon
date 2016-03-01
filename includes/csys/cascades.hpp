@@ -10,8 +10,8 @@
 #include <string>
 
 /**
- *	Implements a binary with threshold cascade model. 
- *	Thresholds are taken from an uniform distribution. 
+ *	Implements a binary with threshold cascade model.
+ *	Thresholds are taken from an uniform distribution.
  */
 namespace amon {
 
@@ -29,9 +29,9 @@ public:
 	 * @brief      { Creates a cascade model based on a previous generated graph. }
 	 *
 	 * @param[in]  g     { The graph. }
-	 * @param[in]  f	 { Fraction of initial innovators. } 
+	 * @param[in]  f	 { Fraction of initial innovators. }
 	 * @param[in]  adoptionThreshold { The threshold of neighboors necessary to trigger a cascade effect. }
-	 * @param[in] innovatorModel 
+	 * @param[in] innovatorModel
 	 * 				{ default: random innovators, 'degree': the highest degree nodes
 	 * 						'bet': highest betweeness nodes }
 	 */
@@ -53,7 +53,7 @@ public:
 
 	/**
 	 * @brief      { Returns the network representing the cascade process. }
-	 *             
+	 *
 	 * @return     { An amon::graph containing the cascade. }
 	 */
 	amon::Graph getCascades();
@@ -70,8 +70,8 @@ public:
 	void runFromRecordWIthPaths_py(boost::python::list l, int depth);
 
 private:
-	
-	bool findCascadePath(int node, int depth);
+
+	bool findCascadePath(int start, int node, int depth);
 
 	double pathProbability;
 
@@ -92,4 +92,4 @@ class CascadeAnalyzer {
 };
 }
 
-#endif 
+#endif
