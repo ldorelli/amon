@@ -87,15 +87,11 @@ BOOST_PYTHON_MODULE(amon)
     	.def("information_depth", &amon::InformationNetwork::informationDepth_py)
     ;
 
-    class_<amon::CascadeModel> ("CascadeModel", init<amon::Graph, double, double, std::string>())
+    class_<amon::CascadeModel> ("CascadeModel", init<amon::Graph, double, int, double>())
         .def(init<amon::Graph>())
         .def("run_from_record_paths", &amon::CascadeModel::runFromRecordWIthPaths_py)
         .def("step", &amon::CascadeModel::step)
-        .def("early_adopters", &amon::CascadeModel::getEarlyAdopters_py)
-        .def("innovators", &amon::CascadeModel::getInnovators_py)
+		.def("set_starter", &amon::CascadeModel::setStarter)
         .def("cascades", &amon::CascadeModel::getCascades)
-        .def("max_reach", &amon::CascadeModel::reachFromInnovators)
-        .def("get_estimated_thresholds", &amon::CascadeModel::getEstimatedThreshold_py)
-        .def("get_reach", &amon::CascadeModel::reachFromInnovators)
     ;
 }

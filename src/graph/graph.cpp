@@ -390,7 +390,9 @@ std::unordered_map<int, double> amon::Graph::unweightedBetweennssCentrality () {
 			res[k] += res_t[i][k];
 		}
 	}
-	for (auto& v : res) v /= ((nodesCount-1)*(nodesCount-2));
+	for (auto& v : res) {
+		v /= ((nodesCount-1)*(nodesCount-2));
+	}
 	std::unordered_map<int, double> ans;
 	for (int i = 0; i < res.size(); ++i) ans[revKey[i]] = res[i];
 	return ans;
@@ -478,7 +480,6 @@ amon::Graph amon::Graph::transpose() {
 			res.addDirectedEdge(revKey[it.first], revKey[i], it.second);
 		}
 	}
-
 	return res;
 }
 
@@ -611,9 +612,9 @@ std::pair <double, double> amon::Graph::cascadeInfluence (amon::Graph cascade) {
 
 	for (auto x : cascade.nodeKeys()) {
 		if (keys.count(x) == 0) continue;
-		double d_x = (double) outDegree (x)/edgesCount;
-		double c_x = (double) cascade.outDegree (x)/cascade.edgesQty();
-		auto p = std::make_pair (d_x, c_x);
+		double d_x = outDegree (x)/ (double)edgesCount;
+		double c_x = cascade.outDegree (x)/ (double)cascade.edgesQty();
+		auto p = std::make_pair (c_x, d_x);
 		if (p > ans) {
 			ans = p;
 		}
