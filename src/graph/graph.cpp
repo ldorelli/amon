@@ -659,6 +659,86 @@ std::unordered_map <int, long double>  amon::Graph::DAGPaths () {
 	return res;
 }
 
+amon::NetworkFlow::NetworkFlow(int n) {
+	adj.resize (n);
+	typ.resize (n);
+	ids.resize (n);
+	que.resize (n);
+	bak.resize (n);
+	who.resize (n);
+	pre.resize (n);
+	lim.resize (n);
+	use = 0;
+	this->n = n;
+}
+
+void amon::NetworkFlow::addEdge (int a, int b, int c) {
+	adj[a].push_back (b);
+	adj[b].push_back (a);
+	typ[a].push_back (1);
+	typ[b].push_back (0);
+	ids[a].push_back (use);
+	ids[b].push_back (use);
+	flow.push_back (0);
+	cap.push_back (c);
+	++use;
+}
+
+void amon::NetworkFlow::clear () {
+	adj.clear();
+	typ.clear();
+	ids.clear();
+	que.clear();
+	bak.clear();
+	who.clear();
+	pre.clear();
+	lim.clear();
+}
+
+int amon::NetworkFlow::maxFlow (int S, int T) {
+	int res = 0;
+	int INF = 0x3f3f3f3f;
+
+	while (true) {
+
+		for (int i = 0; i < n; ++i) {
+			lim[i] = INF;
+			pre[i] = -1;
+		}
+
+		int qf = 0, qe = 1;
+		que[0] = S;
+
+		while (qf < qe) {
+			int p = que[qf++];
+			for (int i = 0; i < adj[p].size(); ++i)	{
+				int q = adj[p][i];
+				int t = typ[p][i];
+				int u = ids[p][i];
+				int f; // current cap
+				if (t == 1) f = cap[u]-flow[u]; // normal edge
+				else f = flow[u]; // cancel edge
+				if (f && pre[q] == -1)
+				{
+					que[qe++] = q;
+					bak[q] = t;
+					pre[q] = p;
+					who[q] = u;
+					lim[q] = std::min(lim[p], f);
+				}
+			}
+		}
+		if (pre[T] == -1) break;
+		// update flow
+		int f = lim[T];
+		res += f;
+		for (int p = T; p != S; p = pre[p])
+			flow[who[p]] += bak[p] ? f : -f;
+	}
+
+	return res;
+}
+
 boost::python::dict amon::Graph::DAGPaths_py () {
 	return toPythonDict (DAGPaths());
 }

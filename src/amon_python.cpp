@@ -24,6 +24,13 @@ BOOST_PYTHON_MODULE(amon)
     boost::python::dict (amon::Graph::*bfs_py1) (boost::python::list) = &amon::Graph::bfs_py;
     boost::python::dict (amon::Graph::*bfs_py2) (int) = &amon::Graph::bfs_py;
 
+	class_<amon::NetworkFlow> ("NetworkFlow", init<int>())
+		.def("add_edge", &amon::NetworkFlow::addEdge)
+		.def("max_flow", &amon::NetworkFlow::maxFlow)
+		.def("clear", &amon::NetworkFlow::clear)
+	;
+
+
     class_<amon::Graph>("Graph", init<>())
     	.def(init<int>())
         .def("random_walk", &amon::Graph::averageRandomWalkSteps_py)
