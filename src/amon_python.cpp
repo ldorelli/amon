@@ -82,7 +82,7 @@ BOOST_PYTHON_MODULE(amon)
         .def("get_hashtags", &amon::TweetLoader::getHashtags_py)
         .def("get_hashtag_activations", &amon::TweetLoader::getHashtagActivations_py)
         .def("get_activations_size", &amon::TweetLoader::getActvationsSize)
-    ;
+	;
 
     enum_<amon::TweetLoader::NetworkType>("TweetNetType")
         .value("retweet", amon::TweetLoader::Retweet)
@@ -94,11 +94,28 @@ BOOST_PYTHON_MODULE(amon)
     	.def("information_depth", &amon::InformationNetwork::informationDepth_py)
     ;
 
+	class_<amon::ETCascadeModel> ("ETCascadeModel", init<amon::Graph, double, int, double, double>())
+		.def("run_from_record_paths", &amon::CascadeModel::runFromRecordWIthPaths_py)
+		.def("step", &amon::CascadeModel::step)
+		.def("set_starter", &amon::CascadeModel::setStarter)
+		.def("cascades", &amon::CascadeModel::getCascades)
+		.def("adoption_times", &amon::CascadeModel::getAdoptionTimes)
+	;
+
+	class_<amon::NETCascadeModel> ("NETCascadeModel", init<amon::Graph, double, int, double, double>())
+		.def("run_from_record_paths", &amon::CascadeModel::runFromRecordWIthPaths_py)
+		.def("step", &amon::CascadeModel::step)
+		.def("set_starter", &amon::CascadeModel::setStarter)
+		.def("cascades", &amon::CascadeModel::getCascades)
+		.def("adoption_times", &amon::CascadeModel::getAdoptionTimes)
+	;
+
     class_<amon::CascadeModel> ("CascadeModel", init<amon::Graph, double, int, double>())
         .def(init<amon::Graph>())
         .def("run_from_record_paths", &amon::CascadeModel::runFromRecordWIthPaths_py)
         .def("step", &amon::CascadeModel::step)
 		.def("set_starter", &amon::CascadeModel::setStarter)
         .def("cascades", &amon::CascadeModel::getCascades)
+		.def("adoption_times", &amon::CascadeModel::getAdoptionTimes)
     ;
 }

@@ -18,8 +18,17 @@ amon::CascadeModel::CascadeModel(amon::Graph g, double hourlyRatio, int timeSkip
 
 void amon::CascadeModel::setStarter (int v, int t) {
 	joinedNodes[v] = t;
+	cascades.addNode(g.getNodeKey(v));
 }
 
+boost::python::list amon::CascadeModel::getAdoptionTimes (void) {
+	std::vector <int>  adoptionTimes;
+	for (auto x : joinedNodes) {
+		adoptionTimes.push_back (x.second);
+	}
+	std::sort (adoptionTimes.begin(), adoptionTimes.end());
+	return toPythonList (adoptionTimes);
+}
 
 bool amon::CascadeModel::step(int T) {
 
@@ -48,14 +57,6 @@ bool amon::CascadeModel::step(int T) {
 			}
 		}
 	}
-}
-
-// Simplest Impl
-bool amon::CascadeModel::willJoin (int p, int t) {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<> dis(0, 1.0);
-	return dis(gen) < adoptionThreshold;
 }
 
 amon::Graph amon::CascadeModel::getCascades() {
@@ -98,4 +99,46 @@ void amon::CascadeModel::runFromRecordWithPaths(std::vector<int> record, int max
 
 void amon::CascadeModel::runFromRecordWIthPaths_py(boost::python::list l, int depth) {
 	runFromRecordWithPaths(toStdVector<int>(l), depth);
+}
+
+amon::ETCascadeModel::ETCascadeModel (amon::Graph g, double hourlyRatio, int timeRelevance, double adoptionThreshold, double alpha) :
+	CascadeModel (g, hourlyRatio, timeRelevance, adoptionThreshold) {
+	this->alpha = alpha;
+}
+
+amon::NETCascadeModel::NETCascadeModel (amon::Graph g, double hourlyRatio, int timeRelevance, double adoptionThreshold, double alpha) :
+	CascadeModel (g, hourlyRatio, timeRelevance, adoptionThreshold) {
+	this->alpha = alpha;
+}
+
+// Simplest Impl
+bool amon::CascadeModel::willJoin (int p, int t) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis(0, 1.0);
+	return dis(gen) < adoptionThreshold;
+}
+
+bool amon::ETCascadeModel::willJoin (int p, int t) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis(0, 1.0);
+	return dis(gen) < adoptionThreshold * exp (-alpha * (double) t);
+}
+
+bool amon::NETCascadeModel::willJoin (int p, int t) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis(0, 1.0);
+	int num = 0;
+	int den = 0;
+	for (auto x = g.adjBegin(p); x != g.adjEnd(p); g.adjNext(x, p)) {
+		int y = x->first;
+		if (joinedNodes.count(y)) {
+			if (dis(gen) < adoptionThreshold * exp (-alpha * (double) t)) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
