@@ -68,6 +68,9 @@ BOOST_PYTHON_MODULE(amon)
         .def("depth", &amon::Graph::getDepth)
         .def("cascade_centrality", &amon::Graph::cascadeInfluence_py)
         .def("dag_paths", &amon::Graph::DAGPaths_py)
+		.def("communities", &amon::Graph::findCommunities_py)
+		.def("jaccard_index", &amon::Graph::jaccardIndex)
+		.def("random_graphs_jaccard", &amon::Graph::randomGraphFrom_py)
     ;
 
     class_<amon::NetworkGenerator> ("NetworkGen", init<>())

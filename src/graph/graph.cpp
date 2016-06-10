@@ -85,7 +85,9 @@ void amon::Graph::addUndirectedEdge(int A, int B) {
 
 void amon::Graph::addUndirectedEdge(int a, int b, double w) {
 	addDirectedEdge(a, b, w);
-	addDirectedEdge(b, a, w);
+	if (a != b) {
+		addDirectedEdge(b, a, w);
+	}
 }
 
 std::vector<std::pair<int, double> >::iterator
@@ -137,6 +139,9 @@ double amon::Graph::meanDegree () {
 }
 
 int amon::Graph::getNodeKey(int index) {
+	if (index > nodesCount) {
+		throw "Invalid Index";
+	}
 	return revKey[index];
 }
 
@@ -659,6 +664,230 @@ std::unordered_map <int, long double>  amon::Graph::DAGPaths () {
 	return res;
 }
 
+// I need to rememb
+amon::Graph amon::Graph::collapseCommunities (amon::Graph& g, std::vector<int>& C, std::vector<int>& O) {
+	amon::Graph res;
+	// Start by coordinate compressing the communities
+	std::vector <int> v;
+	for (int i = 0; i < C.size(); ++i) {
+		v.push_back (C[i]);
+	}
+	std::sort (v.begin(), v.end());
+	auto it = std::unique (v.begin(), v.end());
+	for (int i = 0; i < C.size(); ++i) {
+		C[i] = std::lower_bound (v.begin(), it, C[i]) - v.begin();
+		res.addNode (C[i]);
+	}
+	for (int i = 0; i < O.size(); ++i) {
+		O[i] = C[O[i]];
+	}
+	// Now that everything is compressed we can build a new graph
+	// First, let's build a map to generate the edges
+	std::map < std::pair<int, int>, double > E;
+
+	for (int i = 0; i < g.nodesQty(); ++i) {
+		for (auto j = g.adjBegin(i); j != g.adjEnd(i); g.adjNext(j, i)) {
+			int a = C[i];
+			int b = C[j->first];
+			E[{ std::min(a, b), std::max(a, b) }] += j->second;
+		}
+	}
+
+	for (auto x : E) {
+		// std::cout << "From " << x.first.first << " to " << x.first.second << std::endl;
+		if (x.first.first != x.first.second) x.second /= 2;
+		res.addUndirectedEdge (x.first.first, x.first.second, x.second);
+	}
+	return res;
+}
+
+
+std::unordered_map <int, long double> amon::Graph::findCommunities () {
+
+	std::vector <int> res (nodesCount, 0);
+	for (int i = 0; i < nodesCount; ++i) {
+		res[i] = i;
+	}
+	long double Q = 0.0;
+	bool keepGoing;
+	// Louvain
+	Graph g = *this;
+	do {
+		// Array for communities
+		std::vector <int> C (g.nodesQty(), 0);
+		for (int i = 0; i < g.nodesQty(); ++i) {
+			C[i] = i;
+		}
+		std::cerr << "Iterating Louvain Method" << std::endl;
+		keepGoing = g.louvainPass (C, Q);
+		g = collapseCommunities (g, C, res);
+		std::cerr << "Collapsed - moving on " << std::endl;
+	} while (keepGoing);
+
+	std::unordered_map <int, long double> ans;
+	std::unordered_set <int> s;
+	for (int i = 0; i < nodesCount; ++i) {
+		ans[revKey[i]] = res[i];
+		s.insert ((int) res[i]);
+	}
+	ans[-2] = s.size();
+	ans[-1] = Q;
+	std::cerr << "Got "  << ans[-2] << " Communities " << std::endl;
+	return ans;
+}
+
+double amon::Graph::jaccardIndex (amon::Graph g) {
+	double res = 0.0;
+	int tot = 0;
+	for (int i = 0; i < nodesCount; ++i) {
+
+		int K = revKey[i];
+
+		if (!g.hasKey (K)) {
+			continue;
+		}
+
+		if (adj[i].size() > 0) {
+			tot++;
+		} else {
+			continue;
+		}
+
+		std::unordered_set<int> A, I, U;
+		for (auto it : adj[i]) {
+			U.insert (revKey[it.first]);
+			A.insert(revKey[it.first]);
+		}
+
+		int id = g.getNodeIndex (K);
+		for (auto it = g.adjBegin(id); it != g.adjEnd(id); g.adjNext (it, id)) {
+			int k = g.getNodeKey (it->first);
+			U.insert (k);
+			if (A.count(k)) I.insert (k);
+		}
+		if (U.size() > 0) {
+			res += (double)I.size()/U.size();
+		}
+	}
+	return res/(double)tot;
+}
+
+bool amon::Graph::louvainPass (std::vector<int>& C, long double& Q) {
+
+	std::vector <int> K (nodesCount, 0);
+	std::vector <int> W (nodesCount, 0);
+
+	long double m = 0.0;
+	for (int i = 0; i < nodesCount; ++i) {
+		for (auto it : adj[i]) {
+			m += it.second;
+		}
+	}
+
+	Q = 0.0;
+	for (int i = 0; i < nodesCount; ++i) {
+		C[i] = i;
+		int toItself = 0;
+		for (auto it : adj[i]) {
+			if (it.first == i) toItself += it.second;
+			W[i] += it.second;
+		}
+		K[i] += W[i];
+		Q += (long double)(toItself - (long double)(W[i] * W[i])/m)/m;
+	}
+
+	bool good = false;
+	bool improve;
+	do {
+		improve = false;
+		for (int i = 0; i < nodesCount; ++i) {
+			int _new = -1;
+			int _old = -1;
+			long double QN = 0.0;
+
+			std::unordered_map <int, int> kc;
+			for (int j = 0; j < adj[i].size(); ++j) {
+				kc[C[adj[i][j].first]] += adj[i][j].second;
+			}
+			for (int j = 0; j < adj[i].size(); ++j) {
+					int k = adj[i][j].first;
+					if (C[k] == C[i]) continue;
+					long double delta = 0.0;
+					delta = 2.0*((long double) (kc[C[k]] - (long double) (W[i]*K[C[k]])/m)/m);
+					delta -=  2.0*((long double) (kc[C[i]] - (long double) (W[i]*K[C[i]])/m)/m);
+					delta -= 2.0*(long double) (W[i]*W[i])/(m*m);
+					if (delta > QN) {
+						QN = delta;
+						_old = i;
+						_new = k;
+					}
+			}
+			if (QN > 1e-8) {
+				Q += QN;
+				improve = true;
+				good = true;
+				K[C[_old]] -= W[_old];
+				K[C[_new]] += W[_old];
+				C[_old] = C[_new];
+			}
+
+		}
+	} while (improve);
+
+	std::cerr << "Modularity is " << Q << std::endl;
+	return good;
+}
+
+void amon::Graph::randomGraphFrom (int numIters, std::vector<double>& res) {
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis (0, nodesCount-1);
+
+	for (int i = 0; i < numIters; ++i) {
+
+		double J = 0.0;
+		int tot = 0;
+		for (int j = 0; j < nodesCount; ++j) {
+			if (adj[j].size() == 0) continue;
+			tot++;
+			std::set <int> A, I, U;
+			for (auto it : adj[j]) {
+				A.insert (revKey[it.first]);
+			}
+			for (int k = 0; k < adj[j].size(); ++k) {
+				int x = revKey[dis(gen)];
+				if (A.count(x)) I.insert (x);
+				U.insert (x);
+			}
+			J += (double)I.size()/U.size();
+		}
+		res.push_back ((double)J/tot);
+	}
+}
+
+boost::python::list	amon::Graph::randomGraphFrom_py (int iters) {
+
+	std::vector<double> res[NUM_THREADS], R;
+	std::vector<std::thread> v;
+	int T = iters/NUM_THREADS;
+
+	std::cerr << "Generating graphs with " << NUM_THREADS << " threads " << std::endl;
+	for (int i = 0; i < NUM_THREADS; ++i) {
+		v.push_back( std::thread(&amon::Graph::randomGraphFrom, this, T, std::ref(res[i])) );
+	}
+	for (int i = 0; i < NUM_THREADS; ++i) {
+		v[i].join();
+	}
+	for (int i = 0; i < NUM_THREADS; ++i) {
+		for (int j = 0; j < res[i].size(); ++j) {
+			R.push_back (res[i][j]);
+		}
+	}
+
+	return toPythonList (R);
+}
+
 amon::NetworkFlow::NetworkFlow(int n) {
 	adj.resize (n);
 	typ.resize (n);
@@ -737,6 +966,10 @@ int amon::NetworkFlow::maxFlow (int S, int T) {
 	}
 
 	return res;
+}
+
+boost::python::dict amon::Graph::findCommunities_py () {
+	return toPythonDict (findCommunities());
 }
 
 boost::python::dict amon::Graph::DAGPaths_py () {
